@@ -1,0 +1,19 @@
+.tela {
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.tela.visivel {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+#conteudo h2 {
+    color: #f0eaf4; /* Roxo exemplo, troque pela cor que quiser */
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ben 10 Animation</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000 50%, #0f0f0f 100%);
+            font-family: 'Verdana', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-slide {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: #00ff00;
+            opacity: 0;
+            animation: omnitrixFade 12s infinite;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #000;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .text-slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .text-slide:nth-child(2) {
+            animation-delay: 4s;
+        }
+
+        .text-slide:nth-child(3) {
+            animation-delay: 8s;
+        }
+
+        @keyframes omnitrixFade {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 20%) scale(0.8);
+            }
+            10%, 25% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            35%, 100% {
+                opacity: 0;
+                transform: translate(-50%, -120%) scale(1.2);
+            }
+        }
+
+        /* Omnitrix-inspired background effect */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ab4698 20%, #eb0d96 20%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            animation: pulse 4s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+        }
+
+        @media (max-width: 600px) {
+            .text-slide {
+                font-size: 2.5rem;
+            }
+
+            .container::before {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-slide">Heatblast!</div>
+        <div class="text-slide">XLR8!</div>
+        <div class="text-slide">It's Hero Time!</div>
+    </div>
+</body>
+</html>

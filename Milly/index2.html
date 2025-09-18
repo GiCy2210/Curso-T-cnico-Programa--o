@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Dizer Eu Te Amo nos Animes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #FFF1F2, #FCE7F3);
+            color: #4a044e;
+            transition: all 0.3s ease;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: #fbf4e7;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar button {
+            transition: all 0.3s ease;
+        }
+        .navbar button:hover {
+            transform: scale(1.05);
+        }
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1000px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+        /* Tokyo Revengers */
+        .section-bg-tokyo { background: linear-gradient(to bottom, #1E3A8A, #F97316); }
+        .table-bg-tokyo { background: url('https://via.placeholder.com/1000x200?text=Tokyo+Revengers+Toman+Uniform') center/cover; }
+        .section-bg-tokyo th { background-color: #1E3A8A; color: #F97316; }
+        .section-bg-tokyo table { border: 1px solid #F97316; }
+        .section-bg-tokyo .back-to-top { background-color: #F97316; }
+        .section-bg-tokyo .back-to-top:hover { background-color: #1E3A8A; }
+        /* Naruto */
+        .section-bg-naruto { background: linear-gradient(to bottom, #F97316, #3B82F6); }
+        .table-bg-naruto { background: url('https://via.placeholder.com/1000x200?text=Naruto+Konoha+Bandana') center/cover; }
+        .section-bg-naruto th { background-color: #F97316; color: #3B82F6; }
+        .section-bg-naruto table { border: 1px solid #3B82F6; }
+        .section-bg-naruto .back-to-top { background-color: #3B82F6; }
+        .section-bg-naruto .back-to-top:hover { background-color: #F97316; }
+        /* Demon Slayer */
+        .section-bg-demon { background: linear-gradient(to bottom, #10B981, #DC2626); }
+        .table-bg-demon { background: url('https://via.placeholder.com/1000x200?text=Demon+Slayer+Tanjiro+Katana') center/cover; }
+        .section-bg-demon th { background-color: #10B981; color: #DC2626; }
+        .section-bg-demon table { border: 1px solid #DC2626; }
+        .section-bg-demon .back-to-top { background-color: #DC2626; }
+        .section-bg-demon .back-to-top:hover { background-color: #10B981; }
+        /* The Apothecary Diaries */
+        .section-bg-apothecary { background: linear-gradient(to bottom, #6B7280, #D97706); }
+        .table-bg-apothecary { background: url('https://via.placeholder.com/1000x200?text=Apothecary+Diaries+Maomao+Flask') center/cover; }
+        .section-bg-apothecary th { background-color: #6B7280; color: #D97706; }
+        .section-bg-apothecary table { border: 1px solid #D97706; }
+        .section-bg-apothecary .back-to-top { background-color: #D97706; }
+        .section-bg-apothecary .back-to-top:hover { background-color: #6B7280; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        tr:hover {
+            background-color: rgba(255, 245, 247, 0.9);
+            transition: background-color 0.3s ease;
+        }
+        .back-to-top {
+            display: block;
+            margin: 20px auto;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .navbar button {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+            }
+            .section {
+                padding: 15px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar text-center">
+        <button class="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded m-2" onclick="showSection('home')">Home 🏠</button>
+        <button class="bg-blue-800 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded m-2" onclick="showSection('tokyo-revengers')">Tokyo Revengers 🏍️</button>
+        <button class="bg-orange-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-2" onclick="showSection('naruto')">Naruto 🍥</button>
+        <button class="bg-green-600 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-2" onclick="showSection('demon-slayer')">Demon Slayer ⚔️</button>
+        <button class="bg-gray-600 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded m-2" onclick="showSection('the-apothecary-diaries')">The Apothecary Diaries 🧪</button>
+    </div>
+
+    <div id="home" class="section active text-center">
+        <h1 class="text-4xl font-bold text-pink-700 mb-4">Formas de Dizer "Eu Te Amo" nos Animes</h1>
+        <p class="text-lg mb-4">Bem vinda MEU AMORRRR! 💖 Fiz este site pra te mostrar os momentos fofos e uma forma diferente de dizer "EU TE AMO!", então espero que goste e reconheça todas!!!🌸 Referências rápidas:</p>
+        <ul class="list-disc list-inside text-left max-w-2xl mx-auto">
+            <li><strong>Tokyo Revengers</strong>: Amor através de proteção em gangues, como Takemichi salvando Hina! 🏍️❤️</li>
+            <li><strong>Naruto</strong>: Confissões intensas em batalhas, tipo Hinata declarando para Naruto! 🍥💕</li>
+            <li><strong>Demon Slayer</strong>: Gestos doces em meio a demônios, como Tanjiro e Kanao! ⚔️🌸</li>
+            <li><strong>The Apothecary Diaries</strong>: Romance lento e misterioso no palácio, com Maomao e Jinshi! 🧪💌</li>
+        </ul>
+    </div>
+
+    <div id="tokyo-revengers" class="section section-bg-tokyo">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4">Tokyo Revengers</h2>
+        <p>Em <em>Tokyo Revengers</em>, o amor é frequentemente expresso através de proteção, lealdade e gestos em meio ao caos das gangues. Confissões diretas são raras, mas headcanons de fãs destacam como personagens confessam. Aqui vai uma tabela com exemplos baseados em cenas e interpretações:</p>
+        <table class="table-bg-tokyo">
+            <tr><th>Personagem</th><th>Forma de Expressar Amor</th><th>Exemplo/Citação</th></tr>
+            <tr><td>Mikey (Sano Manjiro)</td><td>Através de amizade e gestos de serviço; não confessa diretamente, mas evolui para um relacionamento implícito.</td><td>"Eu gosto de passar tempo com você... acho que somos mais que amigos." (Headcanon de confissão gradual)</td></tr>
+            <tr><td>Draken (Ken Ryuguji)</td><td>Dedicação apaixonada; mostra amor cuidando e priorizando o parceiro.</td><td>Amor como "paixão total", demonstrado por atenção e afeto constante. (Linguagem de amor: Dedicação)</td></tr>
+            <tr><td>Mitsuya (Takashi Mitsuya)</td><td>Romantismo clássico com presentes; cria roupas perfeitas para o parceiro.</td><td>"Eu faço roupas perfeitas para você, inspirado na sua beleza." (Linguagem de amor: Presentes)</td></tr>
+            <tr><td>Takemichi e Hina</td><td>Proteção e palavras diretas como "daisuki" (gosto muito de você).</td><td>Hina para Takemichi: "Daisuki!" em cenas emocionais de reencontro.</td></tr>
+        </table>
+        <p>Outras formas: Amor é mostrado por vingança em nome do amado ou promessas de futuro juntos, como Mikey e Emma.</p>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Voltar ao Topo ⬆️</button>
+    </div>
+
+    <div id="naruto" class="section section-bg-naruto">
+        <h2 class="text-2xl font-bold text-blue-500 mb-4">Naruto</h2>
+        <p><em>Naruto</em> tem confissões icônicas, especialmente durante batalhas, onde o amor é declarado com intensidade. Hinata e Sakura têm momentos marcantes.</p>
+        <table class="table-bg-naruto">
+            <tr><th>Personagem</th><th>Forma de Expressar Amor</th><th>Exemplo/Citação</th></tr>
+            <tr><td>Hinata Hyuga</td><td>Confissão direta em meio ao perigo, enfatizando mudança e proteção.</td><td>"Naruto-kun... Eu te amo. Porque você mudou minha vida... Não tenho medo de morrer protegendo você!" (Durante a luta contra Pain)</td></tr>
+            <tr><td>Sakura Haruno</td><td>Declaração emocional pedindo para ficar junto.</td><td>"Eu te amo com todo o meu coração! Se você ficar comigo, não haverá arrependimentos... Por favor, fique comigo!" (Para Naruto, embora controversa)</td></tr>
+            <tr><td>Naruto e Hinata</td><td>Amor mostrado por ações; Naruto reconhece Hinata após sua confissão.</td><td>Naruto: "Hinata... Obrigado por sempre me apoiar." (Implícito em momentos de proteção mútua).</td></tr>
+            <tr><td>Outros (ex: Sasuke e Sakura)</td><td>Amor implícito por lealdade e sacrifício.</td><td>Sakura: "Eu faria qualquer coisa por você!"</td></tr>
+        </table>
+        <p>Amor em <em>Naruto</em> é frequentemente ligado a crescimento pessoal e redenção.</p>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Voltar ao Topo ⬆️</button>
+    </div>
+
+    <div id="demon-slayer" class="section section-bg-demon">
+        <h2 class="text-2xl font-bold text-red-600 mb-4">Demon Slayer</h2>
+        <p>Em <em>Demon Slayer</em>, o romance é sutil, focado em ações e confissões em momentos de vida ou morte. Poucas declarações diretas, mas headcanons e cenas finais destacam expressões.</p>
+        <table class="table-bg-demon">
+            <tr><th>Personagem</th><th>Forma de Expressar Amor</th><th>Exemplo/Citação</th></tr>
+            <tr><td>Tanjiro Kamado</td><td>Confissão simples e direta, sob árvores de glicínia.</td><td>"Y/n, eu... eu gosto de você." (Headcanon de confissão romântica)</td></tr>
+            <tr><td>Zenitsu Agatsuma</td><td>Confissão criativa e persistente, usando metáforas.</td><td>"Você me pegou. Gancho, linha e chumbada." (Referindo-se a ser "fisgado" pelo amor, para Nezuko)</td></tr>
+            <tr><td>Shinobu Kocho</td><td>Confissão sutil e implícita.</td><td>"Giyu... eu gosto de você." (Momento sutil em episódio 18, mostrando afeto)</td></tr>
+            <tr><td>Obanai Iguro e Mitsuri Kanroji</td><td>Confissão final em momento de morte.</td><td>Obanai: "Eu te amo, Mitsuri." (Antes de morrer, confirmando amor mútuo).</td></tr>
+        </table>
+        <p>Outras formas: Amor por proteção (Tanjiro e Kanao via moeda) ou dedicação (Zenitsu por Nezuko).</p>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Voltar ao Topo ⬆️</button>
+    </div>
+
+    <div id="the-apothecary-diaries" class="section section-bg-apothecary">
+        <h2 class="text-2xl font-bold text-amber-600 mb-4">The Apothecary Diaries</h2>
+        <p><em>The Apothecary Diaries</em> tem um romance sutil e lento entre Maomao e Jinshi, com confissões implícitas através de proteção e diálogos profundos. Nada direto como "eu te amo", mas gestos românticos.</p>
+        <table class="table-bg-apothecary">
+            <tr><th>Personagem</th><th>Forma de Expressar Amor</th><th>Exemplo/Citação</th></tr>
+            <tr><td>Jinshi</td><td>Pedido de compromisso implícito e proteção.</td><td>"Você vai fingir que não imagina, depois de chegarmos tão longe? Ninguém mais pode servir como minha companheira noturna agora." (Volume 9, insinuando exclusividade)</td></tr>
+            <tr><td>Maomao</td><td>Pedido de proteção, mostrando vulnerabilidade.</td><td>"Desculpe, mas posso pedir que me proteja, Jinshi-sama?" (Volume 4, momento emocional)</td></tr>
+            <tr><td>Jinshi</td><td>Toque e ciúme sutil.</td><td>"Eu não devo te tocar muito, devo?" (Volume 14, tensão romântica)</td></tr>
+            <tr><td>Maomao e Jinshi</td><td>Decisão mútua de futuro.</td><td>Maomao: "Você gostaria de se tornar um plebeu?" Jinshi: "Eu não me importaria se pudesse me tornar um agora." (Volume 16, epílogo, insinuando vida juntos)</td></tr>
+        </table>
+        <p>O amor aqui é construído em respeito mútuo e sacrifícios, sem declarações explícitas.</p>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Voltar ao Topo ⬆️</button>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            const targetSection = document.getElementById(sectionId);
+            targetSection.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <footer class="text-center py-4 mt-8">
+        <p class="text-sm">Eu te amo! Não improta o anime, a lingua, o país, o universo, não importa!!! Porque nada mudará que Eu Te Amo!❤️❤️❤️❤️</p>
+    </footer>
+</body>
+</html>

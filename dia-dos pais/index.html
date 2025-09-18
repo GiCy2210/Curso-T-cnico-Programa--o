@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Nil Doces e Bolos - Confeitaria artesanal com produtos feitos com amor e ingredientes de qualidade">
+<title>Nil Doces e Bolos - Confeitaria Artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa-claro: #f7bec5;
+    --rosa-escuro: #f84b63;
+    --marrom-escuro: #4b2f2f;
+    --branco: #ffffff;
+    --sombra: 0 4px 8px rgba(0,0,0,0.1);
+    --transicao: all 0.3s ease;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--rosa-claro);
+    color: var(--marrom-escuro);
+    line-height: 1.6;
+  }
+
+  header {
+    position: relative;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://github.com/GiCy2210/Dia-dos-pais/blob/main/Dia%20dos%20pais.jpg?raw=true');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    color: var(--branco);
+  }
+
+  header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: fadeIn 1.5s ease;
+  }
+
+  header p {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    margin-top: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    animation: fadeIn 2s ease;
+    max-width: 800px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  nav {
+    background-color: var(--branco);
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 15px 0;
+    box-shadow: var(--sombra);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav a {
+    color: var(--marrom-escuro);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: var(--transicao);
+  }
+
+  nav a:hover {
+    color: var(--rosa-escuro);
+    background-color: rgba(248, 75, 99, 0.1);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: var(--branco);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(248,75,99,0.2);
+  }
+
+  section {
+    margin-bottom: 40px;
+    scroll-margin-top: 80px;
+  }
+
+  h2 {
+    color: var(--rosa-escuro);
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+  }
+
+  h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--rosa-escuro);
+    margin: 10px auto;
+  }
+
+  .produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    justify-content: center;
+  }
+
+  .produto {
+    background: var(--branco);
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: var(--sombra);
+    transition: var(--transicao);
+    border: 1px solid rgba(75,47,47,0.1);
+  }
+
+  .produto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(75,47,47,0.2);
+  }
+
+  .produto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: var(--transicao);
+  }
+
+  .produto:hover img {
+    transform: scale(1.05);
+  }
+
+  .produto-conteudo {
+    padding: 20px;
+  }
+
+  .produto h3 {
+    margin: 10px 0;
+    color: var(--marrom-escuro);
+  }
+
+  .produto p {
+    margin-bottom: 15px;
+    color: #666;
+  }
+
+  .preco {
+    font-weight: bold;
+    color: var(--rosa-escuro);
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+
+  .botao {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--rosa-escuro);
+    color: var(--branco);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: var(--transicao);
+    margin-top: 10px;
+    border: 2px solid var(--rosa-escuro);
+  }
+
+  .botao:hover {
+    background: transparent;
+    color: var(--rosa-escuro);
+  }
+
+  .contato-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .contato-item {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    padding: 20px;
+    background: rgba(248, 75, 99, 0.05);
+    border-radius: 10px;
+  }
+
+  .contato-item i {
+    font-size: 2rem;
+    color: var(--rosa-escuro);
+    margin-bottom: 15px;
+  }
+
+  .contato-item h3 {
+    margin: 10px 0;
+    color: var(--marrom-escuro);
+  }
+
+  .depoimentos {
+    background: rgba(248, 75, 99, 0.05);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 40px;
+  }
+
+  .depoimento {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--branco);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+  }
+
+  .depoimento p {
+    font-style: italic;
+  }
+
+  .depoimento-cliente {
+    font-weight: bold;
+    text-align: right;
+    color: var(--rosa-escuro);
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--marrom-escuro);
+    color: var(--branco);
+    margin-top: 40px;
+  }
+
+  .redes-sociais {
+    margin: 20px 0;
+  }
+
+  .redes-sociais a {
+    color: var(--branco);
+    margin: 0 10px;
+    font-size: 1.5rem;
+    transition: var(--transicao);
+  }
+
+  .redes-sociais a:hover {
+    color: var(--rosa-claro);
+  }
+
+  /* Botão flutuante do cardápio */
+  .botao-cardapio {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--rosa-escuro);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 99;
+    transition: var(--transicao);
+    text-decoration: none;
+  }
+
+  .botao-cardapio:hover {
+    background-color: var(--marrom-escuro);
+    transform: scale(1.1);
+  }
+
+  /* Modal (janela) do cardápio */
+  .modal-cardapio {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 100;
+    text-align: center;
+    padding: 20px;
+    overflow: auto;
+  }
+
+  .imagem-cardapio {
+    max-width: 100%;
+    max-height: 100;
+    margin-top: 5%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  .fechar-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    transition: var(--transicao);
+  }
+
+  .fechar-modal:hover {
+    color: var(--rosa-escuro);
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+    
+    header {
+      min-height: 60vh;
+    }
+    
+    main {
+      padding: 20px;
+      margin: 20px 10px;
+    }
+
+    .botao-cardapio {
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <h1>Nil Doces e Bolos</h1>
+  <p>Doces momentos feitos com amor e dedicação</p>
+</header>
+
+<nav>
+  <a href="#sobre"><i class="fas fa-heart"></i> Sobre</a>
+  <a href="#produtos"><i class="fas fa-birthday-cake"></i> Produtos</a>
+  <a href="#depoimentos"><i class="fas fa-comment"></i> Depoimentos</a>
+  <a href="#contato"><i class="fas fa-phone-alt"></i> Contato</a>
+</nav>
+
+<main>
+  <section id="sobre">
+    <h2>Sobre Nós</h2>
+    <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+      <p>A Nil Doces e Bolos nasceu do amor, amor pela família, pelos detalhes e pelos momentos que nos unem. Há cerca de 8 anos, minha filha ficou noiva. Eu queria muito dar a ela um presente especial, mas naquele momento, não tinha condições financeiras para algo grandioso.</p>
+      <p>Comecei a pesquisar algo diferente e me encantei com os bolos de rolo em miniatura. Porém, ao procurar por encomendas, vi que o valor não cabia no meu orçamento, e eu simplesmente não podia pagar.</p>
+      <p>Então decidi tentar: “Por que não aprender a fazer eu mesma?”</p>
+      <p>Foi então que tive uma ideia: faria eu mesma as lembrancinhas do noivado.</p>
+      <p>E assim foi. Aprendi, fiz com todo o meu coração, e presenteei. Aquele gesto simples, feito com tanto carinho, acabou mudando minha vida. Desde então, cada doce, cada bolo que sai da minha cozinha carrega essa mesma energia: a de um amor que começou com a minha filha e se espalhou.
+      <p>Foi através desse gesto de amor que descobri a confeitaria, e nela, encontrei a minha verdadeira paixão.</p>
+    </div>
+  </section>
+
+  <section id="produtos">
+    <h2>Nossos Produtos</h2>
+    <div class="produtos">
+      <div class="produto">
+        <img src="https://github.com/GiCy2210/Dia-dos-pais/blob/main/foto%20pais.jpg?raw=true" alt="Bolo de Morango">
+        <div class="produto-conteudo">
+          <h3>Bolo de Rolo</h3>
+          <p>Temos bolos nos tamanhos de 1kg e 500g. O de 1kg custa R$ 90,00 e o de 500g sai por R$ 50,00 </p>
+          <div class="preco">A partir de R$ 90,00</div>
+          <a href="https://api.whatsapp.com/send?phone=5571997228181&text=Gostaria%20de%20encomendar%20um%20Bolo%20de%20Morango" class="botao" target="_blank">Encomendar</a>
+        </div>
+      </div>
+      
+      <div class="produto">
+        <img src="https://github.com/GiCy2210/Dia-dos-pais/blob/main/foto%20dos%20pais.jpg?raw=true" alt="Brigadeiro Gourmet">
+        <div class="produto-conteudo">
+          <h3>Brigadeiros Gourmet</h3>
+          <p>Separado sai por R$ 3,00 cada</p>
+          <div class="preco">R$ 150,00 o cento</div>
+          <a href="https://api.whatsapp.com/send?phone=5571997228181&text=Gostaria%20de%20encomendar%20Brigadeiros%20Gourmet" class="botao" target="_blank">Encomendar</a>
+        </div>
+      </div>
+      
+      <div class="produto">
+        <img src="https://github.com/GiCy2210/Dia-dos-pais/blob/main/Bolo%20de%20rolo.jpg?raw=true" alt="Bolo de Chocolate">
+        <div class="produto-conteudo">
+          <h3>Mini Bolo de Rolo</h3>
+          <p>Mínimo de 30 unidades</p>
+          <div class="preco">A partir de R$ 4,00</div>
+          <a href="https://api.whatsapp.com/send?phone=5571997228181&text=Gostaria%20de%20encomendar%20um%20Bolo%20de%20Chocolate" class="botao" target="_blank">Encomendar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos">
+    <h2>Depoimentos</h2>
+    <div class="depoimentos">
+      <div class="depoimento">
+        <p>"Ahhhh meu Deus! Que delícia!!! Obrigadaaaa tia 😍❤️ que saudades!!"</p>
+        <div class="depoimento-cliente">- Mariana Alves</div>
+      </div>
+      <div class="depoimento">
+        <p>"Divinos, melhor bolo que já provei até hoje!!! Recomendo superr😍😍😍"</p>
+        <div class="depoimento-cliente">- Giovane Micael</div>
+      </div>
+      <div class="depoimento">
+        <p>"Ganhamos um de presente e amamos😍❤️👏👏👏 parabéns"</p>
+        <div class="depoimento-cliente">- Lílian Castelini</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <h2>Entre em Contato</h2>
+    <p style="text-align: center;">Faça sua encomenda ou tire suas dúvidas através dos nossos canais:</p>
+    
+    <div class="contato-info">
+      <div class="contato-item">
+        <i class="fab fa-whatsapp"></i>
+        <h3>WhatsApp</h3>
+        <p>(71) 99722-8181</p>
+        <a href="https://api.whatsapp.com/send?phone=5571997228181&text=Olá,%20gostaria%20de%20fazer%20uma%20encomenda" class="botao" target="_blank">Enviar mensagem</a>
+      </div>
+      
+      <div class="contato-item">
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p>Nildocesbolos@nildocesebolos.com</p>
+        <a href="mailto:Nildocesbolos@gmail.com" class="botao">Enviar email</a>
+      </div>
+      
+      <div class="contato-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Localização</h3>
+        <p>Amparo, SP</p>
+        <a href="https://www.google.com/maps/place/Amparo+-+SP" class="botao" target="_blank">Ver no mapa</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Botão flutuante do cardápio -->
+<a href="#" class="botao-cardapio" title="Ver Cardápio" onclick="abrirCardapio()">
+  <i class="fas fa-book-open"></i>
+</a>
+
+<!-- Modal (janela) do cardápio -->
+<div id="modal-cardapio" class="modal-cardapio">
+  <span class="fechar-modal" onclick="fecharCardapio()">&times;</span>
+  <img src="https://github.com/GiCy2210/Dia-dos-pais/blob/main/oi.jpg?raw=true" alt="Cardápio Nil Doces e Bolos" class="imagem-cardapio">
+</div>
+
+<footer>
+  <div class="redes-sociais">
+    <a href="https://www.instagram.com/nildocesebolos" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+  <p>&copy; 2025 Nil Doces e Bolos - Todos os direitos reservados</p>
+  <p>Confeitaria artesanal feita com amor</p>
+</footer>
+
+<script>
+  function abrirCardapio() {
+    document.getElementById("modal-cardapio").style.display = "block";
+  }
+
+  function fecharCardapio() {
+    document.getElementById("modal-cardapio").style.display = "none";
+  }
+
+  // Fechar modal ao clicar fora da imagem
+  window.onclick = function(event) {
+    const modal = document.getElementById("modal-cardapio");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>

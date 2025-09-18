@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Cantinho de Amor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background: url('https://github.com/GiCy2210/Surpresa/blob/main/Foto%202.jpg?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;  
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+        .tela {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .tela.visivel {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            position: relative;
+        }
+        .card, .conteudo-container, .declaracao-container, .galeria-container {
+            max-width: 90%;
+            width: 600px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        @media (max-width: 640px) {
+            .card, .conteudo-container, .declaracao-container, .galeria-container {
+                width: 100%;
+                padding: 1.5rem;
+            }
+        }
+        .declaracao-container {
+            max-width: 800px;
+            background: #fff0f5;
+        }
+        .galeria-container {
+            max-width: 1000px;
+            background: #f0f9ff;
+        }
+        h1, h2 {
+            font-size: 2.5rem;
+            color: #ff4d4d;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 2rem;
+        }
+        @media (max-width: 640px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+        .mensagem {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .heart {
+            color: #ff4d4d;
+            font-size: 1.5rem;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            cursor: pointer;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d81b60;
+        }
+        .button {
+            background: linear-gradient(45deg, #ff4d4d, #ff7f7f);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: pulseButton 2s infinite;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            transform: translateY(0);
+        }
+        @keyframes pulseButton {
+            0% { 
+                transform: scale(1) translateY(0);
+                box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            }
+            50% { 
+                transform: scale(1.05) translateY(-3px);
+                box-shadow: 0 10px 20px rgba(255, 77, 77, 0.6);
+            }
+            100% { 
+                transform: scale(1) translateY(0);
+                box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            }
+        }
+        .button:hover {
+            background: linear-gradient(45deg, #d81b60, #ff4d4d);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(216, 27, 96, 0.5);
+            animation: none;
+        }
+        .button:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 0 3px 8px rgba(255, 77, 77, 0.3);
+        }
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: all 0.6s ease;
+        }
+        .button:hover::before {
+            left: 100%;
+        }
+        .button-secondary {
+            background: linear-gradient(45deg, #6b7280, #9ca3af);
+            animation: pulseButtonSecondary 2s infinite;
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.4);
+        }
+        @keyframes pulseButtonSecondary {
+            0% { 
+                transform: scale(1) translateY(0);
+                box-shadow: 0 5px 15px rgba(107, 114, 128, 0.4);
+            }
+            50% { 
+                transform: scale(1.05) translateY(-3px);
+                box-shadow: 0 10px 20px rgba(107, 114, 128, 0.6);
+            }
+            100% { 
+                transform: scale(1) translateY(0);
+                box-shadow: 0 5px 15px rgba(107, 114, 128, 0.4);
+            }
+        }
+        .button-secondary:hover {
+            background: linear-gradient(45deg, #4b5563, #6b7280);
+            box-shadow: 0 12px 25px rgba(75, 85, 99, 0.5);
+        }
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #ff4d4d, #ff7f7f);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 10;
+            border: none;
+            font-weight: bold;
+            animation: pulseButton 2s infinite;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            transition: all 0.4s ease;
+        }
+        .music-toggle:hover {
+            background: linear-gradient(45deg, #d81b60, #ff4d4d);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(216, 27, 96, 0.5);
+            animation: none;
+        }
+        .navegacao {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .nav-btn {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: pulseNav 3s infinite;
+        }
+        @keyframes pulseNav {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1.2); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .nav-btn.ativo {
+            background: #ff4d4d;
+            transform: scale(1.3);
+            animation: pulseNavActive 1.5s infinite;
+            box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
+        }
+        @keyframes pulseNavActive {
+            0% { transform: scale(1.3); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
+            70% { transform: scale(1.3); box-shadow: 0 0 0 12px rgba(255, 77, 77, 0); }
+            100% { transform: scale(1.3); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+        }
+        .nav-btn:hover {
+            transform: scale(1.4);
+            animation: none;
+        }
+        .contador {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 77, 77, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        footer {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 2rem;
+        }
+        .galeria-full {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        .galeria-full-item {
+            width: 100%;
+            height: 220px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: none;
+        }
+        .galeria-full-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 0, 174, 0.244);
+        }
+        .galeria-full img {
+            width: 100%;
+            height: 85%;
+            object-fit: cover;
+            border: none;
+        }
+        .legenda {
+            font-size: 0.9rem;
+            color: #444;
+            margin-top: 5px;
+            text-align: center;
+            font-weight: bold;
+            padding: 0 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .galeria-full-item:hover .legenda {
+            opacity: 1;
+        }
+        @media (max-width: 1024px) {
+            .galeria-full {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .galeria-full {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .galeria-full-item {
+                height: 180px;
+            }
+        }
+        @media (max-width: 480px) {
+            .galeria-full {
+                grid-template-columns: 1fr;
+            }
+            .button {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+                margin: 0.8rem 0.3rem;
+            }
+        }
+        .timeline {
+            margin: 2rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #ff4d4d;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ff4d4d;
+            border: 3px solid white;
+        }
+        .timeline-data {
+            font-weight: bold;
+            color: #ff4d4d;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-conteudo {
+            background: rgba(255, 77, 77, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        .music-notification {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: rgba(255, 77, 77, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            z-index: 10;
+            font-size: 0.9rem;
+            animation: fadeInOut 3s ease-in-out;
+            display: none;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        .play-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            color: white;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .play-button {
+            font-size: 5rem;
+            animation: pulse 1.5s infinite;
+            margin-bottom: 1rem;
+        }
+        .play-text {
+            font-size: 1.5rem;
+            text-align: center;
+            max-width: 300px;
+        }
+        .text-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .text-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #ff4d4d;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ff4d4d; }
+        }
+        .color-change {
+            animation: colorChange 3s infinite alternate;
+        }
+        @keyframes colorChange {
+            0% { color: #ff4d4d; }
+            50% { color: #d81b60; }
+            100% { color: #ff9eb5; }
+        }
+        .pulse-text {
+            animation: pulseText 2s infinite;
+        }
+        @keyframes pulseText {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .bounce-text {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        .countdown {
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 77, 77, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            padding: 10px;
+            background: rgba(255, 77, 77, 0.15);
+            border-radius: 10px;
+            animation: pulseText 2s infinite;
+        }
+        .countdown-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff4d4d;
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-top: 5px;
+            color: #d81b60;
+            font-weight: bold;
+        }
+        @media (max-width: 640px) {
+            .countdown-container {
+                gap: 8px;
+            }
+            .countdown-item {
+                min-width: 50px;
+                padding: 8px;
+            }
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            .countdown-label {
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="play-overlay" id="playOverlay">
+        <div class="play-button">▶</div>
+        <div class="play-text" id="playText">Clique e veja meu amor❣❣❣</div>
+    </div>
+
+    <button class="music-toggle" onclick="toggleMusic()" aria-label="Pausar música de fundo">🎵 Pausar Música</button>
+    <div class="music-notification" id="musicNotification">Música tocando...</div>
+
+    <div class="navegacao">
+        <div class="nav-btn ativo" onclick="mostrarTela(0)"></div>
+        <div class="nav-btn" onclick="mostrarTela(1)"></div>
+        <div class="nav-btn" onclick="mostrarTela(2)"></div>
+        <div class="nav-btn" onclick="mostrarTela(3)"></div>
+    </div>
+
+    <div class="tela visivel card" id="initial">
+        <h1 class="text-animation" id="main-title">Nosso Cantinho de Amor <span class="heart" onclick="heartClick(this)">❣</span></h1>
+        <p class="text-animation">Oi, <span class="color-change">meu amor</span>! Este é um lugarzinho especial só pra dizer o quanto você é importante pra mim. <span class="pulse-text">Você ilumina meu mundo</span> com seu sorriso, e cada momento com você é como um sonho fofo que não quero acordar!</p>
+        <p class="text-animation">Quero te fazer feliz todos os dias, te abraçar bem forte e construir um futuro cheio de carinho e risadas. <span class="bounce-text">Te amo muito</span>, meu coração é todo seu! <span class="heart" onclick="heartClick(this)">♥</span></p>
+        
+        <div class="contador text-animation">
+            <i class="fas fa-heart"></i> Estamos juntos há: <span id="contador-tempo">0 dias</span>
+        </div>
+        
+        <div class="countdown text-animation">
+            <h3>Contagem para nosso próximo aniversário:</h3>
+            <div class="countdown-container" id="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-days">0</div>
+                    <div class="countdown-label">dias</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-hours">0</div>
+                    <div class="countdown-label">horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-minutes">0</div>
+                    <div class="countdown-label">min</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-seconds">0</div>
+                    <div class="countdown-label">seg</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="button" onclick="mostrarTela(1)" aria-label="Ver nossa história">Nossa História</button>
+        <button class="button button-secondary" onclick="mostrarTela(2)" aria-label="Ver minha declaração">Minha Declaração</button>
+        <button class="button button-secondary" onclick="mostrarTela(3)" aria-label="Ver nossa galeria">Nossa Galeria</button>
+        
+        <footer class="text-animation">Feito com muito amor e muitos coraçõezinhos! ❣</footer>
+    </div>
+
+    <div class="tela conteudo-container" id="conteudo">
+        <h2 class="text-animation">Nossa História <span class="heart" onclick="heartClick(this)">💑</span></h2>
+        <p class="text-animation"><strong class="color-change">Pedido de namoro:</strong> <span class="pulse-text">22 de outubro de 2024</span></p>
+        <p class="text-animation"><strong class="color-change">Nosso primeiro beijo:</strong> <span class="pulse-text">02 de setembro de 2024</span></p>
+        <p class="text-animation"><strong class="color-change">Nossa música:</strong> <span class="bounce-text">"Nobody" - OneRepublic</span></p>
+        
+        <div class="timeline">
+            <div class="timeline-item text-animation">
+                <div class="timeline-data">Mar 2024</div>
+                <div class="timeline-conteudo">Quando nos conhecemos - o dia em que conheci o amor da minha vida!</div>
+            </div>
+            <div class="timeline-item text-animation">
+                <div class="timeline-data">Set 2024</div>
+                <div class="timeline-conteudo">Nosso primeiro beijo - um momento mágico que nunca esqueceremos!</div>
+            </div>
+            <div class="timeline-item text-animation">
+                <div class="timeline-data">Out 2024</div>
+                <div class="timeline-conteudo">Pedido de namoro - quando oficializamos nosso amor!</div>
+            </div>
+        </div>
+        
+        <p class="text-animation"><strong>Te amo para sempre, meu amor! <span class="heart" onclick="heartClick(this)">❤</span></strong></p>
+        <button class="button" onclick="mostrarTela(2)">Minha Declaração</button>
+    </div>
+
+    <div class="tela declaracao-container" id="declaracao">
+        <h2 class="text-animation">Minha Declaração para Você <span class="heart" onclick="heartClick(this)">💖</span></h2>
+        <p class="mensagem text-animation">
+            Meu amor, neste tempo ao seu lado vivi os momentos mais inesquecíveis da minha vida. Você é a luz que ilumina meus dias mais escuros, meu lar, meu presente e meu futuro. Com você descobri o que é amar e ser amado de verdade. Não preciso de muito, porque apenas você já basta.<br><br>
+            Você quebrou os muros que construí por anos e me mostrou que o amor é recíproco, puro e verdadeiro. Em você encontrei não só uma namorada, mas uma mulher incrível, um abraço que me acolhe, um olhar que me hipnotiza, um sorriso que ilumina tudo e um beijo que me leva ao céu e me ancora na terra. Cada "eu te amo" que digo vem de todo o meu ser, não só do meu coração.<br><br>
+            Eu sonho com nosso futuro juntos: morar lado a lado, sair para comer no seu restaurante favorito, tomar sorvete, passear pela cidade e voltar para casa para dormir juntinhos. Quero colocar uma aliança dourada no seu dedo, chorar ao te ver entrando de branco, ter uma filha ou um filho e envelhecer sorrindo ao seu lado.<br><br>
+            Camilly, você é meu milagre, a resposta das minhas orações, meu tudo. Sou infinitamente grato a Deus por ter colocado você na minha vida, porque sem você eu não conseguiria viver. Prometo cuidar de você como ninguém nunca cuidou, estar sempre ao seu lado, te apoiando e amando até meu coração parar de bater.<br><br>
+            Só vim aqui para te dizer: <span id="confettiTrigger" class="highlight pulse-text" onclick="triggerConfetti()">FELIZ UM ANO DE NAMORO, MEU AMOR!!!</span> Que esse seja apenas o primeiro de muitos outros. E que nosso namoro só termine no altar, com a gente se casando! Eu te amo daqui até a lua!! <span class="heart" onclick="heartClick(this)">💖</span>
+        </p>
+        <button class="button" onclick="mostrarTela(3)">Nossa Galeria</button>
+    </div>
+
+    <div class="tela galeria-container" id="galeria">
+        <h2 class="text-animation">Nossa Galeria de Fotos <span class="heart" onclick="heartClick(this)">📸</span></h2>
+        <p class="text-animation pulse-text">Que tal relembrarmos alguns momentos juntos:</p>
+        
+        <div class="galeria-full">
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/Surpresa/blob/main/foto%204.jpg?raw=true" alt="Momento especial 1">
+                <p class="legenda">I love you (Inglês)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/Surpresa/blob/main/foto%205.jpg?raw=true" alt="Momento especial 2">
+                <p class="legenda">Te amo (Espanhol)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/Surpresa/blob/main/foto%206.jpg?raw=true" alt="Momento especial 3">
+                <p class="legenda">Je t'aime (Francês)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0037.jpg?raw=true" alt="Momento especial 4">
+                <p class="legenda">Ti amo (Italiano)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0005.jpg?raw=true" alt="Momento especial 5">
+                <p class="legenda">Ich liebe dich (Alemão)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0007.jpg?raw=true" alt="Momento especial 6">
+                <p class="legenda">愛してる (Japonês)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0012.jpg?raw=true" alt="Momento especial 7">
+                <p class="legenda">사랑해요 (Coreano)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0026.jpg?raw=true" alt="Momento especial 8">
+                <p class="legenda">我爱你 (Mandarim)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0031.jpg?raw=true" alt="Momento especial 9">
+                <p class="legenda">Я тебя люблю (Russo)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0039.jpg?raw=true" alt="Momento especial 10">
+                <p class="legenda">أحبك (Árabe)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0059.jpg?raw=true" alt="Momento especial 11">
+                <p class="legenda">मैं तुमसे प्यार करता हूँ (Hindi)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0098.jpg?raw=true" alt="Momento especial 12">
+                <p class="legenda">Nakupenda (Swahili)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0101.jpg?raw=true" alt="Momento especial 13">
+                <p class="legenda">Jag älskar dig (Sueco)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250729-WA0102.jpg?raw=true" alt="Momento especial 14">
+                <p class="legenda">Σ'αγαπώ (snGrego)</p>
+            </div>
+            <div class="galeria-full-item">
+                <img src="https://github.com/GiCy2210/galeria/blob/main/IMG-20250821-WA0242.jpg?raw=true" alt="Momento especial 15">
+                <p class="legenda">Seni seviyorum (Turco)</p>
+            </div>
+        </div>
+        
+        <p class="highlight">Cada uma dessas fotos, está aqui para demonstar que meu amor por você é capaz ultrapassar até a barreira dos países!!! 💖</p>
+        <button class="button" onclick="mostrarTela(0)">Voltar ao Início</button>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="Nobody - OneRepublic (1).mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <script>
+        const audio = document.getElementById("backgroundMusic");
+        const musicToggle = document.querySelector(".music-toggle");
+        const musicNotification = document.getElementById("musicNotification");
+        const playOverlay = document.getElementById("playOverlay");
+        let isPlaying = false;
+        const telas = document.querySelectorAll('.tela');
+        const botoesNav = document.querySelectorAll('.nav-btn');
+        const dataInicio = new Date('2024-10-22');
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d4d', '#d81b60', '#ff9eb5', '#ffffff'],
+                shapes: ['circle', 'square', 'heart'],
+                scalar: 1.2
+            });
+        }
+
+        function mostrarTela(indice) {
+            telas.forEach((tela, i) => {
+                if (i === indice) {
+                    tela.classList.add('visivel');
+                    botoesNav[i].classList.add('ativo');
+                    setTimeout(() => {
+                        const textElements = tela.querySelectorAll('.text-animation');
+                        textElements.forEach((element, index) => {
+                            setTimeout(() => {
+                                element.classList.add('text-visible');
+                            }, index * 200);
+                        });
+                        if (i === 2) {
+                            setTimeout(triggerConfetti, 1000);
+                        }
+                    }, 100);
+                } else {
+                    tela.classList.remove('visivel');
+                    botoesNav[i].classList.remove('ativo');
+                }
+            });
+        }
+
+        function atualizarContador() {
+            const hoje = new Date();
+            const diferenca = hoje - dataInicio;
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            document.getElementById('contador-tempo').textContent = `${dias} dias`;
+        }
+
+        const heartClick = (element) => {
+            element.style.animation = 'none';
+            setTimeout(() => {
+                element.style.animation = 'pulse 1.5s infinite';
+            }, 10);
+        };
+
+        function playAudio() {
+            audio.volume = 0.7;
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicToggle.textContent = "🎵 Pausar Música";
+                    isPlaying = true;
+                    musicNotification.style.display = 'block';
+                    setTimeout(() => {
+                        musicNotification.style.display = 'none';
+                    }, 3000);
+                }).catch(error => {
+                    console.log("Reprodução bloqueada:", error);
+                    musicToggle.textContent = "🎵 Tocar Música";
+                    isPlaying = false;
+                    playOverlay.style.display = 'flex';
+                });
+            }
+        }
+
+        function setupCountdown() {
+            const nextSpecialDate = new Date('2025-10-22');
+            updateCountdown(nextSpecialDate);
+            setInterval(() => {
+                updateCountdown(nextSpecialDate);
+            }, 1000);
+        }
+
+        function updateCountdown(targetDate) {
+            const now = new Date();
+            const difference = targetDate - now;
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                document.getElementById('countdown-days').textContent = days;
+                document.getElementById('countdown-hours').textContent = hours;
+                document.getElementById('countdown-minutes').textContent = minutes;
+                document.getElementById('countdown-seconds').textContent = seconds;
+            }
+        }
+
+        function startExperience() {
+            playOverlay.style.display = 'none';
+            playAudio();
+            const textElements = document.querySelectorAll('#initial .text-animation');
+            textElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('text-visible');
+                }, index * 200);
+            });
+            document.getElementById('playText').classList.add('typewriter');
+        }
+
+        playOverlay.addEventListener('click', startExperience);
+
+        const toggleMusic = () => {
+            if (isPlaying) {
+                audio.pause();
+                musicToggle.textContent = "🎵 Tocar Música";
+            } else {
+                audio.play().catch(error => {
+                    console.log("Erro ao tocar música:", error);
+                });
+                musicToggle.textContent = "🎵 Pausar Música";
+            }
+            isPlaying = !isPlaying;
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            atualizarContador();
+            setupCountdown();
+            setTimeout(playAudio, 1000);
+            document.getElementById('playText').classList.add('typewriter');
+        });
+    </script>
+</body>
+</html>
