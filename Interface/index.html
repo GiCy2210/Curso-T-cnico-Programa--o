@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emulação de Interface Python - CustomTkinter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #ecf0f1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        .demo-container {
+            flex: 1;
+            min-width: 350px;
+            padding: 20px;
+        }
+        
+        .code-container {
+            flex: 1;
+            min-width: 350px;
+            padding: 20px;
+            background: #1e272e;
+            border-radius: 10px;
+            color: white;
+            overflow: auto;
+            max-height: 600px;
+        }
+        
+        .python-interface {
+            background: #2b2b2b;
+            border-radius: 10px;
+            padding: 20px;
+            width: 350px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .window-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .ctk-label {
+            color: #e0e0e0;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .ctk-entry {
+            width: 100%;
+            padding: 12px 15px;
+            background: #3b3b3b;
+            border: 1px solid #4b4b4b;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .ctk-entry::placeholder {
+            color: #888;
+        }
+        
+        .ctk-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .ctk-button:hover {
+            background: #2980b9;
+        }
+        
+        .result-label {
+            color: #e0e0e0;
+            text-align: center;
+            margin-top: 20px;
+            min-height: 24px;
+        }
+        
+        .success {
+            color: #2ecc71;
+        }
+        
+        .error {
+            color: #e74c3c;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .code-title {
+            font-size: 1.3rem;
+            color: #3498db;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+        
+        .code-comment {
+            color: #57a64a;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-var {
+            color: #9cdcfe;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .demo-container, .code-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Emulação de Interface Python</h1>
+            <p class="description">Esta é uma emulação web da sua interface de login desenvolvida com CustomTkinter</p>
+        </header>
+        
+        <div class="content">
+            <div class="demo-container">
+                <h2>Demonstração Interativa</h2>
+                <p>Experimente a interface de login (use usuário: Giovane, senha: Giovane0128)</p>
+                
+                <div class="python-interface">
+                    <div class="window-title">Sistema de Login</div>
+                    
+                    <label class="ctk-label">Usuário:</label>
+                    <input type="text" class="ctk-entry" id="username" placeholder="Digite seu usuário">
+                    
+                    <label class="ctk-label">Senha:</label>
+                    <input type="password" class="ctk-entry" id="password" placeholder="Digite sua senha">
+                    
+                    <button class="ctk-button" id="login-btn">Login</button>
+                    
+                    <div class="result-label" id="result"></div>
+                </div>
+                
+                <div class="instructions">
+                    <h3>Como funciona a interface real em Python:</h3>
+                    <ul>
+                        <li>A interface foi desenvolvida com a biblioteca <strong>CustomTkinter</strong></li>
+                        <li>Utiliza widgets modernos e com aparência escura (dark mode)</li>
+                        <li>Valida as credenciais inseridas pelo usuário</li>
+                        <li>Exibe mensagens de sucesso ou erro com <strong>tkinter.messagebox</strong></li>
+                        <li>A interface real é executada como uma aplicação desktop nativa</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="code-container">
+                <div class="code-header">
+                    <h2 class="code-title">Código Python Original</h2>
+                    <button class="copy-btn" id="copy-btn">Copiar Código</button>
+                </div>
+                
+                <pre><code><span class="code-comment"># Importação de bibliotecas</span>
+<span class="code-keyword">import</span> <span class="code-var">customtkinter</span> <span class="code-keyword">as</span> <span class="code-var">ctk</span>  
+<span class="code-keyword">import</span> <span class="code-var">tkinter.messagebox</span> <span class="code-keyword">as</span> <span class="code-var">messagebox</span>
+
+<span class="code-comment"># Configuração do tema escuro</span>
+<span class="code-var">ctk</span>.set_appearance_mode(<span class="code-string">'dark'</span>) 
+
+<span class="code-comment"># Função para validar login</span>
+<span class="code-keyword">def</span> <span class="code-function">validar_login</span>():
+    <span class="code-var">usuario</span> = <span class="code-var">campo_usuario</span>.get()
+    <span class="code-var">senha</span> = <span class="code-var">campo_senha</span>.get()
+
+    <span class="code-keyword">if</span> <span class="code-var">usuario</span> == <span class="code-string">'Giovane'</span> <span class="code-keyword">and</span> <span class="code-var">senha</span> == <span class="code-string">'Giovane0128'</span>:
+        <span class="code-var">messagebox</span>.showinfo(<span class="code-string">'Login realizado com sucesso'</span>, <span class="code-string">'Bem-Vindo'</span>)
+    <span class="code-keyword">else</span>:
+        <span class="code-var">messagebox</span>.showerror(<span class="code-string">'Erro de login'</span>, <span class="code-string">'Usuário ou senha incorreto'</span>)
+
+<span class="code-comment"># Configuração da aparência</span>
+<span class="code-var">app</span> = <span class="code-var">ctk</span>.CTk() 
+<span class="code-var">app</span>.title(<span class="code-string">'Sistema de Login'</span>)  
+<span class="code-var">app</span>.geometry(<span class="code-string">'350x350'</span>) 
+
+<span class="code-comment"># Criação de campos</span>
+<span class="code-comment"># Label = Subtítulo</span>
+<span class="code-var">label_usuario</span> = <span class="code-var">ctk</span>.CTkLabel(<span class="code-var">app</span>, <span class="code-var">text</span>= <span class="code-string">'Usuário:'</span>)
+<span class="code-var">label_usuario</span>.pack(<span class="code-var">pady</span>=<span class="code-keyword">10</span>) 
+
+<span class="code-comment"># Entry = Campo de escrita</span>
+<span class="code-var">campo_usuario</span> = <span class="code-var">ctk</span>.CTkEntry(<span class="code-var">app</span>, <span class="code-var">placeholder_text</span>=<span class="code-string">'Digite seu usuário'</span>)
+<span class="code-var">campo_usuario</span>.pack(<span class="code-var">pady</span>=<span class="code-keyword">10</span>)
+
+<span class="code-comment"># Label</span>
+<span class="code-var">label_senha</span> = <span class="code-var">ctk</span>.CTkLabel(<span class="code-var">app</span>, <span class="code-var">text</span>=<span class="code-string">'Senha:'</span>)
+<span class="code-var">label_senha</span>.pack(<span class="code-var">pady</span>=<span class="code-keyword">10</span>)
+
+<span class="code-comment"># Entry</span>
+<span class="code-var">campo_senha</span> = <span class="code-var">ctk</span>.CTkEntry(<span class="code-var">app</span>, <span class="code-var">placeholder_text</span>=<span class="code-string">'Digite sua senha'</span>, <span class="code-var">show</span>=<span class="code-string">'*'</span>)
+<span class="code-var">campo_senha</span>.pack(<span class="code-var">pady</span>=<span class="code-keyword">10</span>)
+
+<span class="code-comment"># Button = Botão</span>
+<span class="code-var">botao_login</span> = <span class="code-var">ctk</span>.CTkButton(<span class="code-var">app</span>, <span class="code-var">text</span>=<span class="code-string">'Login'</span>, <span class="code-var">command</span>=<span class="code-var">validar_login</span>)
+<span class="code-var">botao_login</span>.pack(<span class="code-var">pady</span>=<span class="code-keyword">10</span>)
+
+<span class="code-var">resultado_login</span> = <span class="code-var">ctk</span>.CTkLabel(<span class="code-var">app</span>, <span class="code-var">text</span>=<span class="code-string">''</span>)
+<span class="code-var">resultado_login</span>.pack(<span class="code-var">pady</span>=<span class="code-keyword">10</span>)
+
+<span class="code-comment"># Inicio da Aplicação</span>
+<span class="code-var">app</span>.mainloop()</code></pre>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Esta é uma emulação web da interface Python real desenvolvida com CustomTkinter</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.getElementById('login-btn');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const resultDiv = document.getElementById('result');
+            const copyBtn = document.getElementById('copy-btn');
+            
+            // Função para validar login
+            loginBtn.addEventListener('click', function() {
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+                
+                if (username === 'Giovane' && password === 'Giovane0128') {
+                    resultDiv.textContent = 'Login realizado com sucesso! Bem-Vindo';
+                    resultDiv.className = 'result-label success';
+                    
+                    // Efeito visual de sucesso
+                    loginBtn.style.background = '#2ecc71';
+                    setTimeout(() => {
+                        loginBtn.style.background = '#3498db';
+                    }, 1000);
+                } else {
+                    resultDiv.textContent = 'Erro: Usuário ou senha incorreto';
+                    resultDiv.className = 'result-label error';
+                    
+                    // Efeito visual de erro
+                    loginBtn.style.background = '#e74c3c';
+                    setTimeout(() => {
+                        loginBtn.style.background = '#3498db';
+                    }, 1000);
+                }
+            });
+            
+            // Função para copiar código
+            copyBtn.addEventListener('click', function() {
+                const codeText = `import customtkinter as ctk  
+import tkinter.messagebox as messagebox
+
+ctk.set_appearance_mode('dark') 
+
+def validar_login():
+    usuario = campo_usuario.get()
+    senha = campo_senha.get()
+
+    if usuario == 'Giovane' and senha == 'Giovane0128':
+        messagebox.showinfo('Login realizado com sucesso', 'Bem-Vindo')
+    else:
+        messagebox.showerror('Erro de login', 'Usuário ou senha incorreto')
+
+# Configuração da aparência
+app = ctk.CTk() 
+app.title('Sistema de Login')  
+app.geometry('350x350') 
+
+# Criação de campos
+label_usuario = ctk.CTkLabel(app, text='Usuário:')
+label_usuario.pack(pady=10) 
+
+campo_usuario = ctk.CTkEntry(app, placeholder_text='Digite seu usuário')
+campo_usuario.pack(pady=10)
+
+label_senha = ctk.CTkLabel(app, text='Senha:')
+label_senha.pack(pady=10)
+
+campo_senha = ctk.CTkEntry(app, placeholder_text='Digite sua senha', show='*')
+campo_senha.pack(pady=10)
+
+botao_login = ctk.CTkButton(app, text='Login', command=validar_login)
+botao_login.pack(pady=10)
+
+resultado_login = ctk.CTkLabel(app, text='')
+resultado_login.pack(pady=10)
+
+app.mainloop()`;
+                
+                navigator.clipboard.writeText(codeText).then(() => {
+                    copyBtn.textContent = 'Código Copiado!';
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Copiar Código';
+                    }, 2000);
+                });
+            });
+            
+            // Permitir login com Enter
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loginBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
