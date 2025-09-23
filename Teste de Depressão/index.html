@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saúde Mental - Teste de Depressão PHQ-9</title>
+    <title>Saúde Mental - Teste de Depressão PHQ-9 | Setembro Amarelo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #5b7fb5;
-            --secondary-color: #6b8cbc;
-            --accent-color: #ff6b6b;
-            --light-color: #f0f5ff;
-            --dark-color: #2c3e50;
+            --primary-color: #ffcc00;  /* Amarelo principal */
+            --secondary-color: #ffdb4d; /* Amarelo mais claro */
+            --accent-color: #ff6b6b;   /* Vermelho para alertas */
+            --light-color: #fff9e6;    /* Amarelo muito claro para fundo */
+            --dark-color: #8c6d1f;     /* Marrom escuro para texto */
             --success-color: #5cb85c;
             --warning-color: #f0ad4e;
             --info-color: #5bc0de;
-            --gradient-start: #6a89cc;
-            --gradient-end: #4a69bd;
-            --card-shadow: 0 10px 20px rgba(91, 127, 181, 0.2);
+            --gradient-start: #ffcc00;
+            --gradient-end: #ffdb4d;
+            --card-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
             --transition: all 0.3s ease;
         }
         
@@ -29,7 +29,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--light-color) 0%, #e6eeff 100%);
+            background: linear-gradient(135deg, var(--light-color) 0%, #fff4d6 100%);
             color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
@@ -47,7 +47,7 @@
             margin-bottom: 30px;
             padding: 30px 20px;
             background: linear-gradient(120deg, var(--gradient-start), var(--gradient-end));
-            color: white;
+            color: #8c6d1f; /* Texto em marrom escuro para contraste */
             border-radius: 15px;
             box-shadow: var(--card-shadow);
             position: relative;
@@ -61,7 +61,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             transform: rotate(45deg);
             z-index: 1;
         }
@@ -74,7 +74,7 @@
         h1 {
             margin-bottom: 10px;
             font-size: 2.5rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
         }
         
         .header-subtitle {
@@ -96,7 +96,7 @@
         
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(91, 127, 181, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
         }
         
         .card-title {
@@ -105,7 +105,7 @@
             gap: 10px;
             margin-bottom: 20px;
             color: var(--primary-color);
-            border-bottom: 2px solid #f0f5ff;
+            border-bottom: 2px solid #fff9e6;
             padding-bottom: 10px;
         }
         
@@ -129,7 +129,7 @@
         input[type="password"] {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e1e8ff;
+            border: 2px solid #ffeeb3;
             border-radius: 8px;
             font-size: 16px;
             transition: var(--transition);
@@ -139,13 +139,13 @@
         input[type="email"]:focus,
         input[type="password"]:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(91, 127, 181, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2);
             outline: none;
         }
         
         button {
             background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
-            color: white;
+            color: #8c6d1f;
             border: none;
             padding: 15px 25px;
             border-radius: 8px;
@@ -156,26 +156,27 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 10px rgba(91, 127, 181, 0.3);
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(91, 127, 181, 0.4);
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
         }
         
         .btn-secondary {
-            background: linear-gradient(to right, #a5b1c2, #778ca3);
+            background: linear-gradient(to right, #e6c200, #d4b000);
         }
         
         .btn-alert {
             background: linear-gradient(to right, #ff7f50, #ff6b6b);
+            color: white;
         }
         
         .question {
             margin-bottom: 25px;
             padding-bottom: 20px;
-            border-bottom: 1px dashed #e1e8ff;
+            border-bottom: 1px dashed #ffeeb3;
         }
         
         .question-text {
@@ -190,7 +191,7 @@
         
         .question-number {
             background: var(--primary-color);
-            color: white;
+            color: #8c6d1f;
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -199,6 +200,7 @@
             justify-content: center;
             font-size: 14px;
             flex-shrink: 0;
+            font-weight: bold;
         }
         
         .options {
@@ -217,7 +219,7 @@
             display: flex;
             align-items: center;
             padding: 12px;
-            border: 2px solid #e1e8ff;
+            border: 2px solid #ffeeb3;
             border-radius: 8px;
             transition: var(--transition);
             cursor: pointer;
@@ -225,7 +227,7 @@
         
         .option:hover {
             border-color: var(--primary-color);
-            background-color: #f8faff;
+            background-color: #fff9e6;
         }
         
         .option input {
@@ -242,13 +244,13 @@
             height: 150px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            color: #8c6d1f;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0 auto 25px;
-            box-shadow: 0 8px 15px rgba(91, 127, 181, 0.3);
+            box-shadow: 0 8px 15px rgba(255, 204, 0, 0.3);
         }
         
         .score-value {
@@ -263,7 +265,7 @@
         }
         
         .interpretation {
-            background-color: #f8faff;
+            background-color: #fff9e6;
             padding: 20px;
             border-radius: 12px;
             margin-top: 20px;
@@ -303,16 +305,17 @@
             padding: 18px 25px;
             white-space: nowrap;
             border-bottom: 3px solid transparent;
+            color: #8c6d1f;
         }
         
         .tab button:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             transform: none;
         }
         
         .tab button.active {
-            border-bottom: 3px solid white;
-            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 3px solid #8c6d1f;
+            background: rgba(255, 255, 255, 0.4);
         }
         
         .tabcontent {
@@ -328,7 +331,7 @@
         
         .history-item {
             padding: 20px;
-            border-bottom: 1px solid #e1e8ff;
+            border-bottom: 1px solid #ffeeb3;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -336,7 +339,7 @@
         }
         
         .history-item:hover {
-            background-color: #f8faff;
+            background-color: #fff9e6;
         }
         
         .history-item:last-child {
@@ -362,23 +365,23 @@
         }
         
         .severity-min {
-            background: #e6f7ee;
-            color: #0cab5b;
+            background: #fff4d6;
+            color: #b38f00;
         }
         
         .severity-mild {
-            background: #fff4e6;
-            color: #f9a825;
+            background: #ffedb3;
+            color: #b38f00;
         }
         
         .severity-moderate {
-            background: #ffece6;
-            color: #ff6b35;
+            background: #ffe680;
+            color: #8c6d1f;
         }
         
         .severity-severe {
-            background: #ffe6e6;
-            color: #ff4757;
+            background: #ffdb4d;
+            color: #8c6d1f;
         }
         
         .alert {
@@ -401,13 +404,13 @@
         
         .disclaimer {
             font-size: 14px;
-            color: #666;
+            color: #8c6d1f;
             margin-top: 40px;
             padding: 20px;
-            background-color: #f8faff;
+            background-color: #fff9e6;
             border-radius: 12px;
             text-align: center;
-            border: 1px dashed #c5d0ff;
+            border: 1px dashed #ffdb4d;
         }
         
         .user-welcome {
@@ -423,7 +426,7 @@
         
         .progress-container {
             height: 8px;
-            background-color: #e1e8ff;
+            background-color: #ffeeb3;
             border-radius: 4px;
             margin: 30px 0;
             overflow: hidden;
@@ -447,7 +450,7 @@
         .footer {
             text-align: center;
             margin-top: 40px;
-            color: #777;
+            color: #8c6d1f;
             font-size: 0.9rem;
         }
         
@@ -469,13 +472,13 @@
             padding: 25px 15px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.1);
             transition: var(--transition);
         }
         
         .feature:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
         }
         
         .feature h3 {
@@ -496,6 +499,17 @@
                 font-size: 1rem;
             }
         }
+        
+        .setembro-amarelo-banner {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(120deg, var(--gradient-start), var(--gradient-end));
+            color: #8c6d1f;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
@@ -506,6 +520,10 @@
                 <p class="header-subtitle">Questionário PHQ-9 para avaliação de sintomas depressivos</p>
             </div>
         </header>
+
+        <div class="setembro-amarelo-banner">
+            <i class="fas fa-ribbon"></i> Setembro Amarelo - Mês de prevenção ao suicídio e valorização da vida
+        </div>
 
         <div class="user-welcome" id="userWelcome">
             <p>Olá, <span class="welcome-name" id="welcomeName">visitante</span>! Faça login para acessar seu teste.</p>
@@ -602,7 +620,7 @@
                     
                     <form id="phq9Form">
                         <div class="question">
-                            <div class="question-text">1. Pouco interesse ou prazer em fazer coisas</div>
+                            <div class="question-text"><span class="question-number">1</span> Pouco interesse ou prazer em fazer coisas</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q1" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q1" value="1"> Vários dias</label>
@@ -612,7 +630,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">2. Sentindo-se para baixo, deprimido ou sem esperança</div>
+                            <div class="question-text"><span class="question-number">2</span> Sentindo-se para baixo, deprimido ou sem esperança</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q2" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q2" value="1"> Vários dias</label>
@@ -622,7 +640,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">3. Dificuldade em pegar no sono ou manter o sono, ou dormir demais</div>
+                            <div class="question-text"><span class="question-number">3</span> Dificuldade em pegar no sono ou manter o sono, ou dormir demais</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q3" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q3" value="1"> Vários dias</label>
@@ -632,7 +650,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">4. Sentindo-se cansado ou com pouca energia</div>
+                            <div class="question-text"><span class="question-number">4</span> Sentindo-se cansado ou com pouca energia</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q4" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q4" value="1"> Vários dias</label>
@@ -642,7 +660,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">5. Falta de apetite ou comendo demais</div>
+                            <div class="question-text"><span class="question-number">5</span> Falta de apetite ou comendo demais</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q5" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q5" value="1"> Vários dias</label>
@@ -652,7 +670,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">6. Sentindo-se mal consigo mesmo - ou que você é um fracasso ou que decepcionou a si mesmo ou sua família</div>
+                            <div class="question-text"><span class="question-number">6</span> Sentindo-se mal consigo mesmo - ou que você é um fracasso ou que decepcionou a si mesmo ou sua família</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q6" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q6" value="1"> Vários dias</label>
@@ -662,7 +680,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">7. Dificuldade de concentração em coisas, como ler o jornal ou assistir televisão</div>
+                            <div class="question-text"><span class="question-number">7</span> Dificuldade de concentração em coisas, como ler o jornal ou assistir televisão</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q7" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q7" value="1"> Vários dias</label>
@@ -672,7 +690,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">8. Movendo-se ou falando tão devagar que os outros poderiam ter notado. Ou o contrário - tão agitado que você tem se movido muito mais do que o habitual</div>
+                            <div class="question-text"><span class="question-number">8</span> Movendo-se ou falando tão devagar que os outros poderiam ter notado. Ou o contrário - tão agitado que você tem se movido muito mais do que o habitual</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q8" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q8" value="1"> Vários dias</label>
@@ -682,7 +700,7 @@
                         </div>
                         
                         <div class="question">
-                            <div class="question-text">9. Pensamentos de que você estaria melhor morto ou de machucar a si mesmo de alguma forma</div>
+                            <div class="question-text"><span class="question-number">9</span> Pensamentos de que você estaria melhor morto ou de machucar a si mesmo de alguma forma</div>
                             <div class="options">
                                 <label class="option"><input type="radio" name="q9" value="0" required> Nenhum dia</label>
                                 <label class="option"><input type="radio" name="q9" value="1"> Vários dias</label>
@@ -690,9 +708,6 @@
                                 <label class="option"><input type="radio" name="q9" value="3"> Quase todos os dias</label>
                             </div>
                         </div>
-                        
-                        <!-- As outras questões seguem o mesmo padrão -->
-                        <!-- Para brevidade, mantive apenas 2 questões no exemplo -->
                         
                         <button type="submit"><i class="fas fa-check-circle"></i> Finalizar Teste</button>
                     </form>
@@ -718,7 +733,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <div>
                             <strong>Alerta importante:</strong> Suas respostas indicam pensamentos sobre morte ou autolesão. 
-                            É muito importante buscar ajuda profissional imediatamente.
+                            É muito importante buscar ajuda profissional imediatamente. Ligue 188 - Centro de Valorização da Vida.
                         </div>
                     </div>
                     
@@ -739,11 +754,11 @@
         </div>
 
         <div class="disclaimer">
-            <p><strong>Nota importante:</strong> Este teste é baseado no PHQ-9, um instrumento válido para rastreamento de depressão, mas não substitui um diagnóstico profissional. Se você está passando por dificuldades, procure ajuda de um profissional de saúde mental.</p>
+            <p><strong>Nota importante:</strong> Este teste é baseado no PHQ-9, um instrumento válido para rastreamento de depressão, mas não substitui um diagnóstico profissional. Se você está passando por dificuldades, procure ajuda de um profissional de saúde mental. Em caso de crise, ligue para o CVV - Centro de Valorização da Vida no telefone 188.</p>
         </div>
 
         <div class="footer">
-            <p>Saúde Mental &copy; 2023 - Todos os direitos reservados</p>
+            <p>Saúde Mental &copy; 2023 - Setembro Amarelo - Todos os direitos reservados</p>
         </div>
     </div>
 
