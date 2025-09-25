@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovane Micael - Desenvolvedor Full Stack</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Carregando Portfólio...</div>
+    </div>
+
+    <!-- Container de Notificações -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Matrix Background -->
+    <canvas class="matrix-bg" id="matrixBg"></canvas>
+
+    <!-- Header e Navegação -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Giovane<span>Micael</span></a>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="circuit-bg"></div>
+        <div class="hexagon-container" id="hexagonContainer"></div>
+        <div class="particles" id="particles"></div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 id="typing-title"></h1>
+                <p>Buscando sempre a evolução profissional, para aperfeiçoar meus projetos! Se lembre que: "Há sempre alguém melhor que você!". Por isso não se contente com o pouco, e procure sempre melhorar!</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+                    <a href="#contact" class="btn btn-outline">Entrar em Contato</a>
+                </div>
+            </div>
+            <div class="hero-image" data-parallax>
+                <div class="image-container">
+                    <img src="https://github.com/GiCy2210/Portif-lio/blob/main/ChatGPT%20Image%2015%20de%20set.%20de%202025,%2018_41_18.png?raw=true" alt="Giovane Micael - Desenvolvedor Full Stack" class="profile-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="digital-transition"></div>
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Giovane Micael</h2>
+                    <p>Sou um desenvolvedor iniciante, com foco em aprender o máximo que eu puder com pessoas mais experientes, para que e seja um programador de prestígio e para que eu seja reconhecido por criar algo que todos usem.</p>
+                    <p>Com expêriencia básica em Python, JavaScript, HTML e CSS, estou sempre em busca de novos aprendizados, sobre novas tecnologias e como usá-las, para sempre entregar os melhores resultados possíveis.</p>
+                    <a href="#contact" class="btn btn-primary">Vamos conversar</a>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3 class="skill-title">Python</h3>
+                        <p>Desenvolvimento back-end básico, encapsulamento e o básico do CTK(Custom Tkinter)</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <h3 class="skill-title">JavaScript</h3>
+                        <p>Interatividade front-end, aplicações web dinâmicas e funcionalidades.</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h3 class="skill-title">HTML5</h3>
+                        <p>Estruturação semântica e acessibilidade.</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h3 class="skill-title">CSS3</h3>
+                        <p>Estilização responsiva, animações e design moderno para a web.</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="digital-transition"></div>
+        <div class="container">
+            <h2 class="section-title">Meus Projetos</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        Projeto 1
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Monkey Vibes</h3>
+                        <p class="project-description">Site de música Web: Com músicas funcionais, playlists montadas e seus artistas (em desenvolvimento)</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <button class="btn btn-outline project-details" data-project="1">Detalhes</button>
+                            <button class="btn btn-primary" data-project="1">Ver Demo</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        Projeto 2
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Interface de Login</h3>
+                        <p class="project-description">Interface simples: uma interface que tem uma tela de Login, onde ao logar aparecerá a tela de bem-vindo.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Tkinter</span>
+                            <span class="project-tag">CustomTkinter</span>
+                        </div>
+                        <div class="project-links">
+                            <button class="btn btn-outline project-details" data-project="2">Detalhes</button>
+                            <button class="btn btn-primary" data-project="2">Ver Demo</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        Projeto 3
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Teste de Depressão</h3>
+                        <p class="project-description">Site basiado no teste de depressão (PHQ-9), onde o JavaScript reproduz o papel do Banco de Dados na tela de login, o teste se baseia nas notas do PHQ-9</p>
+                        <div class="project-tags">
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <button class="btn btn-outline project-details" data-project="3">Detalhes</button>
+                            <button class="btn btn-primary" data-project="3">Ver Demo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="digital-transition"></div>
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item" id="emailContact">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>giovanemicael80@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="githubContact">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>GitHub</h4>
+                            <p>GiCy2210</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="linkedinContact">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>LinkedIn</h4>
+                            <p>GiovaneMicael</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="whatsappContact">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>WhatsApp</h4>
+                            <p>+55 (19) 99706-6802</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/xvgbjkln" method="POST" id="contactForm">
+                        <input type="hidden" name="_subject" value="Novo contato do portfólio - Giovane Micael">
+                        
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" class="form-input" placeholder="" required>
+                            <label for="name" class="form-label">Nome</label>
+                            <div class="input-focus-line"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" class="form-input" placeholder="" required>
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-focus-line"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" class="form-input" placeholder="" required></textarea>
+                            <label for="message" class="form-label">Mensagem</label>
+                            <div class="input-focus-line"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Giovane<span>Micael</span></div>
+                    <p class="footer-text">Desenvolvedor Full Stack especializado em criar soluções web eficientes e com boa lógica de programação.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" id="footerGithub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" id="footerLinkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/micaelgiovane/" class="social-link" id="footerInstagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">Links Rápidos</h3>
+                    <a href="#home" class="footer-link">Início</a>
+                    <a href="#about" class="footer-link">Sobre</a>
+                    <a href="#projects" class="footer-link">Projetos</a>
+                    <a href="#contact" class="footer-link">Contato</a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Giovane Micael.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="projectLightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="lightboxContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar notificações
+        function showNotification(title, message, type = 'info', duration = 5000) {
+            const notificationContainer = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            // Ícones para cada tipo de notificação
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            };
+            
+            notification.innerHTML = `
+                <i class="fas ${icons[type]} notification-icon"></i>
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+                <button class="notification-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="notification-progress">
+                    <div class="notification-progress-bar"></div>
+                </div>
+            `;
+            
+            notificationContainer.appendChild(notification);
+            
+            // Forçar reflow para garantir que a animação funcione
+            void notification.offsetWidth;
+            
+            // Mostrar notificação
+            notification.classList.add('show');
+            
+            // Configurar evento de fechamento
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                closeNotification(notification);
+            });
+            
+            // Fechar automaticamente após o tempo especificado
+            if (duration > 0) {
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        closeNotification(notification);
+                    }
+                }, duration);
+            }
+            
+            return notification;
+        }
+        
+        function closeNotification(notification) {
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+            
+            // Remover do DOM após a animação
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+        
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                // Mostrar notificação de boas-vindas
+                showNotification('Bem-vindo!', 'Portfólio carregado com sucesso.', 'success', 4000);
+            }, 1500);
+        });
+
+        // Custom Cursor - Melhorado
+        const cursor = document.getElementById('customCursor');
+        const cursorDot = document.getElementById('cursorDot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('active');
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('active');
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+
+        // Matrix Rain Background
+        const matrixCanvas = document.getElementById('matrixBg');
+        const ctx = matrixCanvas.getContext('2d');
+        
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        
+        let matrixChars = "01";
+        matrixChars = matrixChars.split("");
+        
+        const font_size = 12;
+        const columns = matrixCanvas.width / font_size;
+        const drops = [];
+        
+        for(let x = 0; x < columns; x++)
+            drops[x] = 1; 
+        
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+            ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            
+            ctx.fillStyle = "#0F0";
+            ctx.font = font_size + "px arial";
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
+                
+                if(drops[i] * font_size > matrixCanvas.height && Math.random() > 0.975)
+                    drops[i] = 0;
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+
+        // Hexagon Grid Animation
+        const hexagonContainer = document.getElementById('hexagonContainer');
+        function createHexagonGrid() {
+            const hexagonCount = 15;
+            for (let i = 0; i < hexagonCount; i++) {
+                const hexagon = document.createElement('div');
+                hexagon.classList.add('hexagon');
+                hexagon.style.left = `${Math.random() * 100}%`;
+                hexagon.style.top = `${Math.random() * 100}%`;
+                hexagon.style.width = `${Math.random() * 100 + 50}px`;
+                hexagon.style.height = `${Math.random() * 55 + 27.5}px`;
+                hexagon.style.animationDelay = `${Math.random() * 10}s`;
+                hexagon.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                hexagonContainer.appendChild(hexagon);
+            }
+        }
+        createHexagonGrid();
+
+        // Menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Back to top button visibility
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            // Section animation on scroll
+            animateSections();
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Validação básica
+            if (!name || !email || !message) {
+                e.preventDefault();
+                showNotification('Erro', 'Por favor, preencha todos os campos.', 'error', 4000);
+                return;
+            }
+            
+            // Feedback visual
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            // O Formspree cuidará do envio real
+            // Adicionamos um timeout para dar feedback mesmo se o formulário for redirecionado
+            setTimeout(() => {
+                submitBtn.textContent = 'Mensagem Enviada!';
+                submitBtn.style.background = '#4CAF50';
+                
+                // Mostrar notificação de sucesso
+                showNotification('Sucesso!', 'Mensagem enviada com sucesso. Entrarei em contato em breve.', 'success', 5000);
+                
+                // Reset após 3 segundos
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                    contactForm.reset();
+                }, 3000);
+            }, 1000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Back to top functionality
+        const backToTop = document.getElementById('backToTop');
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Typing animation for hero title
+        const typingTitle = document.getElementById('typing-title');
+        const phrases = [
+            'Bem <i>vindo</i>',
+            'Ao meu <i>Portifólio</i>',
+            'Meu <i>Trabalho de Lógica</i>',
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            if (!isDeleting && charIndex < currentPhrase.length) {
+                typingTitle.innerHTML = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeWriter, 50);
+            } else if (isDeleting && charIndex > 0) {
+                typingTitle.innerHTML = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(typeWriter, 30);
+            } else if (!isDeleting && charIndex === currentPhrase.length) {
+                setTimeout(() => {
+                    isDeleting = true;
+                    typeWriter();
+                }, 1000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeWriter, 200);
+            }
+        }
+        
+        window.addEventListener('load', typeWriter);
+
+        // Animate skill progress bars
+        function animateSkills() {
+            const progressBars = document.querySelectorAll('.skill-progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width;
+            });
+        }
+
+        // Animate sections on scroll
+        function animateSections() {
+            const sections = document.querySelectorAll('.section');
+            const projectCards = document.querySelectorAll('.project-card');
+            const contactItems = document.querySelectorAll('.contact-item');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                if (sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                    
+                    if (section.id === 'about') {
+                        animateSkills();
+                    }
+                    
+                    if (section.id === 'projects') {
+                        projectCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                    
+                    if (section.id === 'contact') {
+                        contactItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }
+
+        // Parallax effect for hero image
+        const heroImage = document.querySelector('.hero-image[data-parallax]');
+        window.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth - 0.5) * 20;
+            const y = (clientY / window.innerHeight - 0.5) * 20;
+            heroImage.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Particle background - Melhorado
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 100; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.width = `${Math.random() * 8 + 2}px`;
+            particle.style.height = particle.style.width;
+            particle.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            particle.style.animationDelay = `${Math.random() * 10}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Project lightbox functionality
+        const projectDetailsButtons = document.querySelectorAll('.project-details');
+        const lightbox = document.getElementById('projectLightbox');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxContent = document.getElementById('lightboxContent');
+        
+        const projectData = {
+            1: {
+                title: "Monkey Vibes",
+                description: "Site de música simples e em desevolvimento, porém já possue músicas funcionais, playlists já prontas e, ele permite a criação de novas playlists! Fácil de se usar e é bem criativo.",
+                technologies: ["HTML", "CSS", "JavaScript"],
+                features: ["Músicas funcionais", "Playlists prontas", "Criação de Playlists", "Fácil manuseio"],
+                image: "https://raw.githubusercontent.com/GiCy2210/Portif-lio/refs/heads/main/imagem_2025-09-25_162111383.png"
+            },
+            2: {
+                title: "Emulação de interface em Python",
+                description: "Site emulador de uma interface de login, com espaço para usuário e senha já definidos, e além de emulador o site também explica a interface e tem o código original. ",
+                technologies: ["HTML", "CSS", "JavaScript", "Python"],
+                features: ["Interface simples", "Emulação funcional", "Informativo de como usar", "Espaço para Login e Senha"],
+                image: "https://github.com/GiCy2210/Portif-lio/blob/main/imagem_2025-09-25_161840366.png?raw=true"
+            },
+            3: {
+                title: "Teste de Depressão ",
+                description: "Site que reproduz o teste de depressão PHQ-9, que tem tela de cadastro, de login, de histórico e a tela do resultado. A liguagem é simples e o site é de fácil manueio.",
+                technologies: ["JavaScript", "HTML", "CSS"],
+                features: ["Tela de Login", "Tela de Cadastro", "Questionário funciona"],
+                image: "https://github.com/GiCy2210/Portif-lio/blob/main/imagem_2025-09-25_161622259.png?raw=true"
+            }
+        };
+        
+        projectDetailsButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const projectId = button.getAttribute('data-project');
+                const project = projectData[projectId];
+                
+                if (project) {
+                    lightboxContent.innerHTML = `
+                        <h2 style="animation: fadeInUp 0.5s ease-out;">${project.title}</h2>
+                        <div class="project-image" style="margin: 1rem 0; border-radius: 10px; overflow: hidden; animation: fadeInUp 0.5s ease-out 0.2s both;">
+                            <img src="${project.image}">
+                        </div>
+                        <p style="animation: fadeInUp 0.5s ease-out 0.4s both;">${project.description}</p>
+                        <h3 style="margin: 1.5rem 0 1rem; animation: fadeInUp 0.5s ease-out 0.6s both;">Tecnologias Utilizadas</h3>
+                        <div class="project-tags" style="animation: fadeInUp 0.5s ease-out 0.8s both;">
+                            ${project.technologies.map(tech => `<span class="project-tag">${tech}</span>`).join('')}
+                        </div>
+                        <h3 style="margin: 1.5rem 0 1rem; animation: fadeInUp 0.5s ease-out 1s both;">Principais Funcionalidades</h3>
+                        <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; animation: fadeInUp 0.5s ease-out 1.2s both;">
+                            ${project.features.map(feature => `<li style="margin-bottom: 0.5rem;">${feature}</li>`).join('')}
+                        </ul>
+                    `;
+                    
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Resize handler for matrix canvas
+        window.addEventListener('resize', () => {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        });
+
+        // Inicializar animações quando a página carregar
+        window.addEventListener('load', () => {
+            animateSections();
+        });
+
+        // FUNÇÕES PARA OS BOTÕES DE CONTATO
+        document.getElementById('emailContact').addEventListener('click', function() {
+            // Copiar email para a área de transferência
+            navigator.clipboard.writeText('giovanemicael80@gmail.com')
+                .then(() => {
+                    // Feedback visual
+                    showNotification('Email copiado!', 'O email foi copiado para a área de transferência.', 'success', 3000);
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar texto: ', err);
+                    window.location.href = 'mailto:giovanemicael80@gmail.com';
+                });
+        });
+
+        document.getElementById('githubContact').addEventListener('click', function() {
+            // Animação de clique
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+                window.open('https://github.com/GiCy2210', '_blank');
+            }, 200);
+        });
+
+        document.getElementById('linkedinContact').addEventListener('click', function() {
+            // Animação de clique
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+                window.open('https://linkedin.com/in/GiovaneMicael', '_blank');
+            }, 200);
+        });
+
+        document.getElementById('whatsappContact').addEventListener('click', function() {
+            // Animação de clique
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+                window.open('https://wa.me/5519997066802', '_blank');
+            }, 200);
+        });
+
+        // Funções para os botões de rede social no footer
+        document.getElementById('footerGithub').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://github.com/GiCy2210', '_blank');
+        });
+
+        document.getElementById('footerLinkedin').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://linkedin.com/in/GiovaneMicael', '_blank');
+        });
+
+        document.getElementById('footerInstagram').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://www.instagram.com/micaelgiovane/', '_blank');
+        });
+
+        // Adicionar efeito de pulso aos botões principais
+        const pulseButtons = document.querySelectorAll('.btn-primary, .btn-outline');
+        pulseButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.add('btn-pulse');
+                setTimeout(() => {
+                    this.classList.remove('btn-pulse');
+                }, 600);
+            });
+        });
+
+        // Função para os botões "Ver Demo" dos projetos
+        document.querySelectorAll('.project-links .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Impede a propagação do evento
+                
+                // Animação de clique
+                this.style.transform = 'scale(0.95)';
+
+                // Obter o número do projeto do botão "Detalhes" correspondente
+                const projectCard = this.closest('.project-card');
+                const detailsButton = projectCard.querySelector('.project-details');
+                const projectNumber = detailsButton ? detailsButton.getAttribute('data-project') : null;
+
+                setTimeout(() => {
+                    this.style.transform = '';
+                    if (projectNumber) {
+                        openProjectDemo(parseInt(projectNumber));
+                    }
+                }, 200);
+            });
+        });
+
+        // Adicionar efeito de ripple aos botões
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const x = e.pageX - this.offsetLeft;
+                const y = e.pageY - this.offsetTop;
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple-effect');
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Solução simples - sem event listeners
+        function openProjectDemo(projectNumber) {
+            const links = [
+                'https://gicy2210.github.io/L-gica/',
+                'https://gicy2210.github.io/Interface/',
+                'https://gicy2210.github.io/Teste-de-Depress-o/'
+            ];
+    
+            if (links[projectNumber - 1]) {
+                window.open(links[projectNumber - 1], '_blank');
+
+                // Mostrar notificação
+                const projectTitle = document.querySelector(`[data-project="${projectNumber}"]`).closest('.project-card').querySelector('.project-title').textContent;
+                showNotification('Abrindo Projeto', `Redirecionando para ${projectTitle}...`, 'info', 2000);
+            }
+        }
+    </script>
+</body>
+</html>
