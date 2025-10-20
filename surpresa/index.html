@@ -259,14 +259,6 @@
             transform: scale(1.4);
             animation: none;
         }
-        .contador {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 77, 77, 0.1);
-            border-radius: 10px;
-            display: inline-block;
-        }
         footer {
             font-size: 0.9rem;
             color: #666;
@@ -545,31 +537,6 @@
         <p class="text-animation">Oi, <span class="color-change">meu amor</span>! Este é um lugarzinho especial só pra dizer o quanto você é importante pra mim. <span class="pulse-text">Você ilumina meu mundo</span> com seu sorriso, e cada momento com você é como um sonho fofo que não quero acordar!</p>
         <p class="text-animation">Quero te fazer feliz todos os dias, te abraçar bem forte e construir um futuro cheio de carinho e risadas. <span class="bounce-text">Te amo muito</span>, meu coração é todo seu! <span class="heart" onclick="heartClick(this)">♥</span></p>
         
-        <div class="contador text-animation">
-            <i class="fas fa-heart"></i> Estamos juntos há: <span id="contador-tempo">0 dias</span>
-        </div>
-        
-        <div class="countdown text-animation">
-            <h3>Contagem para nosso próximo aniversário:</h3>
-            <div class="countdown-container" id="countdown-container">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-days">0</div>
-                    <div class="countdown-label">dias</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-hours">0</div>
-                    <div class="countdown-label">horas</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-minutes">0</div>
-                    <div class="countdown-label">min</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-seconds">0</div>
-                    <div class="countdown-label">seg</div>
-                </div>
-            </div>
-        </div>
         
         <button class="button" onclick="mostrarTela(1)" aria-label="Ver nossa história">Nossa História</button>
         <button class="button button-secondary" onclick="mostrarTela(2)" aria-label="Ver minha declaração">Minha Declaração</button>
@@ -735,13 +702,6 @@
             });
         }
 
-        function atualizarContador() {
-            const hoje = new Date();
-            const diferenca = hoje - dataInicio;
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            document.getElementById('contador-tempo').textContent = `${dias} dias`;
-        }
-
         const heartClick = (element) => {
             element.style.animation = 'none';
             setTimeout(() => {
@@ -819,12 +779,6 @@
             isPlaying = !isPlaying;
         };
 
-        document.addEventListener("DOMContentLoaded", () => {
-            atualizarContador();
-            setupCountdown();
-            setTimeout(playAudio, 1000);
-            document.getElementById('playText').classList.add('typewriter');
-        });
     </script>
 </body>
 </html>
