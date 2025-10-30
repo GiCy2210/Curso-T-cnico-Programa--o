@@ -6,7 +6,7 @@
     <title>Igreja Adventista - ATA Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* TODOS OS ESTILOS DOS DOIS CÓDIGOS AQUI */
+        /* TODOS OS ESTILOS ANTERIORES PERMANECEM AQUI */
         :root {
             --primary: #2c5aa0;
             --primary-dark: #1e3d72;
@@ -301,6 +301,11 @@
             background-color: #218838;
         }
         
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
         .actions {
             display: flex;
             gap: 1rem;
@@ -492,6 +497,41 @@
         .back-button:hover {
             color: var(--primary-dark);
         }
+        
+        /* Novos estilos para os campos de hinos, oração e versículo */
+        .hymn-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+        
+        .hymn-number {
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 60px;
+        }
+        
+        .hymn-title {
+            flex: 1;
+        }
+        
+        .worship-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .worship-section h3 {
+            color: var(--secondary);
+            border-bottom: none;
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -517,6 +557,7 @@
             <div class="doctrines-section">
                 <h2>Doutrinas Principais</h2>
                 <div class="doctrines-grid">
+                    <!-- Cards de doutrinas (mantidos do código anterior) -->
                     <div class="doctrine-card">
                         <h3><i class="fas fa-bible"></i> A Bíblia como Regra de Fé</h3>
                         <p>Cremos que a Bíblia é a Palavra de Deus, a revelação de Sua vontade para a humanidade e o padrão supremo de toda doutrina e experiência.</p>
@@ -663,6 +704,44 @@
                     <label for="meetingTime">Horário da Reunião</label>
                     <input type="text" id="meetingTime" placeholder="Ex: 19:30 às 21:00">
                 </div>
+
+                <!-- NOVA SEÇÃO: ELEMENTOS DE ADORAÇÃO -->
+                <div class="worship-section">
+                    <h3><i class="fas fa-pray"></i> Elementos de Adoração</h3>
+                    
+                    <div class="form-group">
+                        <label for="openingPrayer">Responsável pela Oração Inicial</label>
+                        <input type="text" id="openingPrayer" placeholder="Nome da pessoa que fez a oração inicial">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bibleVerse">Versículo Base da Meditação</label>
+                        <input type="text" id="bibleVerse" placeholder="Ex: João 3:16">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="verseText">Texto do Versículo (Opcional)</label>
+                        <textarea id="verseText" placeholder="Digite o texto completo do versículo"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Hinos Escolhidos</label>
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 1;">
+                                <input type="text" id="hymnNumber" placeholder="Número do hino">
+                            </div>
+                            <div class="form-group" style="flex: 2;">
+                                <input type="text" id="hymnTitle" placeholder="Título do hino">
+                            </div>
+                            <button class="btn btn-secondary" id="addHymn">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="members-list" id="hymnsList">
+                            <!-- Hinos serão adicionados aqui -->
+                        </div>
+                    </div>
+                </div>
                 
                 <h3>Participantes</h3>
                 
@@ -738,6 +817,7 @@
                 <ol>
                     <li>Selecione o tipo de ATA que deseja criar</li>
                     <li>Preencha os dados básicos da reunião (número, data, local, horário)</li>
+                    <li>Preencha os elementos de adoração (oração, versículo, hinos)</li>
                     <li>Adicione os participantes da reunião</li>
                     <li>Descreva a pauta da reunião</li>
                     <li>Registre as deliberações e decisões tomadas</li>
@@ -774,6 +854,7 @@
         // Variáveis globais
         let selectedCommission = '';
         let participants = [];
+        let hymns = [];
         
         // Navegação entre telas
         function showScreen(screenId) {
@@ -928,7 +1009,7 @@
                     participantElement.innerHTML = `
                         <span>${participant}</span>
                         <div class="member-actions">
-                            <button class="btn btn-secondary" onclick="removeParticipant(${index})">
+                            <button class="btn btn-secondary btn-sm" onclick="removeParticipant(${index})">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -937,8 +1018,74 @@
                 });
             }
             
-            // Initialize with empty participants list
+            // Hinos functionality
+            const addHymnBtn = document.getElementById('addHymn');
+            const hymnNumberInput = document.getElementById('hymnNumber');
+            const hymnTitleInput = document.getElementById('hymnTitle');
+            const hymnsList = document.getElementById('hymnsList');
+            
+            addHymnBtn.addEventListener('click', function() {
+                const hymnNumber = hymnNumberInput.value.trim();
+                const hymnTitle = hymnTitleInput.value.trim();
+                
+                if (hymnNumber && hymnTitle) {
+                    addHymn(hymnNumber, hymnTitle);
+                    hymnNumberInput.value = '';
+                    hymnTitleInput.value = '';
+                } else {
+                    alert('Por favor, preencha tanto o número quanto o título do hino.');
+                }
+            });
+            
+            hymnNumberInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addHymnBtn.click();
+                }
+            });
+            
+            hymnTitleInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addHymnBtn.click();
+                }
+            });
+            
+            function addHymn(number, title) {
+                hymns.push({ number, title });
+                renderHymns();
+            }
+            
+            function removeHymn(index) {
+                hymns.splice(index, 1);
+                renderHymns();
+            }
+            
+            function renderHymns() {
+                hymnsList.innerHTML = '';
+                
+                if (hymns.length === 0) {
+                    hymnsList.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 1rem;">Nenhum hino adicionado</p>';
+                    return;
+                }
+                
+                hymns.forEach((hymn, index) => {
+                    const hymnElement = document.createElement('div');
+                    hymnElement.className = 'hymn-item';
+                    hymnElement.innerHTML = `
+                        <div class="hymn-number">Hino ${hymn.number}</div>
+                        <div class="hymn-title">${hymn.title}</div>
+                        <div class="member-actions">
+                            <button class="btn btn-secondary btn-sm" onclick="removeHymn(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    hymnsList.appendChild(hymnElement);
+                });
+            }
+            
+            // Initialize with empty lists
             renderParticipants();
+            renderHymns();
             
             // Preview functionality
             const previewBtn = document.getElementById('previewBtn');
@@ -961,6 +1108,9 @@
                 const secretary = document.getElementById('secretary').value;
                 const agendaItems = document.getElementById('agendaItems').value;
                 const deliberations = document.getElementById('deliberations').value;
+                const openingPrayer = document.getElementById('openingPrayer').value;
+                const bibleVerse = document.getElementById('bibleVerse').value;
+                const verseText = document.getElementById('verseText').value;
                 
                 // Format date
                 const formattedDate = ataDate ? new Date(ataDate).toLocaleDateString('pt-BR') : '';
@@ -970,6 +1120,11 @@
                     .filter(item => item.trim() !== '')
                     .map(item => `<li>${item}</li>`)
                     .join('');
+                
+                // Format hymns
+                const hymnsList = hymns.map(hymn => 
+                    `<li>Hino ${hymn.number} - ${hymn.title}</li>`
+                ).join('');
                 
                 // Get type label
                 const typeLabels = {
@@ -994,7 +1149,18 @@
                         na <strong>${ataLocation || '_____'}</strong>, reuniu-se a <strong>${typeLabel}</strong> 
                         da <strong>Igreja Adventista do Sétimo Dia</strong>, sob a presidência de 
                         <strong>${president || '_____'}</strong>, secretariada por 
-                        <strong>${secretary || '_____'}</strong>, com a seguinte pauta:</p>
+                        <strong>${secretary || '_____'}</strong>.</p>
+                        
+                        <p>A reunião iniciou com uma oração feita por <strong>${openingPrayer || '_____'}</strong>, 
+                        seguida pela meditação no versículo <strong>${bibleVerse || '_____'}</strong>${verseText ? `: "${verseText}"` : ''}.</p>
+                        
+                        <p>Foram entoados os seguintes hinos:
+                            <ul>
+                                ${hymnsList || '<li>_________________________________</li>'}
+                            </ul>
+                        </p>
+                        
+                        <p>Em seguida, foi tratada a seguinte pauta:</p>
                         
                         <ol>
                             ${agendaList || '<li>_________________________________</li>'}
@@ -1042,6 +1208,10 @@
                     time: document.getElementById('meetingTime').value,
                     president: document.getElementById('president').value,
                     secretary: document.getElementById('secretary').value,
+                    openingPrayer: document.getElementById('openingPrayer').value,
+                    bibleVerse: document.getElementById('bibleVerse').value,
+                    verseText: document.getElementById('verseText').value,
+                    hymns: hymns,
                     participants: participants,
                     agenda: document.getElementById('agendaItems').value,
                     deliberations: document.getElementById('deliberations').value,
@@ -1108,7 +1278,7 @@
                             <div class="history-title">ATA ${ata.number} - ${typeLabels[ata.type]}</div>
                             <div class="history-details">
                                 Realizada em ${formattedDate} | Criada em ${createdDate} | 
-                                ${ata.participants.length} participantes
+                                ${ata.participants.length} participantes | ${ata.hymns.length} hinos
                             </div>
                         </div>
                         <div class="history-actions">
@@ -1131,25 +1301,27 @@
             }
             
             function resetForm() {
-                document.getElementById('ataType').value = selectedCommission; // Mantém a comissão selecionada
+                document.getElementById('ataType').value = selectedCommission;
                 document.getElementById('ataNumber').value = '';
                 document.getElementById('ataDate').value = '';
                 document.getElementById('ataLocation').value = 'Igreja Adventista do Sétimo Dia';
                 document.getElementById('meetingTime').value = '';
                 document.getElementById('president').value = '';
                 document.getElementById('secretary').value = '';
+                document.getElementById('openingPrayer').value = '';
+                document.getElementById('bibleVerse').value = '';
+                document.getElementById('verseText').value = '';
                 document.getElementById('agendaItems').value = '';
                 document.getElementById('deliberations').value = '';
                 participants = [];
+                hymns = [];
                 renderParticipants();
+                renderHymns();
                 previewContainer.style.display = 'none';
             }
             
             // Download ATA as PDF
             function downloadATA(ataData) {
-                // In a real implementation, this would generate an actual PDF
-                // For this example, we'll create a text file
-                
                 const typeLabels = {
                     'assembleia-geral': 'Assembleia Geral',
                     'diretoria': 'Reunião de Diretoria',
@@ -1166,8 +1338,19 @@
                 content += `Aos ${formattedDate}, às ${ataData.time}, na ${ataData.location}, `;
                 content += `reuniu-se a ${typeLabels[ataData.type]} da Igreja Adventista do Sétimo Dia, `;
                 content += `sob a presidência de ${ataData.president}, secretariada por ${ataData.secretary}.\n\n`;
-                content += `PAUTA:\n`;
                 
+                content += `ELEMENTOS DE ADORAÇÃO:\n`;
+                content += `Oração inicial: ${ataData.openingPrayer}\n`;
+                content += `Versículo base: ${ataData.bibleVerse}\n`;
+                if (ataData.verseText) {
+                    content += `Texto: "${ataData.verseText}"\n`;
+                }
+                content += `Hinos entoados:\n`;
+                ataData.hymns.forEach(hymn => {
+                    content += `- Hino ${hymn.number}: ${hymn.title}\n`;
+                });
+                
+                content += `\nPAUTA:\n`;
                 const agendaItems = ataData.agenda.split('\n').filter(item => item.trim() !== '');
                 agendaItems.forEach((item, index) => {
                     content += `${index + 1}. ${item}\n`;
@@ -1200,6 +1383,7 @@
             
             // Make functions available globally for onclick handlers
             window.removeParticipant = removeParticipant;
+            window.removeHymn = removeHymn;
             window.viewATA = function(id) {
                 const atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
                 const ata = atas.find(a => a.id === id);
@@ -1231,10 +1415,15 @@
                     document.getElementById('meetingTime').value = ata.time;
                     document.getElementById('president').value = ata.president;
                     document.getElementById('secretary').value = ata.secretary;
+                    document.getElementById('openingPrayer').value = ata.openingPrayer || '';
+                    document.getElementById('bibleVerse').value = ata.bibleVerse || '';
+                    document.getElementById('verseText').value = ata.verseText || '';
                     document.getElementById('agendaItems').value = ata.agenda;
                     document.getElementById('deliberations').value = ata.deliberations;
                     participants = ata.participants;
+                    hymns = ata.hymns || [];
                     renderParticipants();
+                    renderHymns();
                     
                     alert('ATA carregada para edição. Lembre-se de gerar novamente após as alterações.');
                 }
