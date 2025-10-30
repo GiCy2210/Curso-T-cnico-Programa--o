@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATA Digital - Igreja Adventista do Sétimo Dia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5aa0;
+            --primary-dark: #1e3d72;
+            --secondary: #8b0000;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --success: #28a745;
+            --border: #dee2e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #dee2e6;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+        
+        .members-list {
+            margin-top: 1rem;
+        }
+        
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+        
+        .member-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .history-list {
+            list-style: none;
+        }
+        
+        .history-item {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .history-info {
+            flex: 1;
+        }
+        
+        .history-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .history-details {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .history-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .history-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .history-actions {
+                align-self: flex-end;
+            }
+        }
+        
+        .preview-container {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .ata-preview {
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+        }
+        
+        .ata-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .ata-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .ata-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ata-body {
+            margin-bottom: 2rem;
+        }
+        
+        .ata-signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #000;
+            width: 200px;
+            text-align: center;
+            padding-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-church logo"></i>
+            <div>
+                <h1>ATA Digital</h1>
+                <p class="subtitle">Igreja Adventista do Sétimo Dia</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <div class="tabs">
+                <button class="tab active" data-tab="create">Criar ATA</button>
+                <button class="tab" data-tab="history">Histórico</button>
+                <button class="tab" data-tab="help">Ajuda</button>
+            </div>
+            
+            <div class="tab-content active" id="create-tab">
+                <h2>Criar Nova ATA</h2>
+                
+                <div class="form-group">
+                    <label for="ataType">Tipo de ATA</label>
+                    <select id="ataType">
+                        <option value="">Selecione o tipo de ATA</option>
+                        <option value="assembleia-geral">Assembleia Geral</option>
+                        <option value="diretoria">Reunião de Diretoria</option>
+                        <option value="comissao">Reunião de Comissão</option>
+                        <option value="secretaria">Reunião de Secretaria</option>
+                        <option value="tesouraria">Reunião de Tesouraria</option>
+                        <option value="outra">Outra</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ataNumber">Número da ATA</label>
+                        <input type="text" id="ataNumber" placeholder="Ex: 001/2023">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ataDate">Data da Reunião</label>
+                        <input type="date" id="ataDate">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ataLocation">Local da Reunião</label>
+                    <input type="text" id="ataLocation" placeholder="Ex: Sala de Reuniões da Igreja" value="Igreja Adventista do Sétimo Dia">
+                </div>
+                
+                <div class="form-group">
+                    <label for="meetingTime">Horário da Reunião</label>
+                    <input type="text" id="meetingTime" placeholder="Ex: 19:30 às 21:00">
+                </div>
+                
+                <h3>Participantes</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="president">Presidente da Reunião</label>
+                        <input type="text" id="president" placeholder="Nome do presidente">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="secretary">Secretário da Reunião</label>
+                        <input type="text" id="secretary" placeholder="Nome do secretário">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="participants">Lista de Participantes</label>
+                    <div class="form-row">
+                        <input type="text" id="newParticipant" placeholder="Nome do participante">
+                        <button class="btn btn-secondary" id="addParticipant">Adicionar</button>
+                    </div>
+                    <div class="members-list" id="participantsList">
+                        <!-- Participants will be added here -->
+                    </div>
+                </div>
+                
+                <h3>Pauta da Reunião</h3>
+                
+                <div class="form-group">
+                    <label for="agendaItems">Itens da Pauta</label>
+                    <textarea id="agendaItems" placeholder="Descreva os itens da pauta, um por linha"></textarea>
+                </div>
+                
+                <h3>Deliberações</h3>
+                
+                <div class="form-group">
+                    <label for="deliberations">Deliberações e Decisões</label>
+                    <textarea id="deliberations" placeholder="Descreva as deliberações e decisões tomadas"></textarea>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-secondary" id="previewBtn">Visualizar ATA</button>
+                    <button class="btn btn-primary" id="generateBtn">Gerar e Salvar ATA</button>
+                </div>
+                
+                <div class="preview-container" id="previewContainer" style="display: none;">
+                    <h3>Pré-visualização da ATA</h3>
+                    <div class="ata-preview" id="ataPreview">
+                        <!-- ATA preview will be generated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="history-tab">
+                <h2>Histórico de ATAs</h2>
+                
+                <div class="history-list" id="historyList">
+                    <!-- History items will be added here -->
+                </div>
+                
+                <div class="empty-state" id="emptyHistory" style="display: none;">
+                    <i class="fas fa-history"></i>
+                    <h3>Nenhuma ATA encontrada</h3>
+                    <p>As atas que você criar aparecerão aqui.</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="help-tab">
+                <h2>Ajuda e Instruções</h2>
+                
+                <h3>Como usar o sistema</h3>
+                <p>Para criar uma nova ATA, siga os passos:</p>
+                <ol>
+                    <li>Selecione o tipo de ATA que deseja criar</li>
+                    <li>Preencha os dados básicos da reunião (número, data, local, horário)</li>
+                    <li>Adicione os participantes da reunião</li>
+                    <li>Descreva a pauta da reunião</li>
+                    <li>Registre as deliberações e decisões tomadas</li>
+                    <li>Visualize a ATA antes de gerar o documento final</li>
+                    <li>Clique em "Gerar e Salvar ATA" para finalizar</li>
+                </ol>
+                
+                <h3>Tipos de ATA</h3>
+                <ul>
+                    <li><strong>Assembleia Geral:</strong> Reuniões com a participação de todos os membros da igreja</li>
+                    <li><strong>Reunião de Diretoria:</strong> Reuniões da diretoria da igreja</li>
+                    <li><strong>Reunião de Comissão:</strong> Reuniões de comissões específicas</li>
+                    <li><strong>Reunião de Secretaria:</strong> Reuniões do departamento de secretaria</li>
+                    <li><strong>Reunião de Tesouraria:</strong> Reuniões do departamento financeiro</li>
+                    <li><strong>Outra:</strong> Para reuniões que não se enquadram nas categorias acima</li>
+                </ul>
+                
+                <h3>Recursos do Sistema</h3>
+                <ul>
+                    <li><strong>Histórico:</strong> Todas as ATAs criadas ficam salvas no histórico</li>
+                    <li><strong>Download:</strong> É possível baixar as ATAs em formato PDF</li>
+                    <li><strong>Visualização:</strong> Pré-visualização da ATA antes de gerar</li>
+                    <li><strong>Edição:</strong> Possibilidade de editar ATAs do histórico</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>ATA Digital &copy; 2023 - Sistema de registro de atas da Igreja Adventista do Sétimo Dia</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show active tab content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // If history tab, load history
+                    if (tabId === 'history') {
+                        loadHistory();
+                    }
+                });
+            });
+            
+            // Participants functionality
+            const addParticipantBtn = document.getElementById('addParticipant');
+            const newParticipantInput = document.getElementById('newParticipant');
+            const participantsList = document.getElementById('participantsList');
+            
+            let participants = [];
+            
+            addParticipantBtn.addEventListener('click', function() {
+                const participantName = newParticipantInput.value.trim();
+                if (participantName) {
+                    addParticipant(participantName);
+                    newParticipantInput.value = '';
+                }
+            });
+            
+            newParticipantInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addParticipantBtn.click();
+                }
+            });
+            
+            function addParticipant(name) {
+                participants.push(name);
+                renderParticipants();
+            }
+            
+            function removeParticipant(index) {
+                participants.splice(index, 1);
+                renderParticipants();
+            }
+            
+            function renderParticipants() {
+                participantsList.innerHTML = '';
+                
+                if (participants.length === 0) {
+                    participantsList.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 1rem;">Nenhum participante adicionado</p>';
+                    return;
+                }
+                
+                participants.forEach((participant, index) => {
+                    const participantElement = document.createElement('div');
+                    participantElement.className = 'member-item';
+                    participantElement.innerHTML = `
+                        <span>${participant}</span>
+                        <div class="member-actions">
+                            <button class="btn btn-secondary" onclick="removeParticipant(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    participantsList.appendChild(participantElement);
+                });
+            }
+            
+            // Initialize with empty participants list
+            renderParticipants();
+            
+            // Preview functionality
+            const previewBtn = document.getElementById('previewBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            const previewContainer = document.getElementById('previewContainer');
+            const ataPreview = document.getElementById('ataPreview');
+            
+            previewBtn.addEventListener('click', function() {
+                generatePreview();
+                previewContainer.style.display = 'block';
+            });
+            
+            function generatePreview() {
+                const ataType = document.getElementById('ataType').value;
+                const ataNumber = document.getElementById('ataNumber').value;
+                const ataDate = document.getElementById('ataDate').value;
+                const ataLocation = document.getElementById('ataLocation').value;
+                const meetingTime = document.getElementById('meetingTime').value;
+                const president = document.getElementById('president').value;
+                const secretary = document.getElementById('secretary').value;
+                const agendaItems = document.getElementById('agendaItems').value;
+                const deliberations = document.getElementById('deliberations').value;
+                
+                // Format date
+                const formattedDate = ataDate ? new Date(ataDate).toLocaleDateString('pt-BR') : '';
+                
+                // Format agenda items
+                const agendaList = agendaItems.split('\n')
+                    .filter(item => item.trim() !== '')
+                    .map(item => `<li>${item}</li>`)
+                    .join('');
+                
+                // Get type label
+                const typeLabels = {
+                    'assembleia-geral': 'Assembleia Geral',
+                    'diretoria': 'Reunião de Diretoria',
+                    'comissao': 'Reunião de Comissão',
+                    'secretaria': 'Reunião de Secretaria',
+                    'tesouraria': 'Reunião de Tesouraria',
+                    'outra': 'Reunião'
+                };
+                
+                const typeLabel = typeLabels[ataType] || 'Reunião';
+                
+                ataPreview.innerHTML = `
+                    <div class="ata-header">
+                        <div class="ata-title">ATA DE ${typeLabel.toUpperCase()}</div>
+                        <div class="ata-subtitle">Nº ${ataNumber || '___/____'}</div>
+                    </div>
+                    
+                    <div class="ata-body">
+                        <p>Aos <strong>${formattedDate || '_____'}</strong>, às <strong>${meetingTime || '_____'}</strong>, 
+                        na <strong>${ataLocation || '_____'}</strong>, reuniu-se a <strong>${typeLabel}</strong> 
+                        da <strong>Igreja Adventista do Sétimo Dia</strong>, sob a presidência de 
+                        <strong>${president || '_____'}</strong>, secretariada por 
+                        <strong>${secretary || '_____'}</strong>, com a seguinte pauta:</p>
+                        
+                        <ol>
+                            ${agendaList || '<li>_________________________________</li>'}
+                        </ol>
+                        
+                        <p>Foram discutidos os assuntos constantes da pauta e, após debates, foram tomadas as seguintes deliberações:</p>
+                        
+                        <p>${deliberations || '_________________________________________________________'}</p>
+                        
+                        <p>Nada mais havendo a tratar, foi encerrada a reunião e, para constar, foi lavrada a presente ata, que será assinada pelo presidente e secretário.</p>
+                    </div>
+                    
+                    <div class="ata-signatures">
+                        <div class="signature-line">
+                            <strong>${president || '__________________________'}</strong><br>
+                            Presidente
+                        </div>
+                        
+                        <div class="signature-line">
+                            <strong>${secretary || '__________________________'}</strong><br>
+                            Secretário
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Generate and save ATA
+            generateBtn.addEventListener('click', function() {
+                const ataType = document.getElementById('ataType').value;
+                const ataNumber = document.getElementById('ataNumber').value;
+                const ataDate = document.getElementById('ataDate').value;
+                
+                if (!ataType || !ataNumber || !ataDate) {
+                    alert('Por favor, preencha pelo menos o tipo, número e data da ATA.');
+                    return;
+                }
+                
+                // Generate ATA data
+                const ataData = {
+                    id: Date.now(),
+                    type: ataType,
+                    number: ataNumber,
+                    date: ataDate,
+                    location: document.getElementById('ataLocation').value,
+                    time: document.getElementById('meetingTime').value,
+                    president: document.getElementById('president').value,
+                    secretary: document.getElementById('secretary').value,
+                    participants: participants,
+                    agenda: document.getElementById('agendaItems').value,
+                    deliberations: document.getElementById('deliberations').value,
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Save to localStorage
+                saveATA(ataData);
+                
+                // Generate and download PDF
+                downloadATA(ataData);
+                
+                // Show success message
+                alert('ATA gerada e salva com sucesso!');
+                
+                // Reset form
+                resetForm();
+                
+                // Switch to history tab
+                document.querySelector('[data-tab="history"]').click();
+            });
+            
+            function saveATA(ataData) {
+                let atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
+                atas.push(ataData);
+                localStorage.setItem('adventist-atas', JSON.stringify(atas));
+            }
+            
+            function loadHistory() {
+                const historyList = document.getElementById('historyList');
+                const emptyHistory = document.getElementById('emptyHistory');
+                
+                let atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
+                
+                historyList.innerHTML = '';
+                
+                if (atas.length === 0) {
+                    emptyHistory.style.display = 'block';
+                    return;
+                }
+                
+                emptyHistory.style.display = 'none';
+                
+                // Sort by date (newest first)
+                atas.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                
+                atas.forEach(ata => {
+                    const typeLabels = {
+                        'assembleia-geral': 'Assembleia Geral',
+                        'diretoria': 'Reunião de Diretoria',
+                        'comissao': 'Reunião de Comissão',
+                        'secretaria': 'Reunião de Secretaria',
+                        'tesouraria': 'Reunião de Tesouraria',
+                        'outra': 'Reunião'
+                    };
+                    
+                    const formattedDate = new Date(ata.date).toLocaleDateString('pt-BR');
+                    const createdDate = new Date(ata.createdAt).toLocaleDateString('pt-BR');
+                    
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.innerHTML = `
+                        <div class="history-info">
+                            <div class="history-title">ATA ${ata.number} - ${typeLabels[ata.type]}</div>
+                            <div class="history-details">
+                                Realizada em ${formattedDate} | Criada em ${createdDate} | 
+                                ${ata.participants.length} participantes
+                            </div>
+                        </div>
+                        <div class="history-actions">
+                            <button class="btn btn-secondary" onclick="viewATA(${ata.id})">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="btn btn-primary" onclick="downloadATAFromHistory(${ata.id})">
+                                <i class="fas fa-download"></i> Baixar
+                            </button>
+                            <button class="btn btn-secondary" onclick="editATA(${ata.id})">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-secondary" onclick="deleteATA(${ata.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    historyList.appendChild(historyItem);
+                });
+            }
+            
+            function resetForm() {
+                document.getElementById('ataType').value = '';
+                document.getElementById('ataNumber').value = '';
+                document.getElementById('ataDate').value = '';
+                document.getElementById('ataLocation').value = 'Igreja Adventista do Sétimo Dia';
+                document.getElementById('meetingTime').value = '';
+                document.getElementById('president').value = '';
+                document.getElementById('secretary').value = '';
+                document.getElementById('agendaItems').value = '';
+                document.getElementById('deliberations').value = '';
+                participants = [];
+                renderParticipants();
+                previewContainer.style.display = 'none';
+            }
+            
+            // Download ATA as PDF
+            function downloadATA(ataData) {
+                // In a real implementation, this would generate an actual PDF
+                // For this example, we'll create a text file
+                
+                const typeLabels = {
+                    'assembleia-geral': 'Assembleia Geral',
+                    'diretoria': 'Reunião de Diretoria',
+                    'comissao': 'Reunião de Comissão',
+                    'secretaria': 'Reunião de Secretaria',
+                    'tesouraria': 'Reunião de Tesouraria',
+                    'outra': 'Reunião'
+                };
+                
+                const formattedDate = new Date(ataData.date).toLocaleDateString('pt-BR');
+                
+                let content = `ATA DE ${typeLabels[ataData.type].toUpperCase()}\n`;
+                content += `Nº ${ataData.number}\n\n`;
+                content += `Aos ${formattedDate}, às ${ataData.time}, na ${ataData.location}, `;
+                content += `reuniu-se a ${typeLabels[ataData.type]} da Igreja Adventista do Sétimo Dia, `;
+                content += `sob a presidência de ${ataData.president}, secretariada por ${ataData.secretary}.\n\n`;
+                content += `PAUTA:\n`;
+                
+                const agendaItems = ataData.agenda.split('\n').filter(item => item.trim() !== '');
+                agendaItems.forEach((item, index) => {
+                    content += `${index + 1}. ${item}\n`;
+                });
+                
+                content += `\nDELIBERAÇÕES:\n`;
+                content += `${ataData.deliberations}\n\n`;
+                content += `PARTICIPANTES:\n`;
+                ataData.participants.forEach(participant => {
+                    content += `- ${participant}\n`;
+                });
+                
+                content += `\n__________________________________________\n`;
+                content += `${ataData.president}\n`;
+                content += `Presidente\n\n`;
+                content += `__________________________________________\n`;
+                content += `${ataData.secretary}\n`;
+                content += `Secretário\n`;
+                
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ATA-${ataData.number}-${formattedDate.replace(/\//g, '-')}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+            
+            // Make functions available globally for onclick handlers
+            window.removeParticipant = removeParticipant;
+            window.viewATA = function(id) {
+                const atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
+                const ata = atas.find(a => a.id === id);
+                if (ata) {
+                    alert(`Visualizando ATA ${ata.number}. Em uma implementação real, isso abriria uma visualização detalhada.`);
+                }
+            };
+            
+            window.downloadATAFromHistory = function(id) {
+                const atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
+                const ata = atas.find(a => a.id === id);
+                if (ata) {
+                    downloadATA(ata);
+                }
+            };
+            
+            window.editATA = function(id) {
+                const atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
+                const ata = atas.find(a => a.id === id);
+                if (ata) {
+                    // Switch to create tab
+                    document.querySelector('[data-tab="create"]').click();
+                    
+                    // Fill form with ATA data
+                    document.getElementById('ataType').value = ata.type;
+                    document.getElementById('ataNumber').value = ata.number;
+                    document.getElementById('ataDate').value = ata.date;
+                    document.getElementById('ataLocation').value = ata.location;
+                    document.getElementById('meetingTime').value = ata.time;
+                    document.getElementById('president').value = ata.president;
+                    document.getElementById('secretary').value = ata.secretary;
+                    document.getElementById('agendaItems').value = ata.agenda;
+                    document.getElementById('deliberations').value = ata.deliberations;
+                    participants = ata.participants;
+                    renderParticipants();
+                    
+                    alert('ATA carregada para edição. Lembre-se de gerar novamente após as alterações.');
+                }
+            };
+            
+            window.deleteATA = function(id) {
+                if (confirm('Tem certeza que deseja excluir esta ATA?')) {
+                    let atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
+                    atas = atas.filter(a => a.id !== id);
+                    localStorage.setItem('adventist-atas', JSON.stringify(atas));
+                    loadHistory();
+                }
+            };
+        });
+    </script>
+</body>
+</html>
