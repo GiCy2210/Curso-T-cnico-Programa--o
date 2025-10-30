@@ -6,16 +6,23 @@
     <title>Igreja Adventista - ATA Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* TODOS OS ESTILOS ANTERIORES PERMANECEM AQUI */
         :root {
-            --primary: #2c5aa0;
-            --primary-dark: #1e3d72;
-            --secondary: #8b0000;
+            --primary: #3a6447;
+            --primary-dark: #3e6c3c;
+            --primary-light: #54bc75;
+            --secondary: #ac3838;
+            --secondary-light: #b30000;
             --light: #f8f9fa;
             --dark: #343a40;
             --gray: #6c757d;
+            --gray-light: #e9ecef;
             --success: #28a745;
             --border: #dee2e6;
+            --gold: #d4af37;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.18);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-light));
         }
         
         * {
@@ -29,14 +36,101 @@
             background-color: #f5f7fa;
             color: var(--dark);
             line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f5f7fa"/><path d="M0 0L100 100M100 0L0 100" stroke="%23e9ecef" stroke-width="0.5"/></svg>');
+        }
+        
+        /* Barra de navegação superior */
+        .top-nav {
+            background: var(--gradient-primary);
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .nav-logo i {
+            font-size: 1.5rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: url('https://img.freepik.com/fotos-gratis/jovens-a-relaxar-juntos_23-2151561975.jpg?semt=ais_hybrid&w=740&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: white;
-            padding: 1.5rem;
+            padding: 2.5rem 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
+            position: relative;
+            min-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            z-index: 2;
             position: relative;
         }
         
@@ -44,171 +138,302 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
         
         .logo {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         h1 {
-            font-size: 2rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
         }
         
         .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .header-text {
             font-size: 1.1rem;
-            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            line-height: 1.6;
         }
         
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
+            margin: 2.5rem auto;
             padding: 0 1.5rem;
         }
         
         .card {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
         
         /* Estilos da tela inicial */
         .intro-section {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .intro-section::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-primary);
+            margin: 1.5rem auto;
+            border-radius: 2px;
         }
         
         .intro-section h2 {
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
         }
         
         .intro-section p {
             max-width: 800px;
             margin: 0 auto 1.5rem;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
         }
         
         .doctrines-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         
         .doctrines-section h2 {
             color: var(--primary);
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
         }
         
         .doctrines-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
         
         .doctrine-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.5rem;
-            border-left: 4px solid var(--primary);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: linear-gradient(145deg, #ffffff, #f5f7fa);
+            border-radius: 12px;
+            padding: 1.8rem;
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .doctrine-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
         }
         
         .doctrine-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+        
+        .doctrine-card:hover::before {
+            opacity: 1;
+        }
+        
+        .doctrine-card:hover h3,
+        .doctrine-card:hover p,
+        .doctrine-card:hover i {
+            color: white;
+            position: relative;
+            z-index: 1;
         }
         
         .doctrine-card h3 {
             color: var(--primary-dark);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
         }
         
         .doctrine-card h3 i {
             color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+        
+        .doctrine-card p {
+            transition: color 0.3s ease;
         }
         
         .commissions-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         
         .commissions-section h2 {
             color: var(--primary);
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
         }
         
         .commissions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
         
         .commission-card {
             background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
             text-align: center;
             border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .commission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
         }
         
         .commission-card:hover {
-            background: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
             color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .commission-card:hover::before {
+            opacity: 1;
         }
         
         .commission-card:hover h3,
+        .commission-card:hover p,
         .commission-card:hover .commission-icon {
             color: white;
+            position: relative;
+            z-index: 1;
         }
         
         .commission-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            transition: color 0.4s ease;
         }
         
         .commission-card h3 {
             color: var(--primary-dark);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            transition: color 0.4s ease;
+        }
+        
+        .commission-card p {
+            transition: color 0.4s ease;
         }
         
         /* Estilos do sistema de ATAs */
         .tabs {
             display: flex;
             border-bottom: 1px solid var(--border);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            background: var(--gray-light);
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem;
         }
         
         .tab {
-            padding: 0.75rem 1.5rem;
+            padding: 0.9rem 1.8rem;
             background: none;
             border: none;
             cursor: pointer;
             font-weight: 600;
             color: var(--gray);
-            border-bottom: 3px solid transparent;
+            border-radius: 6px;
             transition: all 0.3s ease;
+            margin-right: 0.5rem;
         }
         
         .tab.active {
+            color: white;
+            background: var(--gradient-primary);
+            box-shadow: 0 4px 10px rgba(44, 90, 160, 0.3);
+        }
+        
+        .tab:hover:not(.active) {
+            background: rgba(44, 90, 160, 0.1);
             color: var(--primary);
-            border-bottom: 3px solid var(--primary);
         }
         
         .tab-content {
             display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .tab-content.active {
@@ -216,35 +441,46 @@
         }
         
         h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
             color: var(--primary);
+            font-weight: 700;
         }
         
         h3 {
-            font-size: 1.25rem;
-            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+            margin: 1.8rem 0 1.2rem;
             color: var(--primary-dark);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.6rem;
+            font-weight: 600;
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
         
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             font-weight: 600;
+            color: var(--primary-dark);
         }
         
         input, select, textarea {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.9rem;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
         }
         
         textarea {
@@ -254,7 +490,7 @@
         
         .form-row {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
         }
         
         .form-row .form-group {
@@ -262,55 +498,62 @@
         }
         
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.9rem 1.8rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
         .btn-primary {
-            background-color: var(--primary);
+            background: var(--gradient-primary);
             color: white;
         }
         
         .btn-primary:hover {
-            background-color: var(--primary-dark);
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(44, 90, 160, 0.4);
         }
         
         .btn-secondary {
-            background-color: #e9ecef;
+            background: #e9ecef;
             color: var(--dark);
         }
         
         .btn-secondary:hover {
-            background-color: #dee2e6;
+            background: #dee2e6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 117, 125, 0.3);
         }
         
         .btn-success {
-            background-color: var(--success);
+            background: var(--success);
             color: white;
         }
         
         .btn-success:hover {
-            background-color: #218838;
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
         }
         
         .btn-sm {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             font-size: 0.875rem;
         }
         
         .actions {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
             justify-content: center;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
         
         .system-actions {
@@ -318,23 +561,30 @@
         }
         
         .members-list {
-            margin-top: 1rem;
+            margin-top: 1.2rem;
         }
         
         .member-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.75rem;
+            gap: 1.2rem;
+            padding: 0.9rem;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.9rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .member-item:hover {
+            background: var(--gray-light);
+            transform: translateX(5px);
         }
         
         .member-actions {
             margin-left: auto;
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
         
         .history-list {
@@ -342,13 +592,21 @@
         }
         
         .history-item {
-            padding: 1rem;
+            padding: 1.5rem;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-bottom: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .history-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .history-info {
@@ -356,8 +614,10 @@
         }
         
         .history-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
         }
         
         .history-details {
@@ -367,28 +627,29 @@
         
         .history-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
         
         .empty-state {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             color: var(--gray);
         }
         
         .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
             opacity: 0.5;
         }
         
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             color: var(--gray);
             font-size: 0.9rem;
             border-top: 1px solid var(--border);
-            margin-top: 2rem;
+            margin-top: 3rem;
+            background: white;
         }
         
         @media (max-width: 768px) {
@@ -408,7 +669,7 @@
             .history-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 1rem;
+                gap: 1.2rem;
             }
             
             .history-actions {
@@ -419,62 +680,109 @@
             .commissions-grid {
                 grid-template-columns: 1fr;
             }
+            
+            header {
+                min-height: 320px;
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+                width: 70px;
+                height: 70px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+                margin-bottom: 0.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
         
         .preview-container {
             background: #f8f9fa;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            max-height: 400px;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 1.8rem;
+            max-height: 500px;
             overflow-y: auto;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
         }
         
         .ata-preview {
             background: white;
-            padding: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             font-family: 'Times New Roman', serif;
             line-height: 1.8;
+            border: 1px solid #e0e0e0;
         }
         
         .ata-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1.5rem;
         }
         
         .ata-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary-dark);
         }
         
         .ata-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
         }
         
         .ata-body {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         
         .ata-signatures {
             display: flex;
             justify-content: space-between;
-            margin-top: 3rem;
+            margin-top: 3.5rem;
         }
         
         .signature-line {
             border-top: 1px solid #000;
-            width: 200px;
+            width: 220px;
             text-align: center;
-            padding-top: 0.5rem;
+            padding-top: 0.8rem;
         }
         
         /* Navegação entre telas */
         .screen {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
         
         .screen.active {
@@ -489,30 +797,44 @@
             font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            padding: 0.5rem 0;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+            padding: 0.7rem 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         
         .back-button:hover {
             color: var(--primary-dark);
+            transform: translateX(-5px);
         }
         
         /* Novos estilos para os campos de hinos, oração e versículo */
         .hymn-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.75rem;
+            gap: 1.2rem;
+            padding: 0.9rem;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.9rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .hymn-item:hover {
+            background: var(--gray-light);
+            transform: translateX(5px);
         }
         
         .hymn-number {
             font-weight: bold;
             color: var(--primary);
-            min-width: 60px;
+            min-width: 70px;
+            background: var(--gray-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            text-align: center;
         }
         
         .hymn-title {
@@ -520,14 +842,138 @@
         }
         
         .worship-section {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--secondary);
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.8rem;
+            border-left: 5px solid var(--secondary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
         
         .worship-section h3 {
+            color: var(--secondary);
+            border-bottom: none;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        
+        .worship-section h3 i {
+            color: var(--secondary);
+        }
+        
+        /* Decorative elements */
+        .section-divider {
+            height: 4px;
+            width: 100px;
+            background: var(--gradient-primary);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        /* Selection state for commission cards */
+        .commission-card.selected {
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .commission-card.selected h3,
+        .commission-card.selected p,
+        .commission-card.selected .commission-icon {
+            color: white;
+        }
+        
+        /* Estilos para a tela de dúvidas */
+        .faq-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .faq-section h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            background: var(--gray-light);
+            padding: 1.2rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #dee2e6;
+        }
+        
+        .faq-answer {
+            padding: 1.5rem;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .contact-form {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .contact-form h3 {
             color: var(--secondary);
             border-bottom: none;
             margin-top: 0;
@@ -535,13 +981,44 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <i class="fas fa-church logo"></i>
-            <div>
-                <h1>Igreja Adventista do Sétimo Dia</h1>
-                <p class="subtitle" id="subtitle">ATA Digital - Sistema de Registro de Atas</p>
+    <!-- Barra de navegação superior -->
+    <div class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-church"></i>
+                <span>Igreja Adventista</span>
             </div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showHomeScreen()">
+                    <i class="fas fa-home"></i> Início
+                </button>
+                <button class="nav-btn" onclick="showATASystem()">
+                    <i class="fas fa-file-alt"></i> Criar ATA
+                </button>
+                <button class="nav-btn" onclick="showFAQScreen()">
+                    <i class="fas fa-question-circle"></i> Dúvidas
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <header>
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 5%;"></div>
+            <div class="floating-element" style="width: 60px; height: 60px; top: 70%; left: 80%;"></div>
+            <div class="floating-element" style="width: 100px; height: 100px; top: 40%; left: 90%;"></div>
+            <div class="floating-element" style="width: 50px; height: 50px; top: 20%; left: 70%;"></div>
+        </div>
+        
+        <div class="header-content">
+            <div class="logo-container">
+                <i class="fas fa-church logo"></i>
+                <div>
+                    <h1>Igreja Adventista do Sétimo Dia</h1>
+                    <p class="subtitle" id="subtitle">ATA Digital - Sistema de Registro de Atas</p>
+                </div>
+            </div>
+            <p class="header-text">Sistema digital para criação e gerenciamento de atas de reuniões e assembleias da igreja</p>
         </div>
     </header>
     
@@ -554,13 +1031,15 @@
                 <p>Fundada em 1863, a denominação cresceu para se tornar uma organização religiosa global com milhões de membros em todo o mundo, mantendo uma forte ênfase missionária e educacional.</p>
             </div>
             
+            <div class="section-divider"></div>
+            
             <div class="doctrines-section">
                 <h2>Doutrinas Principais</h2>
                 <div class="doctrines-grid">
                     <!-- Cards de doutrinas (mantidos do código anterior) -->
                     <div class="doctrine-card">
                         <h3><i class="fas fa-bible"></i> A Bíblia como Regra de Fé</h3>
-                        <p>Cremos que a Bíblia é a Palavra de Deus, a revelação de Sua vontade para a humanidade e o padrão supremo de toda doutrina e experiência.</p>
+                        <p>Cremos que a Bíblia é a Palavra de Deus, a revelação de Sua vontade para a humanidade e o padrão suprema de toda doutrina e experiência.</p>
                     </div>
                     
                     <div class="doctrine-card">
@@ -600,9 +1079,11 @@
                 </div>
             </div>
             
+            <div class="section-divider"></div>
+            
             <div class="commissions-section">
                 <h2>Comissões e Departamentos</h2>
-                <p style="text-align: center; margin-bottom: 1.5rem;">Selecione o tipo de comissão para acessar o sistema de atas correspondente:</p>
+                <p style="text-align: center; margin-bottom: 1.8rem;">Selecione o tipo de comissão para acessar o sistema de atas correspondente:</p>
                 
                 <div class="commissions-grid">
                     <div class="commission-card" onclick="selectCommission('assembleia-geral')">
@@ -644,7 +1125,7 @@
             </div>
             
             <div class="actions">
-                <button class="btn btn-primary" onclick="goToATASystem()">
+                <button class="btn btn-primary" onclick="showATASystem()">
                     <i class="fas fa-external-link-alt"></i> Acessar Sistema de ATAs
                 </button>
                 <button class="btn btn-secondary" onclick="showHistoryScreen()">
@@ -656,7 +1137,7 @@
     
     <!-- SISTEMA DE ATAS -->
     <div class="container screen" id="ata-system-screen">
-        <button class="back-button" onclick="goBackToHome()">
+        <button class="back-button" onclick="showHomeScreen()">
             <i class="fas fa-arrow-left"></i> Voltar para a Tela Inicial
         </button>
         
@@ -846,6 +1327,132 @@
         </div>
     </div>
     
+    <!-- TELA DE DÚVIDAS -->
+    <div class="container screen" id="faq-screen">
+        <button class="back-button" onclick="showHomeScreen()">
+            <i class="fas fa-arrow-left"></i> Voltar para a Tela Inicial
+        </button>
+        
+        <div class="card">
+            <div class="intro-section">
+                <h2>Dúvidas Frequentes</h2>
+                <p>Encontre respostas para as perguntas mais comuns sobre o sistema de ATAs e a Igreja Adventista do Sétimo Dia.</p>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Perguntas sobre o Sistema de ATAs</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como criar uma nova ATA?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para criar uma nova ATA, acesse a seção "Criar ATA" no menu superior, selecione o tipo de reunião, preencha os dados básicos, adicione os participantes, descreva a pauta e as deliberações, e então clique em "Gerar e Salvar ATA".</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso editar uma ATA após gerá-la?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, você pode editar ATAs existentes. Acesse o "Histórico" no sistema de ATAs, localize a ATA desejada e clique no botão "Editar". Após fazer as alterações, gere a ATA novamente para salvar as modificações.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como faço para baixar uma ATA?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No histórico de ATAs, ao lado de cada ATA listada, há um botão "Baixar". Clique nele para baixar a ATA em formato de texto que pode ser impresso ou convertido para PDF.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Os dados ficam salvos onde?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Os dados são armazenados localmente no seu navegador usando a tecnologia localStorage. Isso significa que as ATAs ficam salvas apenas no dispositivo onde foram criadas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Perguntas sobre a Igreja Adventista</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Por que os adventistas guardam o sábado?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Os adventistas guardam o sábado porque acreditam que ele é um memorial da criação estabelecido por Deus no sétimo dia (Gênesis 2:1-3) e confirmado nos Dez Mandamentos (Êxodo 20:8-11). É um dia especial de descanso, adoração e comunhão com Deus.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Qual é a visão adventista sobre a saúde?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Os adventistas promovem um estilo de vida saudável baseado em princípios bíblicos, incluindo alimentação vegetariana, abstinência de álcool, tabaco e outras drogas, exercício físico adequado, confiança em Deus e equilíbrio entre trabalho e descanso.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>O que os adventistas creem sobre a segunda vinda de Cristo?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Os adventistas creem na volta visível, pessoal e iminente de Jesus Cristo. Esta crença é central para sua fé e motiva sua missão de preparar pessoas para esse evento, através da proclamação do evangelho e do cuidado integral com as pessoas.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Qual é a estrutura organizacional da Igreja Adventista?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A Igreja Adventista é organizada em uma estrutura representativa com quatro níveis: a igreja local, a associação/missão, a união e a Associação Geral. Cada nível tem autonomia em sua esfera de atuação, com líderes eleitos por delegados em assembleias regulares.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Ainda tem dúvidas?</h3>
+                <p>Se você não encontrou a resposta para sua pergunta, entre em contato conosco:</p>
+                
+                <div class="form-group">
+                    <label for="contactName">Seu Nome</label>
+                    <input type="text" id="contactName" placeholder="Digite seu nome">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactEmail">Seu E-mail</label>
+                    <input type="email" id="contactEmail" placeholder="Digite seu e-mail">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactMessage">Sua Mensagem</label>
+                    <textarea id="contactMessage" placeholder="Descreva sua dúvida ou questão" rows="5"></textarea>
+                </div>
+                
+                <button class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <p>Igreja Adventista do Sétimo Dia &copy; 2023 - Proclamando as Três Mensagens Angélicas</p>
     </footer>
@@ -862,11 +1469,46 @@
                 screen.classList.remove('active');
             });
             document.getElementById(screenId).classList.add('active');
+            
+            // Atualizar botões de navegação
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Ativar o botão correspondente à tela atual
+            if (screenId === 'home-screen') {
+                document.querySelector('.nav-btn[onclick="showHomeScreen()"]').classList.add('active');
+            } else if (screenId === 'ata-system-screen') {
+                document.querySelector('.nav-btn[onclick="showATASystem()"]').classList.add('active');
+            } else if (screenId === 'faq-screen') {
+                document.querySelector('.nav-btn[onclick="showFAQScreen()"]').classList.add('active');
+            }
         }
         
-        function goBackToHome() {
+        function showHomeScreen() {
             showScreen('home-screen');
             document.getElementById('subtitle').textContent = 'ATA Digital - Sistema de Registro de Atas';
+        }
+        
+        function showATASystem() {
+            if (!selectedCommission) {
+                alert('Por favor, selecione um tipo de comissão antes de prosseguir.');
+                return;
+            }
+            
+            showScreen('ata-system-screen');
+            document.getElementById('subtitle').textContent = 'Sistema de ATAs - ' + getCommissionName(selectedCommission);
+            
+            // Preencher automaticamente o tipo de ATA
+            document.getElementById('ataType').value = selectedCommission;
+            
+            // Ir para a aba de criação
+            document.querySelector('[data-tab="create"]').click();
+        }
+        
+        function showFAQScreen() {
+            showScreen('faq-screen');
+            document.getElementById('subtitle').textContent = 'Dúvidas Frequentes';
         }
         
         function showHistoryScreen() {
@@ -882,46 +1524,14 @@
             // Update UI to show selected commission
             const cards = document.querySelectorAll('.commission-card');
             cards.forEach(card => {
-                card.style.border = '1px solid var(--border)';
-                card.style.background = 'white';
-                card.style.color = 'var(--dark)';
-                
-                const h3 = card.querySelector('h3');
-                const icon = card.querySelector('.commission-icon');
-                
-                if (h3) h3.style.color = 'var(--primary-dark)';
-                if (icon) icon.style.color = 'var(--primary)';
+                card.classList.remove('selected');
             });
             
             // Highlight selected card
             const selectedCard = document.querySelector(`[onclick="selectCommission('${commission}')"]`);
             if (selectedCard) {
-                selectedCard.style.border = '2px solid var(--primary)';
-                selectedCard.style.background = 'var(--primary)';
-                selectedCard.style.color = 'white';
-                
-                const h3 = selectedCard.querySelector('h3');
-                const icon = selectedCard.querySelector('.commission-icon');
-                
-                if (h3) h3.style.color = 'white';
-                if (icon) icon.style.color = 'white';
+                selectedCard.classList.add('selected');
             }
-        }
-        
-        function goToATASystem() {
-            if (!selectedCommission) {
-                alert('Por favor, selecione um tipo de comissão antes de prosseguir.');
-                return;
-            }
-            
-            showScreen('ata-system-screen');
-            document.getElementById('subtitle').textContent = 'Sistema de ATAs - ' + getCommissionName(selectedCommission);
-            
-            // Preencher automaticamente o tipo de ATA
-            document.getElementById('ataType').value = selectedCommission;
-            
-            // Ir para a aba de criação
-            document.querySelector('[data-tab="create"]').click();
         }
         
         function getCommissionName(commission) {
@@ -963,6 +1573,15 @@
                     if (tabId === 'history') {
                         loadHistory();
                     }
+                });
+            });
+            
+            // FAQ functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
                 });
             });
             
