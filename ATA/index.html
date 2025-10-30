@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATA Digital - Igreja Adventista do Sétimo Dia</title>
+    <title>Igreja Adventista - ATA Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* TODOS OS ESTILOS DOS DOIS CÓDIGOS AQUI */
         :root {
             --primary: #2c5aa0;
             --primary-dark: #1e3d72;
@@ -76,6 +77,114 @@
             margin-bottom: 2rem;
         }
         
+        /* Estilos da tela inicial */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .intro-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .intro-section p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .doctrines-section {
+            margin-bottom: 2rem;
+        }
+        
+        .doctrines-section h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .doctrines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .doctrine-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .doctrine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .doctrine-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .doctrine-card h3 i {
+            color: var(--secondary);
+        }
+        
+        .commissions-section {
+            margin-bottom: 2rem;
+        }
+        
+        .commissions-section h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .commissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .commission-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .commission-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .commission-card:hover h3,
+        .commission-card:hover .commission-icon {
+            color: white;
+        }
+        
+        .commission-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .commission-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Estilos do sistema de ATAs */
         .tabs {
             display: flex;
             border-bottom: 1px solid var(--border);
@@ -195,8 +304,12 @@
         .actions {
             display: flex;
             gap: 1rem;
-            justify-content: flex-end;
+            justify-content: center;
             margin-top: 2rem;
+        }
+        
+        .system-actions {
+            justify-content: flex-end;
         }
         
         .members-list {
@@ -283,6 +396,10 @@
                 flex-direction: column;
             }
             
+            .system-actions {
+                flex-direction: column;
+            }
+            
             .history-item {
                 flex-direction: column;
                 align-items: flex-start;
@@ -291,6 +408,11 @@
             
             .history-actions {
                 align-self: flex-end;
+            }
+            
+            .doctrines-grid,
+            .commissions-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -344,6 +466,32 @@
             text-align: center;
             padding-top: 0.5rem;
         }
+        
+        /* Navegação entre telas */
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+        
+        .back-button:hover {
+            color: var(--primary-dark);
+        }
     </style>
 </head>
 <body>
@@ -351,13 +499,126 @@
         <div class="logo-container">
             <i class="fas fa-church logo"></i>
             <div>
-                <h1>ATA Digital</h1>
-                <p class="subtitle">Igreja Adventista do Sétimo Dia</p>
+                <h1>Igreja Adventista do Sétimo Dia</h1>
+                <p class="subtitle" id="subtitle">ATA Digital - Sistema de Registro de Atas</p>
             </div>
         </div>
     </header>
     
-    <div class="container">
+    <!-- TELA INICIAL -->
+    <div class="container screen active" id="home-screen">
+        <div class="card">
+            <div class="intro-section">
+                <h2>Bem-vindo ao Sistema ATA Digital</h2>
+                <p>A Igreja Adventista do Sétimo Dia é uma comunidade cristã protestante que se destaca por sua ênfase na observância do sábado como dia de descanso e adoração, na iminente segunda vinda de Jesus Cristo e na adoção de um estilo de vida saudável.</p>
+                <p>Fundada em 1863, a denominação cresceu para se tornar uma organização religiosa global com milhões de membros em todo o mundo, mantendo uma forte ênfase missionária e educacional.</p>
+            </div>
+            
+            <div class="doctrines-section">
+                <h2>Doutrinas Principais</h2>
+                <div class="doctrines-grid">
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-bible"></i> A Bíblia como Regra de Fé</h3>
+                        <p>Cremos que a Bíblia é a Palavra de Deus, a revelação de Sua vontade para a humanidade e o padrão supremo de toda doutrina e experiência.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-cross"></i> Salvação por meio de Cristo</h3>
+                        <p>Cremos que a salvação é um dom gratuito de Deus recebido pela fé em Jesus Cristo, que morreu pelos nossos pecados e ressuscitou para nossa justificação.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-calendar-day"></i> O Sábado Sagrado</h3>
+                        <p>Cremos que o sétimo dia da semana, o sábado, é o dia de descanso e adoração estabelecido por Deus na criação e confirmado nos Dez Mandamentos.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-undo-alt"></i> A Segunda Vinda de Cristo</h3>
+                        <p>Cremos na breve e visível volta de Jesus Cristo em glória e poder, que marcará o fim do pecado e o estabelecimento do Seu reino eterno.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-tint"></i> O Batismo por Imersão</h3>
+                        <p>Cremos no batismo por imersão como símbolo público de nossa fé em Cristo, morte para o pecado e ressurreição para uma nova vida.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-heartbeat"></i> O Ministério de Cristo no Santuário Celestial</h3>
+                        <p>Cremos que Cristo iniciou em 1844 um ministério especial de juízo investigativo no santuário celestial, preparando o caminho para Sua segunda vinda.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-apple-alt"></i> O Estilo de Vida Saudável</h3>
+                        <p>Cremos que nosso corpo é templo do Espírito Santo e defendemos um estilo de vida saudável, incluindo alimentação adequada, exercício físico e abstinência de substâncias nocivas.</p>
+                    </div>
+                    
+                    <div class="doctrine-card">
+                        <h3><i class="fas fa-dove"></i> O Dom de Profecia</h3>
+                        <p>Cremos que o dom de profecia foi manifestado no ministério de Ellen G. White, cujos escritos continuam a orientar e inspirar a igreja.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="commissions-section">
+                <h2>Comissões e Departamentos</h2>
+                <p style="text-align: center; margin-bottom: 1.5rem;">Selecione o tipo de comissão para acessar o sistema de atas correspondente:</p>
+                
+                <div class="commissions-grid">
+                    <div class="commission-card" onclick="selectCommission('assembleia-geral')">
+                        <i class="fas fa-users commission-icon"></i>
+                        <h3>Assembleia Geral</h3>
+                        <p>Reuniões com participação de todos os membros da igreja</p>
+                    </div>
+                    
+                    <div class="commission-card" onclick="selectCommission('diretoria')">
+                        <i class="fas fa-user-tie commission-icon"></i>
+                        <h3>Diretoria</h3>
+                        <p>Reuniões da diretoria da igreja</p>
+                    </div>
+                    
+                    <div class="commission-card" onclick="selectCommission('comissao')">
+                        <i class="fas fa-clipboard-list commission-icon"></i>
+                        <h3>Comissões</h3>
+                        <p>Reuniões de comissões específicas</p>
+                    </div>
+                    
+                    <div class="commission-card" onclick="selectCommission('secretaria')">
+                        <i class="fas fa-file-alt commission-icon"></i>
+                        <h3>Secretaria</h3>
+                        <p>Reuniões do departamento de secretaria</p>
+                    </div>
+                    
+                    <div class="commission-card" onclick="selectCommission('tesouraria')">
+                        <i class="fas fa-dollar-sign commission-icon"></i>
+                        <h3>Tesouraria</h3>
+                        <p>Reuniões do departamento financeiro</p>
+                    </div>
+                    
+                    <div class="commission-card" onclick="selectCommission('outra')">
+                        <i class="fas fa-ellipsis-h commission-icon"></i>
+                        <h3>Outras Reuniões</h3>
+                        <p>Reuniões que não se enquadram nas categorias acima</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button class="btn btn-primary" onclick="goToATASystem()">
+                    <i class="fas fa-external-link-alt"></i> Acessar Sistema de ATAs
+                </button>
+                <button class="btn btn-secondary" onclick="showHistoryScreen()">
+                    <i class="fas fa-history"></i> Ver Histórico de ATAs
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SISTEMA DE ATAS -->
+    <div class="container screen" id="ata-system-screen">
+        <button class="back-button" onclick="goBackToHome()">
+            <i class="fas fa-arrow-left"></i> Voltar para a Tela Inicial
+        </button>
+        
         <div class="card">
             <div class="tabs">
                 <button class="tab active" data-tab="create">Criar ATA</button>
@@ -442,7 +703,7 @@
                     <textarea id="deliberations" placeholder="Descreva as deliberações e decisões tomadas"></textarea>
                 </div>
                 
-                <div class="actions">
+                <div class="actions system-actions">
                     <button class="btn btn-secondary" id="previewBtn">Visualizar ATA</button>
                     <button class="btn btn-primary" id="generateBtn">Gerar e Salvar ATA</button>
                 </div>
@@ -506,11 +767,101 @@
     </div>
     
     <footer>
-        <p>ATA Digital &copy; 2023 - Sistema de registro de atas da Igreja Adventista do Sétimo Dia</p>
+        <p>Igreja Adventista do Sétimo Dia &copy; 2023 - Proclamando as Três Mensagens Angélicas</p>
     </footer>
 
     <script>
+        // Variáveis globais
+        let selectedCommission = '';
+        let participants = [];
+        
+        // Navegação entre telas
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        function goBackToHome() {
+            showScreen('home-screen');
+            document.getElementById('subtitle').textContent = 'ATA Digital - Sistema de Registro de Atas';
+        }
+        
+        function showHistoryScreen() {
+            showScreen('ata-system-screen');
+            document.querySelector('[data-tab="history"]').click();
+            document.getElementById('subtitle').textContent = 'Histórico de ATAs';
+        }
+        
+        // Seleção de comissão
+        function selectCommission(commission) {
+            selectedCommission = commission;
+            
+            // Update UI to show selected commission
+            const cards = document.querySelectorAll('.commission-card');
+            cards.forEach(card => {
+                card.style.border = '1px solid var(--border)';
+                card.style.background = 'white';
+                card.style.color = 'var(--dark)';
+                
+                const h3 = card.querySelector('h3');
+                const icon = card.querySelector('.commission-icon');
+                
+                if (h3) h3.style.color = 'var(--primary-dark)';
+                if (icon) icon.style.color = 'var(--primary)';
+            });
+            
+            // Highlight selected card
+            const selectedCard = document.querySelector(`[onclick="selectCommission('${commission}')"]`);
+            if (selectedCard) {
+                selectedCard.style.border = '2px solid var(--primary)';
+                selectedCard.style.background = 'var(--primary)';
+                selectedCard.style.color = 'white';
+                
+                const h3 = selectedCard.querySelector('h3');
+                const icon = selectedCard.querySelector('.commission-icon');
+                
+                if (h3) h3.style.color = 'white';
+                if (icon) icon.style.color = 'white';
+            }
+        }
+        
+        function goToATASystem() {
+            if (!selectedCommission) {
+                alert('Por favor, selecione um tipo de comissão antes de prosseguir.');
+                return;
+            }
+            
+            showScreen('ata-system-screen');
+            document.getElementById('subtitle').textContent = 'Sistema de ATAs - ' + getCommissionName(selectedCommission);
+            
+            // Preencher automaticamente o tipo de ATA
+            document.getElementById('ataType').value = selectedCommission;
+            
+            // Ir para a aba de criação
+            document.querySelector('[data-tab="create"]').click();
+        }
+        
+        function getCommissionName(commission) {
+            const commissionNames = {
+                'assembleia-geral': 'Assembleia Geral',
+                'diretoria': 'Reunião de Diretoria',
+                'comissao': 'Reunião de Comissão',
+                'secretaria': 'Reunião de Secretaria',
+                'tesouraria': 'Reunião de Tesouraria',
+                'outra': 'Outra Reunião'
+            };
+            
+            return commissionNames[commission] || 'Reunião';
+        }
+        
+        // ========== SISTEMA DE ATAS ==========
+        
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar seleção padrão
+            selectCommission('assembleia-geral');
+            
             // Tab functionality
             const tabs = document.querySelectorAll('.tab');
             const tabContents = document.querySelectorAll('.tab-content');
@@ -538,8 +889,6 @@
             const addParticipantBtn = document.getElementById('addParticipant');
             const newParticipantInput = document.getElementById('newParticipant');
             const participantsList = document.getElementById('participantsList');
-            
-            let participants = [];
             
             addParticipantBtn.addEventListener('click', function() {
                 const participantName = newParticipantInput.value.trim();
@@ -782,7 +1131,7 @@
             }
             
             function resetForm() {
-                document.getElementById('ataType').value = '';
+                document.getElementById('ataType').value = selectedCommission; // Mantém a comissão selecionada
                 document.getElementById('ataNumber').value = '';
                 document.getElementById('ataDate').value = '';
                 document.getElementById('ataLocation').value = 'Igreja Adventista do Sétimo Dia';
