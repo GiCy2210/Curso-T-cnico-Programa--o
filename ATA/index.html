@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igreja Adventista - ATA Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
         :root {
             --primary: #3a6447;
@@ -1319,7 +1321,7 @@
                 <h3>Recursos do Sistema</h3>
                 <ul>
                     <li><strong>Histórico:</strong> Todas as ATAs criadas ficam salvas no histórico</li>
-                    <li><strong>Download:</strong> É possível baixar as ATAs em formato PDF</li>
+                    <li><strong>Download:</strong> É possível baixar as ATAs em formato Word</li>
                     <li><strong>Visualização:</strong> Pré-visualização da ATA antes de gerar</li>
                     <li><strong>Edição:</strong> Possibilidade de editar ATAs do histórico</li>
                 </ul>
@@ -1368,7 +1370,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>No histórico de ATAs, ao lado de cada ATA listada, há um botão "Baixar". Clique nele para baixar a ATA em formato de texto que pode ser impresso ou convertido para PDF.</p>
+                        <p>No histórico de ATAs, ao lado de cada ATA listada, há um botão "Baixar". Clique nele para baixar a ATA em formato Word (.docx).</p>
                     </div>
                 </div>
                 
@@ -1840,11 +1842,11 @@
                 // Save to localStorage
                 saveATA(ataData);
                 
-                // Generate and download PDF
-                downloadATA(ataData);
+                // Generate and download Word document
+                downloadATAasWord(ataData);
                 
                 // Show success message
-                alert('ATA gerada e salva com sucesso!');
+                alert('ATA gerada e salva com sucesso! O arquivo Word será baixado automaticamente.');
                 
                 // Reset form
                 resetForm();
@@ -1939,8 +1941,8 @@
                 previewContainer.style.display = 'none';
             }
             
-            // Download ATA as PDF
-            function downloadATA(ataData) {
+            // Download ATA as Word document
+            function downloadATAasWord(ataData) {
                 const typeLabels = {
                     'assembleia-geral': 'Assembleia Geral',
                     'diretoria': 'Reunião de Diretoria',
@@ -1952,48 +1954,145 @@
                 
                 const formattedDate = new Date(ataData.date).toLocaleDateString('pt-BR');
                 
-                let content = `ATA DE ${typeLabels[ataData.type].toUpperCase()}\n`;
-                content += `Nº ${ataData.number}\n\n`;
-                content += `Aos ${formattedDate}, às ${ataData.time}, na ${ataData.location}, `;
-                content += `reuniu-se a ${typeLabels[ataData.type]} da Igreja Adventista do Sétimo Dia, `;
-                content += `sob a presidência de ${ataData.president}, secretariada por ${ataData.secretary}.\n\n`;
+                // Create Word document content
+                let content = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset="utf-8">
+                    <title>ATA ${ataData.number}</title>
+                    <style>
+                        body {
+                            font-family: 'Times New Roman', serif;
+                            font-size: 12pt;
+                            line-height: 1.5;
+                            margin: 1in;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 40px;
+                        }
+                        .title {
+                            font-size: 16pt;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                        }
+                        .subtitle {
+                            font-size: 14pt;
+                            margin-bottom: 30px;
+                        }
+                        .body {
+                            text-align: justify;
+                            margin-bottom: 30px;
+                        }
+                        .signatures {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-top: 60px;
+                        }
+                        .signature-line {
+                            border-top: 1px solid #000;
+                            width: 220px;
+                            text-align: center;
+                            padding-top: 5px;
+                        }
+                        ul, ol {
+                            margin-left: 40px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <div class="title">ATA DE ${typeLabels[ataData.type].toUpperCase()}</div>
+                        <div class="subtitle">Nº ${ataData.number}</div>
+                    </div>
+                    
+                    <div class="body">
+                        <p>Aos <strong>${formattedDate}</strong>, às <strong>${ataData.time}</strong>, 
+                        na <strong>${ataData.location}</strong>, reuniu-se a <strong>${typeLabels[ataData.type]}</strong> 
+                        da <strong>Igreja Adventista do Sétimo Dia</strong>, sob a presidência de 
+                        <strong>${ataData.president}</strong>, secretariada por 
+                        <strong>${ataData.secretary}</strong>.</p>
+                        
+                        <p>A reunião iniciou com uma oração feita por <strong>${ataData.openingPrayer}</strong>, 
+                        seguida pela meditação no versículo <strong>${ataData.bibleVerse}</strong>${ataData.verseText ? `: "${ataData.verseText}"` : ''}.</p>
+                        
+                        <p>Foram entoados os seguintes hinos:</p>
+                        <ul>
+                `;
                 
-                content += `ELEMENTOS DE ADORAÇÃO:\n`;
-                content += `Oração inicial: ${ataData.openingPrayer}\n`;
-                content += `Versículo base: ${ataData.bibleVerse}\n`;
-                if (ataData.verseText) {
-                    content += `Texto: "${ataData.verseText}"\n`;
+                // Add hymns
+                if (ataData.hymns && ataData.hymns.length > 0) {
+                    ataData.hymns.forEach(hymn => {
+                        content += `<li>Hino ${hymn.number} - ${hymn.title}</li>`;
+                    });
+                } else {
+                    content += `<li>_________________________________</li>`;
                 }
-                content += `Hinos entoados:\n`;
-                ataData.hymns.forEach(hymn => {
-                    content += `- Hino ${hymn.number}: ${hymn.title}\n`;
-                });
                 
-                content += `\nPAUTA:\n`;
-                const agendaItems = ataData.agenda.split('\n').filter(item => item.trim() !== '');
-                agendaItems.forEach((item, index) => {
-                    content += `${index + 1}. ${item}\n`;
-                });
+                content += `
+                        </ul>
+                        
+                        <p>Em seguida, foi tratada a seguinte pauta:</p>
+                        <ol>
+                `;
                 
-                content += `\nDELIBERAÇÕES:\n`;
-                content += `${ataData.deliberations}\n\n`;
-                content += `PARTICIPANTES:\n`;
-                ataData.participants.forEach(participant => {
-                    content += `- ${participant}\n`;
-                });
+                // Add agenda items
+                if (ataData.agenda) {
+                    const agendaItems = ataData.agenda.split('\n').filter(item => item.trim() !== '');
+                    agendaItems.forEach(item => {
+                        content += `<li>${item}</li>`;
+                    });
+                } else {
+                    content += `<li>_________________________________</li>`;
+                }
                 
-                content += `\n__________________________________________\n`;
-                content += `${ataData.president}\n`;
-                content += `Presidente\n\n`;
-                content += `__________________________________________\n`;
-                content += `${ataData.secretary}\n`;
-                content += `Secretário\n`;
+                content += `
+                        </ol>
+                        
+                        <p>Foram discutidos os assuntos constantes da pauta e, após debates, foram tomadas as seguintes deliberações:</p>
+                        
+                        <p>${ataData.deliberations || '_________________________________________________________'}</p>
+                        
+                        <p>Participantes da reunião:</p>
+                        <ul>
+                `;
                 
-                const blob = new Blob([content], { type: 'text/plain' });
+                // Add participants
+                if (ataData.participants && ataData.participants.length > 0) {
+                    ataData.participants.forEach(participant => {
+                        content += `<li>${participant}</li>`;
+                    });
+                } else {
+                    content += `<li>_________________________________</li>`;
+                }
+                
+                content += `
+                        </ul>
+                        
+                        <p>Nada mais havendo a tratar, foi encerrada a reunião e, para constar, foi lavrada a presente ata, que será assinada pelo presidente e secretário.</p>
+                    </div>
+                    
+                    <div class="signatures">
+                        <div class="signature-line">
+                            <strong>${ataData.president}</strong><br>
+                            Presidente
+                        </div>
+                        
+                        <div class="signature-line">
+                            <strong>${ataData.secretary}</strong><br>
+                            Secretário
+                        </div>
+                    </div>
+                </body>
+                </html>
+                `;
+                
+                // Create and download the Word document
+                const blob = new Blob([content], { type: 'application/msword' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `ATA-${ataData.number}-${formattedDate.replace(/\//g, '-')}.txt`;
+                a.download = `ATA-${ataData.number}-${formattedDate.replace(/\//g, '-')}.doc`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -2015,7 +2114,7 @@
                 const atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
                 const ata = atas.find(a => a.id === id);
                 if (ata) {
-                    downloadATA(ata);
+                    downloadATAasWord(ata);
                 }
             };
             
