@@ -854,7 +854,7 @@
         }
         
         .worship-section h3 {
-            color: var(--secondary);
+            color: var(--primary-dark);
             border-bottom: none;
             margin-top: 0;
             display: flex;
@@ -950,7 +950,7 @@
         }
         
         .faq-question:hover {
-            background: #dee2e6;
+            background: #e0e6de;
         }
         
         .faq-answer {
@@ -968,18 +968,19 @@
             transform: rotate(180deg);
         }
         
-        .contact-form {
-            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        .social-section {
+            background: linear-gradient(145deg, #f8f9fa, #eaefe9);
             padding: 2rem;
             border-radius: 12px;
             margin-top: 2rem;
             border-left: 5px solid var(--primary-dark);
         }
         
-        .contact-form h3 {
+        .social-section h3 {
             color: var(--primary);
             border-bottom: none;
             margin-top: 0;
+            text-align: center;
         }
 
         /* Novos estilos para o formulário de deliberações */
@@ -1159,11 +1160,11 @@
         }
         
         .relatorio-section {
-            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            background: linear-gradient(145deg, #e6fde3, #cffabb);
             border-radius: 12px;
             padding: 2rem;
             margin-top: 2rem;
-            border-left: 5px solid #1976d2;
+            border-left: 5px solid var(--primary-dark);
         }
         
         .relatorio-fields {
@@ -1219,6 +1220,82 @@
             border-radius: 4px;
             cursor: pointer;
             margin-left: auto;
+        }
+
+        /* Estilos para as redes sociais */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .social-card.whatsapp .social-icon {
+            color: #25D366;
+        }
+        
+        .social-card.instagram .social-icon {
+            color: #E4405F;
+        }
+        
+        .social-card.facebook .social-icon {
+            color: #1877F2;
+        }
+        
+        .social-card.youtube .social-icon {
+            color: #FF0000;
+        }
+        
+        .social-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        .social-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
         }
     </style>
 </head>
@@ -1730,28 +1807,38 @@
                 </div>
             </div>
             
-            <div class="contact-form">
-                <h3>Ainda tem dúvidas?</h3>
-                <p>Se você não encontrou a resposta para sua pergunta, entre em contato conosco:</p>
+            <!-- NOVA SEÇÃO: REDES SOCIAIS -->
+            <div class="social-section">
+                <h3>Conecte-se Conosco</h3>
+                <p style="text-align: center; margin-bottom: 1.5rem;">Siga-nos em nossas redes sociais e fique por dentro de todas as novidades e atividades da nossa igreja:</p>
                 
-                <div class="form-group">
-                    <label for="contactName">Seu Nome</label>
-                    <input type="text" id="contactName" placeholder="Digite seu nome">
-                </div>
-                
-                <div class="form-group">
-                    <label for="contactEmail">Seu E-mail</label>
-                    <input type="email" id="contactEmail" placeholder="Digite seu e-mail">
-                </div>
-                
-                <div class="form-group">
-                    <label for="contactMessage">Sua Mensagem</label>
-                    <textarea id="contactMessage" placeholder="Descreva sua dúvida ou questão" rows="5"></textarea>
-                </div>
-                
-                <button class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> Enviar Mensagem
-                </button>
+                <div class="social-grid">
+                    <div class="social-card whatsapp">
+                        <i class="fab fa-whatsapp social-icon"></i>
+                        <h4>Grupo do WhatsApp</h4>
+                        <p>Participe do nosso grupo para receber avisos, devocionais e informações importantes da igreja</p>
+                        <a href="https://wa.me/5511996294661" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Entre em contato
+                        </a>
+                    </div>
+                    
+                    <div class="social-card instagram">
+                        <i class="fab fa-instagram social-icon"></i>
+                        <h4>Instagram</h4>
+                        <p>Acompanhe nossos cultos, eventos e mensagens inspiradoras através do Instagram</p>
+                        <a href="https://www.instagram.com/iasd.amanda.iii/#" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i> Seguir no Instagram
+                        </a>
+                    </div>
+                    
+                    <div class="social-card facebook">
+                        <i class="fab fa-facebook social-icon"></i>
+                        <h4>Facebook</h4>
+                        <p>Curta nossa página e acompanhe as transmissões ao vivo e eventos da comunidade</p>
+                        <a href="https://www.facebook.com/share/17Wi43uyrS/" class="social-link" target="_blank">
+                            <i class="fab fa-facebook"></i> Curtir Página
+                        </a>
+                    </div>  
             </div>
         </div>
     </div>
