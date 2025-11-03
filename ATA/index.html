@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
+        /* Mantendo todos os estilos anteriores */
         :root {
             --primary: #3a6447;
             --primary-dark: #3e6c3c;
@@ -980,6 +981,245 @@
             border-bottom: none;
             margin-top: 0;
         }
+
+        /* Novos estilos para o formulário de deliberações */
+        .deliberation-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .deliberation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .deliberation-number {
+            font-weight: bold;
+            color: var(--primary);
+            background: var(--gray-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+        }
+        
+        .deliberation-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+        
+        .deliberation-content {
+            margin-bottom: 1rem;
+        }
+        
+        .deliberation-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .deliberation-description {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .voto-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .voto-type {
+            background: var(--gray-light);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .voto-type:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+        
+        .voto-type.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+        
+        .voto-type h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .voto-type p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Estilo para o aviso de confidencialidade */
+        .confidential-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+        
+        .confidential-notice h4 {
+            color: #856404;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .confidential-notice p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* NOVOS ESTILOS PARA CAMPOS ESPECÍFICOS DE VOTOS */
+        .voto-fields {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .voto-fields.active {
+            display: block;
+        }
+        
+        .voto-field-group {
+            margin-bottom: 1rem;
+        }
+        
+        .voto-field-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .voto-field-group input,
+        .voto-field-group textarea,
+        .voto-field-group select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .voto-field-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .voto-participants {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .voto-participant-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .voto-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .voto-table th,
+        .voto-table td {
+            border: 1px solid var(--border);
+            padding: 0.7rem;
+            text-align: left;
+        }
+        
+        .voto-table th {
+            background: var(--gray-light);
+            font-weight: 600;
+        }
+        
+        .relatorio-section {
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #1976d2;
+        }
+        
+        .relatorio-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .relatorio-field-group {
+            margin-bottom: 1rem;
+        }
+        
+        .relatorio-field-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .relatorio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+        }
+        
+        .relatorio-table th,
+        .relatorio-table td {
+            border: 1px solid var(--border);
+            padding: 0.8rem;
+            text-align: left;
+        }
+        
+        .relatorio-table th {
+            background: var(--primary-light);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .add-participant-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        .remove-participant-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: auto;
+        }
     </style>
 </head>
 <body>
@@ -1038,37 +1278,34 @@
             <div class="doctrines-section">
                 <h2>Doutrinas Principais</h2>
                 <div class="doctrines-grid">
-                    <!-- Cards de doutrinas (mantidos do código anterior) -->
                     <div class="doctrine-card">
                         <h3><i class="fas fa-bible"></i> As Escrituras Sagradas</h3>
-                        <p>As Escrituras Sagradas, o Antigo e o Novo Testamento, são a Palavra de Deus escrita, dada por inspiração divina por intermédio de santos homens de Deus que falaram e escreveram ao serem movidos pelo Espírito Santo. (2 Pedro 1:20 e 21; 2 Timóteo 3:16 e 17; Salmos 119:105; Provérbios 30:5 e 6; Isaías 8:20; João 10:35; 17:17; 1 Tessalonicenses 2:13; Hebreus 4:12). </p>
+                        <p>As Escrituras Sagradas, o Antigo e o Novo Testamento, são a Palavra de Deus escrita, dada por inspiração divina por intermédio de santos homens de Deus que falaram e escreveram ao serem movidos pelo Espírito Santo.</p>
                     </div>
                    
                     <div class="doctrine-card">
                         <h3><i class="fas fa-calendar-day"></i> O Sábado Sagrado</h3>
-                        <p>O bondoso Criador, após os seis dias da Criação descansou no sétimo e instituiu o Sábado para todas as pessoas, como memorial da Criação. O quarto mandamento da imutável Lei de Deus requer a observância desse Sábado do sétimo dia como dia de descanso, adoração e ministério, em harmonia com o ensino e prática de Jesus, o Senhor do Sábado.</p>
+                        <p>O bondoso Criador, após os seis dias da Criação descansou no sétimo e instituiu o Sábado para todas as pessoas, como memorial da Criação. O quarto mandamento da imutável Lei de Deus requer a observância desse Sábado do sétimo dia como dia de descanso, adoração e ministério.</p>
                     </div>
                     
                     <div class="doctrine-card">
                         <h3><i class="fas fa-undo-alt"></i> A Segunda Vinda de Cristo</h3>
-                        <p>Cristo ministra em um santuário no Céu, aplicando aos crentes os méritos de Seu sacrifício na cruz. Ao ascender, tornou-Se o Sumo Sacerdote e iniciou Seu ministério intercessório. Em 1844, começou a última fase desse ministério — o juízo investigativo — que revela quem será salvo, tanto entre os mortos quanto entre os vivos. Quando esse ministério terminar, encerrará o tempo da graça antes do Segundo Advento.
-                        </p>
+                        <p>Cristo ministra em um santuário no Céu, aplicando aos crentes os méritos de Seu sacrifício na cruz. Ao ascender, tornou-Se o Sumo Sacerdote e iniciou Seu ministério intercessório.</p>
                     </div>
                     
                     <div class="doctrine-card">
                         <h3><i class="fas fa-tint"></i> O Batismo por Imersão</h3>
-                        <p>Pelo batismo confessamos nossa fé na morte e na ressurreição de Jesus Cristo e atestamos nossa morte para o pecado e nosso propósito de andar em novidade de vida, sendo aceitos como membros por Sua Igreja. O batismo deve acontecer por imersão na água e seguir as instrução nas Escrituras Sagradas  (Mateus 3:13-16; 28:19 e 20; Atos 2:38; 16:30-33; 22:16; Romanos 6:1-6; Gálatas 3:27; 1 Coríntios 12:13; Colossenses 2:12 e 13; 1 Pedro 3:21). </p>
+                        <p>Pelo batismo confessamos nossa fé na morte e na ressurreição de Jesus Cristo e atestamos nossa morte para o pecado e nosso propósito de andar em novidade de vida, sendo aceitos como membros por Sua Igreja.</p>
                     </div>
                     
                     <div class="doctrine-card">
                         <h3><i class="fas fa-heartbeat"></i> O Ministério de Cristo no Santuário Celestial</h3>
-                        <p>Cristo ministra em um santuário no Céu, aplicando aos crentes os méritos de Seu sacrifício na cruz. Ao ascender, tornou-Se o Sumo Sacerdote e iniciou Seu ministério intercessório. Em 1844, começou a última fase desse ministério — o juízo investigativo — que revela quem será salvo, tanto entre os mortos quanto entre os vivos. Quando esse ministério terminar, encerrará o tempo da graça antes do Segundo Advento.
-                        </p>
+                        <p>Cristo ministra em um santuário no Céu, aplicando aos crentes os méritos de Seu sacrifício na cruz. Em 1844, começou a última fase desse ministério — o juízo investigativo — que revela quem será salvo.</p>
                     </div>
                     
                     <div class="doctrine-card">
                         <h3><i class="fas fa-dove"></i> O Dom de Profecia</h3>
-                        <p>Um dos dons do Espírito Santo é a profecia. Esse dom é uma característica da Igreja remanescente e foi manifestado no ministério de Ellen G. White. Como a mensageira do Senhor, seus escritos são uma contínua e autorizada fonte de verdade e proporcionam conforto, orientação, instrução e correção à Igreja.</p>
+                        <p>Um dos dons do Espírito Santo é a profecia. Esse dom é uma característica da Igreja remanescente e foi manifestado no ministério de Ellen G. White. Como a mensageira do Senhor, seus escritos são uma contínua e autorizada fonte de verdade.</p>
                     </div>
                 </div>
             </div>
@@ -1080,40 +1317,22 @@
                 <p style="text-align: center; margin-bottom: 1.8rem;">Selecione o tipo de comissão para acessar o sistema de atas correspondente:</p>
                 
                 <div class="commissions-grid">
-                    <div class="commission-card" onclick="selectCommission('assembleia-geral')">
+                    <div class="commission-card" onclick="selectCommission('comissao-diretiva')">
                         <i class="fas fa-users commission-icon"></i>
-                        <h3>Assembleia Geral</h3>
-                        <p>Reuniões com participação de todos os membros da igreja</p>
+                        <h3>Comissão Diretiva</h3>
+                        <p>Reuniões da comissão diretiva da igreja</p>
                     </div>
                     
-                    <div class="commission-card" onclick="selectCommission('diretoria')">
+                    <div class="commission-card" onclick="selectCommission('reuniao-regular')">
                         <i class="fas fa-user-tie commission-icon"></i>
-                        <h3>Diretoria</h3>
-                        <p>Reuniões da diretoria da igreja</p>
+                        <h3>Reunião Regular</h3>
+                        <p>Reuniões regulares da igreja</p>
                     </div>
                     
-                    <div class="commission-card" onclick="selectCommission('comissao')">
+                    <div class="commission-card" onclick="selectCommission('reuniao-administrativa')">
                         <i class="fas fa-clipboard-list commission-icon"></i>
-                        <h3>Comissões</h3>
-                        <p>Reuniões de comissões específicas</p>
-                    </div>
-                    
-                    <div class="commission-card" onclick="selectCommission('secretaria')">
-                        <i class="fas fa-file-alt commission-icon"></i>
-                        <h3>Secretaria</h3>
-                        <p>Reuniões do departamento de secretaria</p>
-                    </div>
-                    
-                    <div class="commission-card" onclick="selectCommission('tesouraria')">
-                        <i class="fas fa-dollar-sign commission-icon"></i>
-                        <h3>Tesouraria</h3>
-                        <p>Reuniões do departamento financeiro</p>
-                    </div>
-                    
-                    <div class="commission-card" onclick="selectCommission('outra')">
-                        <i class="fas fa-ellipsis-h commission-icon"></i>
-                        <h3>Outras Reuniões</h3>
-                        <p>Reuniões que não se enquadram nas categorias acima</p>
+                        <h3>Reunião Administrativa</h3>
+                        <p>Reuniões administrativas da igreja</p>
                     </div>
                 </div>
             </div>
@@ -1145,16 +1364,18 @@
             <div class="tab-content active" id="create-tab">
                 <h2>Criar Nova ATA</h2>
                 
+                <div class="confidential-notice">
+                    <h4><i class="fas fa-shield-alt"></i> DOCUMENTO CONFIDENCIAL</h4>
+                    <p><strong>ATENÇÃO:</strong> Todo o conteúdo desta ata está sob a proteção da lei, e a divulgação de qualquer nome, dado, número, decisão, ou de qualquer informação nela contida não poderá ser realizada por qualquer meio físico ou digital, sem a autorização expressa da Associação Paulista Sudoeste dos Adventistas do Sétimo Dia. A pessoa física ou jurídica que violar essa confidencialidade estará sujeita a sanções administrativas, cíveis e penais.</p>
+                </div>
+                
                 <div class="form-group">
                     <label for="ataType">Tipo de ATA</label>
                     <select id="ataType">
                         <option value="">Selecione o tipo de ATA</option>
-                        <option value="assembleia-geral">Assembleia Geral</option>
-                        <option value="diretoria">Reunião de Diretoria</option>
-                        <option value="comissao">Reunião de Comissão</option>
-                        <option value="secretaria">Reunião de Secretaria</option>
-                        <option value="tesouraria">Reunião de Tesouraria</option>
-                        <option value="outra">Outra</option>
+                        <option value="comissao-diretiva">Comissão Diretiva</option>
+                        <option value="reuniao-regular">Reunião Regular</option>
+                        <option value="reuniao-administrativa">Reunião Administrativa</option>
                     </select>
                 </div>
                 
@@ -1171,90 +1392,178 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="ataLocation">Local da Reunião</label>
-                    <input type="text" id="ataLocation" placeholder="Ex: Sala de Reuniões da Igreja" value="Igreja Adventista do Sétimo Dia">
+                    <label for="igrejaNome">Nome da Igreja</label>
+                    <input type="text" id="igrejaNome" placeholder="Ex: Igreja Adventista do Sétimo Dia de Jardim do Céu">
+                </div>
+                
+                <div class="form-group">
+                    <label for="igrejaEndereco">Endereço da Igreja</label>
+                    <input type="text" id="igrejaEndereco" placeholder="Ex: Rua Nova Jerusalém, 555">
                 </div>
                 
                 <div class="form-group">
                     <label for="meetingTime">Horário da Reunião</label>
-                    <input type="text" id="meetingTime" placeholder="Ex: 19:30 às 21:00">
+                    <input type="text" id="meetingTime" placeholder="Ex: 19 horas">
                 </div>
 
-                <!-- NOVA SEÇÃO: ELEMENTOS DE ADORAÇÃO -->
+                <!-- SEÇÃO: ELEMENTOS DE ADORAÇÃO -->
                 <div class="worship-section">
                     <h3><i class="fas fa-pray"></i> Elementos de Adoração</h3>
                     
                     <div class="form-group">
-                        <label for="openingPrayer">Responsável pela Oração Inicial</label>
-                        <input type="text" id="openingPrayer" placeholder="Nome da pessoa que fez a oração inicial">
+                        <label for="hino">Hino</label>
+                        <input type="text" id="hino" placeholder="Ex: 469 HÁ - Oh! Que Esperança!">
                     </div>
                     
                     <div class="form-group">
-                        <label for="bibleVerse">Versículo Base da Meditação</label>
-                        <input type="text" id="bibleVerse" placeholder="Ex: João 3:16">
+                        <label for="oracao">Oração</label>
+                        <input type="text" id="oracao" placeholder="Nome da pessoa que fez a oração">
                     </div>
                     
                     <div class="form-group">
-                        <label for="verseText">Texto do Versículo (Opcional)</label>
-                        <textarea id="verseText" placeholder="Digite o texto completo do versículo"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Hinos Escolhidos</label>
-                        <div class="form-row">
-                            <div class="form-group" style="flex: 1;">
-                                <input type="text" id="hymnNumber" placeholder="Número do hino">
-                            </div>
-                            <div class="form-group" style="flex: 2;">
-                                <input type="text" id="hymnTitle" placeholder="Título do hino">
-                            </div>
-                            <button class="btn btn-secondary" id="addHymn">
-                                <i class="fas fa-plus"></i> Adicionar
-                            </button>
-                        </div>
-                        <div class="members-list" id="hymnsList">
-                            <!-- Hinos serão adicionados aqui -->
-                        </div>
+                        <label for="reflexao">Reflexão Bíblica</label>
+                        <input type="text" id="reflexao" placeholder="Nome da pessoa que fez a reflexão bíblica">
                     </div>
                 </div>
                 
                 <h3>Participantes</h3>
                 
+                <div class="form-group">
+                    <label for="membrosPresentes">Membros Presentes</label>
+                    <textarea id="membrosPresentes" placeholder="Lista de membros presentes, separados por vírgula"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="convidados">Convidados</label>
+                    <textarea id="convidados" placeholder="Lista de convidados, separados por vírgula"></textarea>
+                </div>
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="president">Presidente da Reunião</label>
-                        <input type="text" id="president" placeholder="Nome do presidente">
+                        <label for="presidente">Presidente da Reunião</label>
+                        <input type="text" id="presidente" placeholder="Nome do presidente">
                     </div>
                     
                     <div class="form-group">
-                        <label for="secretary">Secretário da Reunião</label>
-                        <input type="text" id="secretary" placeholder="Nome do secretário">
+                        <label for="secretario">Secretário da Reunião</label>
+                        <input type="text" id="secretario" placeholder="Nome do secretário">
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="participants">Lista de Participantes</label>
-                    <div class="form-row">
-                        <input type="text" id="newParticipant" placeholder="Nome do participante">
-                        <button class="btn btn-secondary" id="addParticipant">Adicionar</button>
-                    </div>
-                    <div class="members-list" id="participantsList">
-                        <!-- Participants will be added here -->
-                    </div>
-                </div>
-                
-                <h3>Pauta da Reunião</h3>
-                
-                <div class="form-group">
-                    <label for="agendaItems">Itens da Pauta</label>
-                    <textarea id="agendaItems" placeholder="Descreva os itens da pauta, um por linha"></textarea>
-                </div>
-                
+
+                <!-- NOVA SEÇÃO: DELIBERAÇÕES COM CAMPOS ESPECÍFICOS -->
                 <h3>Deliberações</h3>
+                <p>Adicione as deliberações da reunião. Selecione o tipo de voto para ver campos específicos.</p>
                 
                 <div class="form-group">
-                    <label for="deliberations">Deliberações e Decisões</label>
-                    <textarea id="deliberations" placeholder="Descreva as deliberações e decisões tomadas"></textarea>
+                    <label for="deliberationTitle">Título da Deliberação</label>
+                    <input type="text" id="deliberationTitle" placeholder="Ex: VOZ E VOTO - CONVIDADO - CONCEDER">
+                </div>
+                
+                <div class="form-group">
+                    <label for="deliberationDescription">Descrição da Deliberação</label>
+                    <textarea id="deliberationDescription" placeholder="Descreva a deliberação em detalhes"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo de Voto</label>
+                    <div class="voto-types">
+                        <div class="voto-type" data-voto="001" onclick="selectVotoType(this)">
+                            <h4>001 - VOZ E VOTO</h4>
+                            <p>Conceder direito a voz e voto a convidado</p>
+                        </div>
+                        <div class="voto-type" data-voto="002" onclick="selectVotoType(this)">
+                            <h4>002 - CLASSIFICAÇÃO DE MEMBROS</h4>
+                            <p>Registrar classificação de membros</p>
+                        </div>
+                        <div class="voto-type" data-voto="014" onclick="selectVotoType(this)">
+                            <h4>014 - ADMISSÃO DE MEMBROS</h4>
+                            <p>Recomendar admissão de membros</p>
+                        </div>
+                        <div class="voto-type" data-voto="015" onclick="selectVotoType(this)">
+                            <h4>015 - CARTAS DE TRANSFERÊNCIA</h4>
+                            <p>Recomendar cartas de transferência</p>
+                        </div>
+                        <div class="voto-type" data-voto="020" onclick="selectVotoType(this)">
+                            <h4>020 - ASSEMBLEIA DA ASSOCIAÇÃO</h4>
+                            <p>Delegado para assembleia</p>
+                        </div>
+                        <div class="voto-type" data-voto="075" onclick="selectVotoType(this)">
+                            <h4>075 - ORÇAMENTO DA IGREJA</h4>
+                            <p>Aprovar orçamento da igreja</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAMPOS ESPECÍFICOS PARA CADA TIPO DE VOTO -->
+                <div id="votoFieldsContainer">
+                    <!-- Campos serão inseridos aqui dinamicamente -->
+                </div>
+
+                <!-- SEÇÃO DE RELATÓRIO -->
+                <div class="relatorio-section">
+                    <h3><i class="fas fa-chart-bar"></i> Relatório das Decisões</h3>
+                    <p>Preencha as informações específicas sobre as decisões tomadas:</p>
+                    
+                    <div class="relatorio-fields">
+                        <div class="relatorio-field-group">
+                            <label for="relatorioData">Data de Implementação</label>
+                            <input type="date" id="relatorioData">
+                        </div>
+                        
+                        <div class="relatorio-field-group">
+                            <label for="relatorioResponsavel">Responsável pela Implementação</label>
+                            <input type="text" id="relatorioResponsavel" placeholder="Nome do responsável">
+                        </div>
+                        
+                        <div class="relatorio-field-group full-width">
+                            <label for="relatorioObservacoes">Observações e Considerações</label>
+                            <textarea id="relatorioObservacoes" placeholder="Descreva observações importantes sobre as decisões" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="relatorio-field-group full-width">
+                            <label for="relatorioAnexos">Anexos e Documentos Relacionados</label>
+                            <textarea id="relatorioAnexos" placeholder="Liste os anexos e documentos relacionados" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="relatorio-field-group full-width">
+                        <label>Prazo para Implementação</label>
+                        <table class="relatorio-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Prazo</th>
+                                    <th>Responsável</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="relatorioPrazos">
+                                <tr>
+                                    <td><input type="text" placeholder="Descrição do item" class="relatorio-input"></td>
+                                    <td><input type="date" class="relatorio-input"></td>
+                                    <td><input type="text" placeholder="Responsável" class="relatorio-input"></td>
+                                    <td>
+                                        <select class="relatorio-input">
+                                            <option value="pendente">Pendente</option>
+                                            <option value="andamento">Em Andamento</option>
+                                            <option value="concluido">Concluído</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-participant-btn" onclick="addPrazoItem()">
+                            <i class="fas fa-plus"></i> Adicionar Item
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="btn btn-secondary" id="addDeliberation">
+                    <i class="fas fa-plus"></i> Adicionar Deliberação
+                </button>
+                
+                <div class="members-list" id="deliberationsList">
+                    <!-- Deliberações serão adicionadas aqui -->
                 </div>
                 
                 <div class="actions system-actions">
@@ -1264,6 +1573,10 @@
                 
                 <div class="preview-container" id="previewContainer" style="display: none;">
                     <h3>Pré-visualização da ATA</h3>
+                    <div class="confidential-notice">
+                        <h4><i class="fas fa-shield-alt"></i> DOCUMENTO CONFIDENCIAL</h4>
+                        <p><strong>ATENÇÃO:</strong> Todo o conteúdo desta ata está sob a proteção da lei, e a divulgação de qualquer nome, dado, número, decisão, ou de qualquer informação nela contida não poderá ser realizada por qualquer meio físico ou digital, sem a autorização expressa da Associação Paulista Sudoeste dos Adventistas do Sétimo Dia. A pessoa física ou jurídica que violar essa confidencialidade estará sujeita a sanções administrativas, cíveis e penais.</p>
+                    </div>
                     <div class="ata-preview" id="ataPreview">
                         <!-- ATA preview will be generated here -->
                     </div>
@@ -1292,22 +1605,18 @@
                 <ol>
                     <li>Selecione o tipo de ATA que deseja criar</li>
                     <li>Preencha os dados básicos da reunião (número, data, local, horário)</li>
-                    <li>Preencha os elementos de adoração (oração, versículo, hinos)</li>
+                    <li>Preencha os elementos de adoração (hino, oração, reflexão bíblica)</li>
                     <li>Adicione os participantes da reunião</li>
-                    <li>Descreva a pauta da reunião</li>
-                    <li>Registre as deliberações e decisões tomadas</li>
+                    <li>Adicione as deliberações da reunião</li>
                     <li>Visualize a ATA antes de gerar o documento final</li>
                     <li>Clique em "Gerar e Salvar ATA" para finalizar</li>
                 </ol>
                 
                 <h3>Tipos de ATA</h3>
                 <ul>
-                    <li><strong>Assembleia Geral:</strong> Reuniões com a participação de todos os membros da igreja</li>
-                    <li><strong>Reunião de Diretoria:</strong> Reuniões da diretoria da igreja</li>
-                    <li><strong>Reunião de Comissão:</strong> Reuniões de comissões específicas</li>
-                    <li><strong>Reunião de Secretaria:</strong> Reuniões do departamento de secretaria</li>
-                    <li><strong>Reunião de Tesouraria:</strong> Reuniões do departamento financeiro</li>
-                    <li><strong>Outra:</strong> Para reuniões que não se enquadram nas categorias acima</li>
+                    <li><strong>Comissão Diretiva:</strong> Reuniões da comissão diretiva da igreja</li>
+                    <li><strong>Reunião Regular:</strong> Reuniões regulares da igreja</li>
+                    <li><strong>Reunião Administrativa:</strong> Reuniões administrativas da igreja</li>
                 </ul>
                 
                 <h3>Recursos do Sistema</h3>
@@ -1454,9 +1763,180 @@
     <script>
         // Variáveis globais
         let selectedCommission = '';
-        let participants = [];
-        let hymns = [];
-        
+        let deliberations = [];
+        let currentVotoType = '';
+        let votoFields = {};
+
+        // Templates para campos específicos de cada tipo de voto
+        const votoTemplates = {
+            '001': `
+                <div class="voto-fields active" id="voto-001-fields">
+                    <h4>Informações para Voz e Voto</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Convidado</label>
+                        <input type="text" id="convidadoNome" placeholder="Nome completo do convidado">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Participação</label>
+                        <textarea id="motivoParticipacao" placeholder="Descreva o motivo da participação do convidado"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Validade</label>
+                        <input type="date" id="validadeVoto">
+                    </div>
+                </div>
+            `,
+            '002': `
+                <div class="voto-fields active" id="voto-002-fields">
+                    <h4>Classificação de Membros</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataReferencia">
+                    </div>
+                    <table class="voto-table">
+                        <thead>
+                            <tr>
+                                <th>Classificação</th>
+                                <th>Quantidade</th>
+                                <th>Percentual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Assiste em outra igreja adventista</td>
+                                <td><input type="number" id="qtdOutraIgreja" placeholder="0"></td>
+                                <td><input type="text" id="percOutraIgreja" placeholder="0%" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Membros a resgatar</td>
+                                <td><input type="number" id="qtdResgatar" placeholder="0"></td>
+                                <td><input type="text" id="percResgatar" placeholder="0%" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Regular frequente</td>
+                                <td><input type="number" id="qtdFrequente" placeholder="0"></td>
+                                <td><input type="text" id="percFrequente" placeholder="0%" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Total de Membros</td>
+                                <td><input type="number" id="totalMembros" placeholder="0" readonly></td>
+                                <td><input type="text" id="totalPercentual" placeholder="100%" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `,
+            '014': `
+                <div class="voto-fields active" id="voto-014-fields">
+                    <h4>Admissão de Membros</h4>
+                    <div class="voto-field-group">
+                        <label>Tipo de Admissão</label>
+                        <select id="tipoAdmissao">
+                            <option value="batismo">Batismo</option>
+                            <option value="rebatismo">Rebatismo</option>
+                            <option value="profissao-fe">Profissão de Fé</option>
+                        </select>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data do Batismo/Admissão</label>
+                        <input type="date" id="dataBatismo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Lista de Candidatos</label>
+                        <textarea id="listaCandidatos" placeholder="Lista de nomes dos candidatos, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local do Batismo</label>
+                        <input type="text" id="localBatismo" placeholder="Local onde será realizado o batismo">
+                    </div>
+                </div>
+            `,
+            '015': `
+                <div class="voto-fields active" id="voto-015-fields">
+                    <h4>Cartas de Transferência</h4>
+                    <div class="voto-field-group">
+                        <label>Tipo de Transferência</label>
+                        <select id="tipoTransferencia">
+                            <option value="recebimento">Recebimento</option>
+                            <option value="envio">Envio</option>
+                        </select>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Igreja de Origem/Destino</label>
+                        <input type="text" id="igrejaTransferencia" placeholder="Nome da igreja">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Lista de Membros</label>
+                        <textarea id="listaMembrosTransferencia" placeholder="Lista de nomes dos membros, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Transferência</label>
+                        <input type="date" id="dataTransferencia">
+                    </div>
+                </div>
+            `,
+            '020': `
+                <div class="voto-fields active" id="voto-020-fields">
+                    <h4>Assembleia da Associação</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Delegado</label>
+                        <input type="text" id="nomeDelegado" placeholder="Nome completo do delegado">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Assembleia</label>
+                        <input type="date" id="dataAssembleia">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local da Assembleia</label>
+                        <input type="text" id="localAssembleia" placeholder="Local onde será realizada a assembleia">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Pauta Principal</label>
+                        <textarea id="pautaAssembleia" placeholder="Principais assuntos da assembleia"></textarea>
+                    </div>
+                </div>
+            `,
+            '075': `
+                <div class="voto-fields active" id="voto-075-fields">
+                    <h4>Orçamento da Igreja</h4>
+                    <div class="voto-field-group">
+                        <label>Ano de Referência</label>
+                        <input type="number" id="anoOrcamento" placeholder="2024" min="2020" max="2030">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor Total do Orçamento</label>
+                        <input type="text" id="valorTotalOrcamento" placeholder="R$ 0,00">
+                    </div>
+                    <table class="voto-table">
+                        <thead>
+                            <tr>
+                                <th>Departamento</th>
+                                <th>Valor Alocado</th>
+                                <th>Percentual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Administração</td>
+                                <td><input type="text" id="valorAdministracao" placeholder="R$ 0,00"></td>
+                                <td><input type="text" id="percAdministracao" placeholder="0%" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Evangelismo</td>
+                                <td><input type="text" id="valorEvangelismo" placeholder="R$ 0,00"></td>
+                                <td><input type="text" id="percEvangelismo" placeholder="0%" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Escola Sabatina</td>
+                                <td><input type="text" id="valorEscolaSabatina" placeholder="R$ 0,00"></td>
+                                <td><input type="text" id="percEscolaSabatina" placeholder="0%" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `
+        };
+
         // Navegação entre telas
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
@@ -1530,22 +2010,139 @@
         
         function getCommissionName(commission) {
             const commissionNames = {
-                'assembleia-geral': 'Assembleia Geral',
-                'diretoria': 'Reunião de Diretoria',
-                'comissao': 'Reunião de Comissão',
-                'secretaria': 'Reunião de Secretaria',
-                'tesouraria': 'Reunião de Tesouraria',
-                'outra': 'Outra Reunião'
+                'comissao-diretiva': 'Comissão Diretiva',
+                'reuniao-regular': 'Reunião Regular',
+                'reuniao-administrativa': 'Reunião Administrativa'
             };
             
             return commissionNames[commission] || 'Reunião';
         }
         
+        // Função para selecionar tipo de voto
+        function selectVotoType(element) {
+            // Remove selected class from all voto types
+            document.querySelectorAll('.voto-type').forEach(voto => {
+                voto.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked voto type
+            element.classList.add('selected');
+            
+            // Store the selected voto type
+            currentVotoType = element.getAttribute('data-voto');
+            
+            // Show specific fields for the selected voto type
+            showVotoFields(currentVotoType);
+        }
+
+        // Função para mostrar campos específicos do tipo de voto
+        function showVotoFields(votoType) {
+            const container = document.getElementById('votoFieldsContainer');
+            
+            if (votoTemplates[votoType]) {
+                container.innerHTML = votoTemplates[votoType];
+                
+                // Adicionar event listeners para cálculos automáticos
+                if (votoType === '002') {
+                    setupClassificacaoCalculations();
+                } else if (votoType === '075') {
+                    setupOrcamentoCalculations();
+                }
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        // Configurar cálculos para classificação de membros
+        function setupClassificacaoCalculations() {
+            const inputs = ['qtdOutraIgreja', 'qtdResgatar', 'qtdFrequente'];
+            
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', calcularTotaisClassificacao);
+                }
+            });
+        }
+
+        function calcularTotaisClassificacao() {
+            const qtdOutraIgreja = parseInt(document.getElementById('qtdOutraIgreja').value) || 0;
+            const qtdResgatar = parseInt(document.getElementById('qtdResgatar').value) || 0;
+            const qtdFrequente = parseInt(document.getElementById('qtdFrequente').value) || 0;
+            
+            const total = qtdOutraIgreja + qtdResgatar + qtdFrequente;
+            
+            document.getElementById('totalMembros').value = total;
+            
+            if (total > 0) {
+                document.getElementById('percOutraIgreja').value = ((qtdOutraIgreja / total) * 100).toFixed(1) + '%';
+                document.getElementById('percResgatar').value = ((qtdResgatar / total) * 100).toFixed(1) + '%';
+                document.getElementById('percFrequente').value = ((qtdFrequente / total) * 100).toFixed(1) + '%';
+                document.getElementById('totalPercentual').value = '100%';
+            }
+        }
+
+        // Configurar cálculos para orçamento
+        function setupOrcamentoCalculations() {
+            const inputs = ['valorAdministracao', 'valorEvangelismo', 'valorEscolaSabatina'];
+            const totalInput = document.getElementById('valorTotalOrcamento');
+            
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', calcularPercentuaisOrcamento);
+                }
+            });
+            
+            if (totalInput) {
+                totalInput.addEventListener('input', calcularPercentuaisOrcamento);
+            }
+        }
+
+        function calcularPercentuaisOrcamento() {
+            const total = parseFloat(document.getElementById('valorTotalOrcamento').value.replace('R$', '').replace('.', '').replace(',', '.')) || 0;
+            const valores = {
+                administracao: parseFloat(document.getElementById('valorAdministracao').value.replace('R$', '').replace('.', '').replace(',', '.')) || 0,
+                evangelismo: parseFloat(document.getElementById('valorEvangelismo').value.replace('R$', '').replace('.', '').replace(',', '.')) || 0,
+                escolaSabatina: parseFloat(document.getElementById('valorEscolaSabatina').value.replace('R$', '').replace('.', '').replace(',', '.')) || 0
+            };
+            
+            if (total > 0) {
+                document.getElementById('percAdministracao').value = ((valores.administracao / total) * 100).toFixed(1) + '%';
+                document.getElementById('percEvangelismo').value = ((valores.evangelismo / total) * 100).toFixed(1) + '%';
+                document.getElementById('percEscolaSabatina').value = ((valores.escolaSabatina / total) * 100).toFixed(1) + '%';
+            }
+        }
+
+        // Função para adicionar item de prazo
+        function addPrazoItem() {
+            const tbody = document.getElementById('relatorioPrazos');
+            const newRow = document.createElement('tr');
+            
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="Descrição do item" class="relatorio-input"></td>
+                <td><input type="date" class="relatorio-input"></td>
+                <td><input type="text" placeholder="Responsável" class="relatorio-input"></td>
+                <td>
+                    <select class="relatorio-input">
+                        <option value="pendente">Pendente</option>
+                        <option value="andamento">Em Andamento</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                    <button type="button" class="remove-participant-btn" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </td>
+            `;
+            
+            tbody.appendChild(newRow);
+        }
+
         // ========== SISTEMA DE ATAS ==========
         
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar seleção padrão
-            selectCommission('assembleia-geral');
+            selectCommission('comissao-diretiva');
             
             // Tab functionality
             const tabs = document.querySelectorAll('.tab');
@@ -1579,126 +2176,242 @@
                 });
             });
             
-            // Participants functionality
-            const addParticipantBtn = document.getElementById('addParticipant');
-            const newParticipantInput = document.getElementById('newParticipant');
-            const participantsList = document.getElementById('participantsList');
+            // Deliberations functionality
+            const addDeliberationBtn = document.getElementById('addDeliberation');
+            const deliberationTitleInput = document.getElementById('deliberationTitle');
+            const deliberationDescriptionInput = document.getElementById('deliberationDescription');
+            const deliberationsList = document.getElementById('deliberationsList');
             
-            addParticipantBtn.addEventListener('click', function() {
-                const participantName = newParticipantInput.value.trim();
-                if (participantName) {
-                    addParticipant(participantName);
-                    newParticipantInput.value = '';
-                }
-            });
-            
-            newParticipantInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addParticipantBtn.click();
-                }
-            });
-            
-            function addParticipant(name) {
-                participants.push(name);
-                renderParticipants();
-            }
-            
-            function removeParticipant(index) {
-                participants.splice(index, 1);
-                renderParticipants();
-            }
-            
-            function renderParticipants() {
-                participantsList.innerHTML = '';
+            addDeliberationBtn.addEventListener('click', function() {
+                const title = deliberationTitleInput.value.trim();
+                const description = deliberationDescriptionInput.value.trim();
                 
-                if (participants.length === 0) {
-                    participantsList.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 1rem;">Nenhum participante adicionado</p>';
-                    return;
-                }
-                
-                participants.forEach((participant, index) => {
-                    const participantElement = document.createElement('div');
-                    participantElement.className = 'member-item';
-                    participantElement.innerHTML = `
-                        <span>${participant}</span>
-                        <div class="member-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="removeParticipant(${index})">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
-                    participantsList.appendChild(participantElement);
-                });
-            }
-            
-            // Hinos functionality
-            const addHymnBtn = document.getElementById('addHymn');
-            const hymnNumberInput = document.getElementById('hymnNumber');
-            const hymnTitleInput = document.getElementById('hymnTitle');
-            const hymnsList = document.getElementById('hymnsList');
-            
-            addHymnBtn.addEventListener('click', function() {
-                const hymnNumber = hymnNumberInput.value.trim();
-                const hymnTitle = hymnTitleInput.value.trim();
-                
-                if (hymnNumber && hymnTitle) {
-                    addHymn(hymnNumber, hymnTitle);
-                    hymnNumberInput.value = '';
-                    hymnTitleInput.value = '';
+                if (title && description && currentVotoType) {
+                    addDeliberation(title, description, currentVotoType);
+                    deliberationTitleInput.value = '';
+                    deliberationDescriptionInput.value = '';
+                    
+                    // Reset voto type selection
+                    document.querySelectorAll('.voto-type').forEach(voto => {
+                        voto.classList.remove('selected');
+                    });
+                    currentVotoType = '';
+                    document.getElementById('votoFieldsContainer').innerHTML = '';
                 } else {
-                    alert('Por favor, preencha tanto o número quanto o título do hino.');
+                    alert('Por favor, preencha o título, descrição e selecione um tipo de voto.');
                 }
             });
             
-            hymnNumberInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addHymnBtn.click();
-                }
-            });
-            
-            hymnTitleInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addHymnBtn.click();
-                }
-            });
-            
-            function addHymn(number, title) {
-                hymns.push({ number, title });
-                renderHymns();
-            }
-            
-            function removeHymn(index) {
-                hymns.splice(index, 1);
-                renderHymns();
-            }
-            
-            function renderHymns() {
-                hymnsList.innerHTML = '';
+            function addDeliberation(title, description, votoType) {
+                // Coletar dados dos campos específicos
+                const camposEspecificos = coletarCamposVoto(votoType);
+                const relatorioData = coletarDadosRelatorio();
                 
-                if (hymns.length === 0) {
-                    hymnsList.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 1rem;">Nenhum hino adicionado</p>';
+                deliberations.push({
+                    title,
+                    description,
+                    votoType,
+                    number: deliberations.length + 1,
+                    camposEspecificos,
+                    relatorioData
+                });
+                renderDeliberations();
+            }
+            
+            function coletarCamposVoto(votoType) {
+                const campos = {};
+                
+                switch(votoType) {
+                    case '001':
+                        campos.convidadoNome = document.getElementById('convidadoNome')?.value || '';
+                        campos.motivoParticipacao = document.getElementById('motivoParticipacao')?.value || '';
+                        campos.validadeVoto = document.getElementById('validadeVoto')?.value || '';
+                        break;
+                    case '002':
+                        campos.dataReferencia = document.getElementById('dataReferencia')?.value || '';
+                        campos.classificacao = {
+                            outraIgreja: document.getElementById('qtdOutraIgreja')?.value || '0',
+                            resgatar: document.getElementById('qtdResgatar')?.value || '0',
+                            frequente: document.getElementById('qtdFrequente')?.value || '0',
+                            total: document.getElementById('totalMembros')?.value || '0'
+                        };
+                        break;
+                    case '014':
+                        campos.tipoAdmissao = document.getElementById('tipoAdmissao')?.value || '';
+                        campos.dataBatismo = document.getElementById('dataBatismo')?.value || '';
+                        campos.listaCandidatos = document.getElementById('listaCandidatos')?.value || '';
+                        campos.localBatismo = document.getElementById('localBatismo')?.value || '';
+                        break;
+                    case '015':
+                        campos.tipoTransferencia = document.getElementById('tipoTransferencia')?.value || '';
+                        campos.igrejaTransferencia = document.getElementById('igrejaTransferencia')?.value || '';
+                        campos.listaMembros = document.getElementById('listaMembrosTransferencia')?.value || '';
+                        campos.dataTransferencia = document.getElementById('dataTransferencia')?.value || '';
+                        break;
+                    case '020':
+                        campos.nomeDelegado = document.getElementById('nomeDelegado')?.value || '';
+                        campos.dataAssembleia = document.getElementById('dataAssembleia')?.value || '';
+                        campos.localAssembleia = document.getElementById('localAssembleia')?.value || '';
+                        campos.pautaAssembleia = document.getElementById('pautaAssembleia')?.value || '';
+                        break;
+                    case '075':
+                        campos.anoOrcamento = document.getElementById('anoOrcamento')?.value || '';
+                        campos.valorTotal = document.getElementById('valorTotalOrcamento')?.value || '';
+                        campos.departamentos = {
+                            administracao: document.getElementById('valorAdministracao')?.value || '',
+                            evangelismo: document.getElementById('valorEvangelismo')?.value || '',
+                            escolaSabatina: document.getElementById('valorEscolaSabatina')?.value || ''
+                        };
+                        break;
+                }
+                
+                return campos;
+            }
+
+            function coletarDadosRelatorio() {
+                const prazos = [];
+                const rows = document.querySelectorAll('#relatorioPrazos tr');
+                
+                rows.forEach(row => {
+                    const inputs = row.querySelectorAll('input, select');
+                    if (inputs[0]?.value) {
+                        prazos.push({
+                            item: inputs[0].value,
+                            prazo: inputs[1].value,
+                            responsavel: inputs[2].value,
+                            status: inputs[3].value
+                        });
+                    }
+                });
+                
+                return {
+                    dataImplementacao: document.getElementById('relatorioData')?.value || '',
+                    responsavel: document.getElementById('relatorioResponsavel')?.value || '',
+                    observacoes: document.getElementById('relatorioObservacoes')?.value || '',
+                    anexos: document.getElementById('relatorioAnexos')?.value || '',
+                    prazos: prazos
+                };
+            }
+            
+            function removeDeliberation(index) {
+                deliberations.splice(index, 1);
+                // Renumber remaining deliberations
+                deliberations.forEach((deliberation, i) => {
+                    deliberation.number = i + 1;
+                });
+                renderDeliberations();
+            }
+            
+            function renderDeliberations() {
+                deliberationsList.innerHTML = '';
+                
+                if (deliberations.length === 0) {
+                    deliberationsList.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 1rem;">Nenhuma deliberação adicionada</p>';
                     return;
                 }
                 
-                hymns.forEach((hymn, index) => {
-                    const hymnElement = document.createElement('div');
-                    hymnElement.className = 'hymn-item';
-                    hymnElement.innerHTML = `
-                        <div class="hymn-number">Hino ${hymn.number}</div>
-                        <div class="hymn-title">${hymn.title}</div>
-                        <div class="member-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="removeHymn(${index})">
-                                <i class="fas fa-times"></i>
-                            </button>
+                deliberations.forEach((deliberation, index) => {
+                    const deliberationElement = document.createElement('div');
+                    deliberationElement.className = 'deliberation-item';
+                    
+                    let camposHTML = '';
+                    if (deliberation.camposEspecificos) {
+                        camposHTML = `<div class="deliberation-campos" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 6px;">
+                            <strong>Informações Específicas:</strong><br>
+                            ${formatarCamposEspecificos(deliberation.camposEspecificos, deliberation.votoType)}
+                        </div>`;
+                    }
+                    
+                    let relatorioHTML = '';
+                    if (deliberation.relatorioData) {
+                        relatorioHTML = `<div class="deliberation-relatorio" style="margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 6px;">
+                            <strong>Relatório:</strong><br>
+                            ${formatarRelatorio(deliberation.relatorioData)}
+                        </div>`;
+                    }
+                    
+                    deliberationElement.innerHTML = `
+                        <div class="deliberation-header">
+                            <div class="deliberation-number">${deliberation.number}-${deliberation.votoType} ${deliberation.title}</div>
+                            <div class="deliberation-actions">
+                                <button class="btn btn-secondary btn-sm" onclick="removeDeliberation(${index})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="deliberation-content">
+                            <div class="deliberation-description">${deliberation.description}</div>
+                            ${camposHTML}
+                            ${relatorioHTML}
                         </div>
                     `;
-                    hymnsList.appendChild(hymnElement);
+                    deliberationsList.appendChild(deliberationElement);
                 });
+            }
+
+            function formatarCamposEspecificos(campos, votoType) {
+                let html = '';
+                
+                switch(votoType) {
+                    case '001':
+                        html = `Convidado: ${campos.convidadoNome}<br>
+                               Motivo: ${campos.motivoParticipacao}<br>
+                               Validade: ${campos.validadeVoto}`;
+                        break;
+                    case '002':
+                        html = `Data de Referência: ${campos.dataReferencia}<br>
+                               Classificação: ${campos.classificacao.outraIgreja} em outra igreja, 
+                               ${campos.classificacao.resgatar} a resgatar, 
+                               ${campos.classificacao.frequente} frequentes<br>
+                               Total: ${campos.classificacao.total} membros`;
+                        break;
+                    case '014':
+                        html = `Tipo: ${campos.tipoAdmissao}<br>
+                               Data: ${campos.dataBatismo}<br>
+                               Local: ${campos.localBatismo}<br>
+                               Candidatos: ${campos.listaCandidatos}`;
+                        break;
+                    case '015':
+                        html = `Tipo: ${campos.tipoTransferencia}<br>
+                               Igreja: ${campos.igrejaTransferencia}<br>
+                               Data: ${campos.dataTransferencia}<br>
+                               Membros: ${campos.listaMembros}`;
+                        break;
+                    case '020':
+                        html = `Delegado: ${campos.nomeDelegado}<br>
+                               Data: ${campos.dataAssembleia}<br>
+                               Local: ${campos.localAssembleia}<br>
+                               Pauta: ${campos.pautaAssembleia}`;
+                        break;
+                    case '075':
+                        html = `Ano: ${campos.anoOrcamento}<br>
+                               Valor Total: ${campos.valorTotal}<br>
+                               Departamentos: ${campos.departamentos.administracao} (Admin), 
+                               ${campos.departamentos.evangelismo} (Evangelismo), 
+                               ${campos.departamentos.escolaSabatina} (Escola Sabatina)`;
+                        break;
+                }
+                
+                return html;
+            }
+
+            function formatarRelatorio(relatorioData) {
+                let html = `Data de Implementação: ${relatorioData.dataImplementacao}<br>
+                           Responsável: ${relatorioData.responsavel}<br>
+                           Observações: ${relatorioData.observacoes}<br>`;
+                
+                if (relatorioData.prazos && relatorioData.prazos.length > 0) {
+                    html += '<br><strong>Prazos:</strong><br>';
+                    relatorioData.prazos.forEach(prazo => {
+                        html += `• ${prazo.item} - ${prazo.prazo} (${prazo.responsavel}) - ${prazo.status}<br>`;
+                    });
+                }
+                
+                return html;
             }
             
             // Initialize with empty lists
-            renderParticipants();
-            renderHymns();
+            renderDeliberations();
             
             // Preview functionality
             const previewBtn = document.getElementById('previewBtn');
@@ -1715,85 +2428,62 @@
                 const ataType = document.getElementById('ataType').value;
                 const ataNumber = document.getElementById('ataNumber').value;
                 const ataDate = document.getElementById('ataDate').value;
-                const ataLocation = document.getElementById('ataLocation').value;
+                const igrejaNome = document.getElementById('igrejaNome').value;
+                const igrejaEndereco = document.getElementById('igrejaEndereco').value;
                 const meetingTime = document.getElementById('meetingTime').value;
-                const president = document.getElementById('president').value;
-                const secretary = document.getElementById('secretary').value;
-                const agendaItems = document.getElementById('agendaItems').value;
-                const deliberations = document.getElementById('deliberations').value;
-                const openingPrayer = document.getElementById('openingPrayer').value;
-                const bibleVerse = document.getElementById('bibleVerse').value;
-                const verseText = document.getElementById('verseText').value;
+                const presidente = document.getElementById('presidente').value;
+                const secretario = document.getElementById('secretario').value;
+                const hino = document.getElementById('hino').value;
+                const oracao = document.getElementById('oracao').value;
+                const reflexao = document.getElementById('reflexao').value;
+                const membrosPresentes = document.getElementById('membrosPresentes').value;
+                const convidados = document.getElementById('convidados').value;
                 
                 // Format date
                 const formattedDate = ataDate ? new Date(ataDate).toLocaleDateString('pt-BR') : '';
                 
-                // Format agenda items
-                const agendaList = agendaItems.split('\n')
-                    .filter(item => item.trim() !== '')
-                    .map(item => `<li>${item}</li>`)
-                    .join('');
-                
-                // Format hymns
-                const hymnsList = hymns.map(hymn => 
-                    `<li>Hino ${hymn.number} - ${hymn.title}</li>`
-                ).join('');
-                
                 // Get type label
                 const typeLabels = {
-                    'assembleia-geral': 'Assembleia Geral',
-                    'diretoria': 'Reunião de Diretoria',
-                    'comissao': 'Reunião de Comissão',
-                    'secretaria': 'Reunião de Secretaria',
-                    'tesouraria': 'Reunião de Tesouraria',
-                    'outra': 'Reunião'
+                    'comissao-diretiva': 'Comissão Diretiva',
+                    'reuniao-regular': 'Reunião Regular',
+                    'reuniao-administrativa': 'Reunião Administrativa'
                 };
                 
                 const typeLabel = typeLabels[ataType] || 'Reunião';
                 
                 ataPreview.innerHTML = `
                     <div class="ata-header">
-                        <div class="ata-title">ATA DE ${typeLabel.toUpperCase()}</div>
-                        <div class="ata-subtitle">Nº ${ataNumber || '___/____'}</div>
+                        <div class="ata-title">ATA DA ${typeLabel.toUpperCase()} DA</div>
+                        <div class="ata-subtitle">${igrejaNome || 'IGREJA ADVENTISTA DO SÉTIMO DIA'}</div>
+                        <div class="ata-subtitle">${igrejaEndereco || 'ENDEREÇO DA IGREJA'}</div>
+                        <div class="ata-subtitle">${formattedDate || 'DATA'}, ${meetingTime || 'HORÁRIO'}</div>
                     </div>
                     
                     <div class="ata-body">
-                        <p>Aos <strong>${formattedDate || '_____'}</strong>, às <strong>${meetingTime || '_____'}</strong>, 
-                        na <strong>${ataLocation || '_____'}</strong>, reuniu-se a <strong>${typeLabel}</strong> 
-                        da <strong>Igreja Adventista do Sétimo Dia</strong>, sob a presidência de 
-                        <strong>${president || '_____'}</strong>, secretariada por 
-                        <strong>${secretary || '_____'}</strong>.</p>
+                        <p><strong>MEMBROS PRESENTES:</strong> ${membrosPresentes || '________________________________________________'}</p>
+                        <p><strong>CONVIDADOS:</strong> ${convidados || '________________________________________________'}</p>
                         
-                        <p>A reunião iniciou com uma oração feita por <strong>${openingPrayer || '_____'}</strong>, 
-                        seguida pela meditação no versículo <strong>${bibleVerse || '_____'}</strong>${verseText ? `: "${verseText}"` : ''}.</p>
+                        <p><strong>HINO:</strong> ${hino || '__________________________'}</p>
+                        <p><strong>ORAÇÃO:</strong> ${oracao || '__________________________'}</p>
+                        <p><strong>REFLEXÃO BÍBLICA:</strong> ${reflexao || '__________________________'}</p>
                         
-                        <p>Foram entoados os seguintes hinos:
-                            <ul>
-                                ${hymnsList || '<li>_________________________________</li>'}
-                            </ul>
-                        </p>
-                        
-                        <p>Em seguida, foi tratada a seguinte pauta:</p>
-                        
-                        <ol>
-                            ${agendaList || '<li>_________________________________</li>'}
-                        </ol>
-                        
-                        <p>Foram discutidos os assuntos constantes da pauta e, após debates, foram tomadas as seguintes deliberações:</p>
-                        
-                        <p>${deliberations || '_________________________________________________________'}</p>
+                        ${deliberations.map(deliberation => `
+                            <p><strong>${deliberation.number}-${deliberation.votoType} ${deliberation.title}</strong></p>
+                            <p>${deliberation.description}</p>
+                            ${deliberation.camposEspecificos ? `<p><em>Detalhes: ${formatarCamposEspecificos(deliberation.camposEspecificos, deliberation.votoType)}</em></p>` : ''}
+                        `).join('')}
                         
                         <p>Nada mais havendo a tratar, foi encerrada a reunião e, para constar, foi lavrada a presente ata, que será assinada pelo presidente e secretário.</p>
                     </div>
                     
                     <div class="ata-signatures">
                         <div class="signature-line">
-                            <strong>${president || '__________________________'}</strong><br>
+                            <strong>${presidente || '__________________________'}</strong><br>
                             Presidente
                         </div>
                         
                         <div class="signature-line">
-                            <strong>${secretary || '__________________________'}</strong><br>
+                            <strong>${secretario || '__________________________'}</strong><br>
                             Secretário
                         </div>
                     </div>
@@ -1817,17 +2507,17 @@
                     type: ataType,
                     number: ataNumber,
                     date: ataDate,
-                    location: document.getElementById('ataLocation').value,
+                    igrejaNome: document.getElementById('igrejaNome').value,
+                    igrejaEndereco: document.getElementById('igrejaEndereco').value,
                     time: document.getElementById('meetingTime').value,
-                    president: document.getElementById('president').value,
-                    secretary: document.getElementById('secretary').value,
-                    openingPrayer: document.getElementById('openingPrayer').value,
-                    bibleVerse: document.getElementById('bibleVerse').value,
-                    verseText: document.getElementById('verseText').value,
-                    hymns: hymns,
-                    participants: participants,
-                    agenda: document.getElementById('agendaItems').value,
-                    deliberations: document.getElementById('deliberations').value,
+                    presidente: document.getElementById('presidente').value,
+                    secretario: document.getElementById('secretario').value,
+                    hino: document.getElementById('hino').value,
+                    oracao: document.getElementById('oracao').value,
+                    reflexao: document.getElementById('reflexao').value,
+                    membrosPresentes: document.getElementById('membrosPresentes').value,
+                    convidados: document.getElementById('convidados').value,
+                    deliberations: deliberations,
                     createdAt: new Date().toISOString()
                 };
                 
@@ -1873,12 +2563,9 @@
                 
                 atas.forEach(ata => {
                     const typeLabels = {
-                        'assembleia-geral': 'Assembleia Geral',
-                        'diretoria': 'Reunião de Diretoria',
-                        'comissao': 'Reunião de Comissão',
-                        'secretaria': 'Reunião de Secretaria',
-                        'tesouraria': 'Reunião de Tesouraria',
-                        'outra': 'Reunião'
+                        'comissao-diretiva': 'Comissão Diretiva',
+                        'reuniao-regular': 'Reunião Regular',
+                        'reuniao-administrativa': 'Reunião Administrativa'
                     };
                     
                     const formattedDate = new Date(ata.date).toLocaleDateString('pt-BR');
@@ -1891,7 +2578,7 @@
                             <div class="history-title">ATA ${ata.number} - ${typeLabels[ata.type]}</div>
                             <div class="history-details">
                                 Realizada em ${formattedDate} | Criada em ${createdDate} | 
-                                ${ata.participants.length} participantes | ${ata.hymns.length} hinos
+                                ${ata.deliberations.length} deliberações
                             </div>
                         </div>
                         <div class="history-actions">
@@ -1917,31 +2604,54 @@
                 document.getElementById('ataType').value = selectedCommission;
                 document.getElementById('ataNumber').value = '';
                 document.getElementById('ataDate').value = '';
-                document.getElementById('ataLocation').value = 'Igreja Adventista do Sétimo Dia';
+                document.getElementById('igrejaNome').value = '';
+                document.getElementById('igrejaEndereco').value = '';
                 document.getElementById('meetingTime').value = '';
-                document.getElementById('president').value = '';
-                document.getElementById('secretary').value = '';
-                document.getElementById('openingPrayer').value = '';
-                document.getElementById('bibleVerse').value = '';
-                document.getElementById('verseText').value = '';
-                document.getElementById('agendaItems').value = '';
-                document.getElementById('deliberations').value = '';
-                participants = [];
-                hymns = [];
-                renderParticipants();
-                renderHymns();
+                document.getElementById('presidente').value = '';
+                document.getElementById('secretario').value = '';
+                document.getElementById('hino').value = '';
+                document.getElementById('oracao').value = '';
+                document.getElementById('reflexao').value = '';
+                document.getElementById('membrosPresentes').value = '';
+                document.getElementById('convidados').value = '';
+                document.getElementById('deliberationTitle').value = '';
+                document.getElementById('deliberationDescription').value = '';
+                document.getElementById('relatorioData').value = '';
+                document.getElementById('relatorioResponsavel').value = '';
+                document.getElementById('relatorioObservacoes').value = '';
+                document.getElementById('relatorioAnexos').value = '';
+                document.getElementById('relatorioPrazos').innerHTML = `
+                    <tr>
+                        <td><input type="text" placeholder="Descrição do item" class="relatorio-input"></td>
+                        <td><input type="date" class="relatorio-input"></td>
+                        <td><input type="text" placeholder="Responsável" class="relatorio-input"></td>
+                        <td>
+                            <select class="relatorio-input">
+                                <option value="pendente">Pendente</option>
+                                <option value="andamento">Em Andamento</option>
+                                <option value="concluido">Concluído</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+                deliberations = [];
+                renderDeliberations();
                 previewContainer.style.display = 'none';
+                
+                // Reset voto type selection
+                document.querySelectorAll('.voto-type').forEach(voto => {
+                    voto.classList.remove('selected');
+                });
+                currentVotoType = '';
+                document.getElementById('votoFieldsContainer').innerHTML = '';
             }
             
             // Download ATA as Word document
             function downloadATAasWord(ataData) {
                 const typeLabels = {
-                    'assembleia-geral': 'Assembleia Geral',
-                    'diretoria': 'Reunião de Diretoria',
-                    'comissao': 'Reunião de Comissão',
-                    'secretaria': 'Reunião de Secretaria',
-                    'tesouraria': 'Reunião de Tesouraria',
-                    'outra': 'Reunião'
+                    'comissao-diretiva': 'Comissão Diretiva',
+                    'reuniao-regular': 'Reunião Regular',
+                    'reuniao-administrativa': 'Reunião Administrativa'
                 };
                 
                 const formattedDate = new Date(ataData.date).toLocaleDateString('pt-BR');
@@ -1987,91 +2697,66 @@
                             text-align: center;
                             padding-top: 5px;
                         }
-                        ul, ol {
-                            margin-left: 40px;
+                        .confidential-notice {
+                            background: #fff3cd;
+                            border: 1px solid #ffeaa7;
+                            border-radius: 8px;
+                            padding: 15px;
+                            margin-bottom: 30px;
+                            font-size: 10pt;
+                            color: #856404;
                         }
                     </style>
                 </head>
                 <body>
+                    <div class="confidential-notice">
+                        <h4>DOCUMENTO CONFIDENCIAL</h4>
+                        <p><strong>ATENÇÃO:</strong> Todo o conteúdo desta ata está sob a proteção da lei, e a divulgação de qualquer nome, dado, número, decisão, ou de qualquer informação nela contida não poderá ser realizada por qualquer meio físico ou digital, sem a autorização expressa da Associação Paulista Sudoeste dos Adventistas do Sétimo Dia. A pessoa física ou jurídica que violar essa confidencialidade estará sujeita a sanções administrativas, cíveis e penais.</p>
+                    </div>
+                    
                     <div class="header">
-                        <div class="title">ATA DE ${typeLabels[ataData.type].toUpperCase()}</div>
-                        <div class="subtitle">Nº ${ataData.number}</div>
+                        <div class="title">ATA DA ${typeLabels[ataData.type].toUpperCase()} DA</div>
+                        <div class="subtitle">${ataData.igrejaNome || 'IGREJA ADVENTISTA DO SÉTIMO DIA'}</div>
+                        <div class="subtitle">${ataData.igrejaEndereco || 'ENDEREÇO DA IGREJA'}</div>
+                        <div class="subtitle">${formattedDate}, ${ataData.time}</div>
                     </div>
                     
                     <div class="body">
-                        <p>Aos <strong>${formattedDate}</strong>, às <strong>${ataData.time}</strong>, 
-                        na <strong>${ataData.location}</strong>, reuniu-se a <strong>${typeLabels[ataData.type]}</strong> 
-                        da <strong>Igreja Adventista do Sétimo Dia</strong>, sob a presidência de 
-                        <strong>${ataData.president}</strong>, secretariada por 
-                        <strong>${ataData.secretary}</strong>.</p>
+                        <p><strong>MEMBROS PRESENTES:</strong> ${ataData.membrosPresentes || '________________________________________________'}</p>
+                        <p><strong>CONVIDADOS:</strong> ${ataData.convidados || '________________________________________________'}</p>
                         
-                        <p>A reunião iniciou com uma oração feita por <strong>${ataData.openingPrayer}</strong>, 
-                        seguida pela meditação no versículo <strong>${ataData.bibleVerse}</strong>${ataData.verseText ? `: "${ataData.verseText}"` : ''}.</p>
-                        
-                        <p>Foram entoados os seguintes hinos:</p>
-                        <ul>
+                        <p><strong>HINO:</strong> ${ataData.hino || '__________________________'}</p>
+                        <p><strong>ORAÇÃO:</strong> ${ataData.oracao || '__________________________'}</p>
+                        <p><strong>REFLEXÃO BÍBLICA:</strong> ${ataData.reflexao || '__________________________'}</p>
                 `;
                 
-                // Add hymns
-                if (ataData.hymns && ataData.hymns.length > 0) {
-                    ataData.hymns.forEach(hymn => {
-                        content += `<li>Hino ${hymn.number} - ${hymn.title}</li>`;
+                // Add deliberations
+                if (ataData.deliberations && ataData.deliberations.length > 0) {
+                    ataData.deliberations.forEach(deliberation => {
+                        content += `
+                        <p><strong>${deliberation.number}-${deliberation.votoType} ${deliberation.title}</strong></p>
+                        <p>${deliberation.description}</p>
+                        `;
+                        
+                        // Add specific fields if available
+                        if (deliberation.camposEspecificos) {
+                            content += `<p><em>Detalhes: ${formatarCamposEspecificos(deliberation.camposEspecificos, deliberation.votoType)}</em></p>`;
+                        }
                     });
-                } else {
-                    content += `<li>_________________________________</li>`;
                 }
                 
                 content += `
-                        </ul>
-                        
-                        <p>Em seguida, foi tratada a seguinte pauta:</p>
-                        <ol>
-                `;
-                
-                // Add agenda items
-                if (ataData.agenda) {
-                    const agendaItems = ataData.agenda.split('\n').filter(item => item.trim() !== '');
-                    agendaItems.forEach(item => {
-                        content += `<li>${item}</li>`;
-                    });
-                } else {
-                    content += `<li>_________________________________</li>`;
-                }
-                
-                content += `
-                        </ol>
-                        
-                        <p>Foram discutidos os assuntos constantes da pauta e, após debates, foram tomadas as seguintes deliberações:</p>
-                        
-                        <p>${ataData.deliberations || '_________________________________________________________'}</p>
-                        
-                        <p>Participantes da reunião:</p>
-                        <ul>
-                `;
-                
-                // Add participants
-                if (ataData.participants && ataData.participants.length > 0) {
-                    ataData.participants.forEach(participant => {
-                        content += `<li>${participant}</li>`;
-                    });
-                } else {
-                    content += `<li>_________________________________</li>`;
-                }
-                
-                content += `
-                        </ul>
-                        
                         <p>Nada mais havendo a tratar, foi encerrada a reunião e, para constar, foi lavrada a presente ata, que será assinada pelo presidente e secretário.</p>
                     </div>
                     
                     <div class="signatures">
                         <div class="signature-line">
-                            <strong>${ataData.president}</strong><br>
+                            <strong>${ataData.presidente}</strong><br>
                             Presidente
                         </div>
                         
                         <div class="signature-line">
-                            <strong>${ataData.secretary}</strong><br>
+                            <strong>${ataData.secretario}</strong><br>
                             Secretário
                         </div>
                     </div>
@@ -2092,8 +2777,8 @@
             }
             
             // Make functions available globally for onclick handlers
-            window.removeParticipant = removeParticipant;
-            window.removeHymn = removeHymn;
+            window.removeDeliberation = removeDeliberation;
+            window.addPrazoItem = addPrazoItem;
             window.viewATA = function(id) {
                 const atas = JSON.parse(localStorage.getItem('adventist-atas')) || [];
                 const ata = atas.find(a => a.id === id);
@@ -2121,19 +2806,18 @@
                     document.getElementById('ataType').value = ata.type;
                     document.getElementById('ataNumber').value = ata.number;
                     document.getElementById('ataDate').value = ata.date;
-                    document.getElementById('ataLocation').value = ata.location;
+                    document.getElementById('igrejaNome').value = ata.igrejaNome;
+                    document.getElementById('igrejaEndereco').value = ata.igrejaEndereco;
                     document.getElementById('meetingTime').value = ata.time;
-                    document.getElementById('president').value = ata.president;
-                    document.getElementById('secretary').value = ata.secretary;
-                    document.getElementById('openingPrayer').value = ata.openingPrayer || '';
-                    document.getElementById('bibleVerse').value = ata.bibleVerse || '';
-                    document.getElementById('verseText').value = ata.verseText || '';
-                    document.getElementById('agendaItems').value = ata.agenda;
-                    document.getElementById('deliberations').value = ata.deliberations;
-                    participants = ata.participants;
-                    hymns = ata.hymns || [];
-                    renderParticipants();
-                    renderHymns();
+                    document.getElementById('presidente').value = ata.presidente;
+                    document.getElementById('secretario').value = ata.secretario;
+                    document.getElementById('hino').value = ata.hino;
+                    document.getElementById('oracao').value = ata.oracao;
+                    document.getElementById('reflexao').value = ata.reflexao;
+                    document.getElementById('membrosPresentes').value = ata.membrosPresentes;
+                    document.getElementById('convidados').value = ata.convidados;
+                    deliberations = ata.deliberations || [];
+                    renderDeliberations();
                     
                     alert('ATA carregada para edição. Lembre-se de gerar novamente após as alterações.');
                 }
