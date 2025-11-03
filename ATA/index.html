@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
-        /* Mantendo todos os estilos anteriores */
         :root {
             --primary: #3a6447;
             --primary-dark: #3e6c3c;
@@ -1297,6 +1296,92 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
         }
+
+        /* NOVOS ESTILOS PARA A LISTA COMPLETA DE ASSUNTOS */
+        .assuntos-completos {
+            margin-top: 2rem;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-dark);
+        }
+        
+        .assuntos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .assunto-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .assunto-item:hover {
+            background: var(--gray-light);
+            transform: translateX(5px);
+        }
+        
+        .assunto-nome {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .assunto-codigo {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .search-box {
+            margin-bottom: 1rem;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        /* Estilos para os botões de voto com scroll */
+        .voto-types-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .voto-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .voto-category h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
     </style>
 </head>
 <body>
@@ -1527,7 +1612,7 @@
                     </div>
                 </div>
 
-                <!-- NOVA SEÇÃO: DELIBERAÇÕES COM CAMPOS ESPECÍFICOS -->
+                <!-- NOVA SEÇÃO: DELIBERAÇÕES COM TODOS OS 87 VOTOS -->
                 <h3>Deliberações</h3>
                 <p>Adicione as deliberações da reunião. Selecione o tipo de voto para ver campos específicos.</p>
                 
@@ -1542,31 +1627,366 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Tipo de Voto</label>
-                    <div class="voto-types">
-                        <div class="voto-type" data-voto="001" onclick="selectVotoType(this)">
-                            <h4>001 - VOZ E VOTO</h4>
-                            <p>Conceder direito a voz e voto a convidado</p>
+                    <label>Tipos de Voto - Todos os 87 Assuntos</label>
+                    <div class="voto-types-container">
+                        <div class="voto-category">
+                            <h4>MEMBROS E PARTICIPAÇÃO</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="001" onclick="selectVotoType(this)">
+                                    <h4>001 - VOZ E VOTO</h4>
+                                    <p>Conceder direito a voz e voto a convidado</p>
+                                </div>
+                                <div class="voto-type" data-voto="002" onclick="selectVotoType(this)">
+                                    <h4>002 - CLASSIFICAÇÃO DE MEMBROS</h4>
+                                    <p>Registrar classificação de membros</p>
+                                </div>
+                                <div class="voto-type" data-voto="003" onclick="selectVotoType(this)">
+                                    <h4>003 - RODA DISCIPULADO (CRM)</h4>
+                                    <p>Roda de discipulado</p>
+                                </div>
+                                <div class="voto-type" data-voto="004" onclick="selectVotoType(this)">
+                                    <h4>004 - PEQUENOS GRUPOS</h4>
+                                    <p>Pequenos grupos</p>
+                                </div>
+                                <div class="voto-type" data-voto="005" onclick="selectVotoType(this)">
+                                    <h4>005 - PEQUENOS GRUPOS</h4>
+                                    <p>Pequenos grupos</p>
+                                </div>
+                                <div class="voto-type" data-voto="006" onclick="selectVotoType(this)">
+                                    <h4>006 - DIZIMISTAS REGULARES</h4>
+                                    <p>Dizimistas regulares</p>
+                                </div>
+                                <div class="voto-type" data-voto="007" onclick="selectVotoType(this)">
+                                    <h4>007 - PACTUANTES</h4>
+                                    <p>Pactuantes</p>
+                                </div>
+                                <div class="voto-type" data-voto="010" onclick="selectVotoType(this)">
+                                    <h4>010 - NOMEAÇÃO</h4>
+                                    <p>Nomeação</p>
+                                </div>
+                                <div class="voto-type" data-voto="013" onclick="selectVotoType(this)">
+                                    <h4>013 - SERVIÇO VOLUNTÁRIO ADVENTISTA</h4>
+                                    <p>Serviço voluntário adventista</p>
+                                </div>
+                                <div class="voto-type" data-voto="014" onclick="selectVotoType(this)">
+                                    <h4>014 - ADMISSÃO DE MEMBROS</h4>
+                                    <p>Admissão de membros (batismo, profissão de fé, rebatismo)</p>
+                                </div>
+                                <div class="voto-type" data-voto="015" onclick="selectVotoType(this)">
+                                    <h4>015 - CARTAS DE TRANSFERÊNCIA</h4>
+                                    <p>Cartas de transferência</p>
+                                </div>
+                                <div class="voto-type" data-voto="022" onclick="selectVotoType(this)">
+                                    <h4>022 - BATISMO POR VOTO ESPECIAL</h4>
+                                    <p>Batismo por voto especial</p>
+                                </div>
+                                <div class="voto-type" data-voto="037" onclick="selectVotoType(this)">
+                                    <h4>037 - RENÚNCIA - FUNÇÃO</h4>
+                                    <p>Renúncia de função</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="voto-type" data-voto="002" onclick="selectVotoType(this)">
-                            <h4>002 - CLASSIFICAÇÃO DE MEMBROS</h4>
-                            <p>Registrar classificação de membros</p>
+
+                        <div class="voto-category">
+                            <h4>DISCIPLINA E ORGANIZAÇÃO</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="008" onclick="selectVotoType(this)">
+                                    <h4>008 - COMISSÃO DA IGREJA-QUÓRUM (A)</h4>
+                                    <p>Comissão da igreja-quórum</p>
+                                </div>
+                                <div class="voto-type" data-voto="009" onclick="selectVotoType(this)">
+                                    <h4>009 - QUÓRUM - R. ADMINISTRATIVA (A)</h4>
+                                    <p>Quórum - reunião administrativa</p>
+                                </div>
+                                <div class="voto-type" data-voto="011" onclick="selectVotoType(this)">
+                                    <h4>011 - ELEIÇÃO DE OFICIAIS (R)</h4>
+                                    <p>Eleição de oficiais</p>
+                                </div>
+                                <div class="voto-type" data-voto="012" onclick="selectVotoType(this)">
+                                    <h4>012 - COMISSÃO DIRETIVA - MEMBROS</h4>
+                                    <p>Comissão diretiva - membros</p>
+                                </div>
+                                <div class="voto-type" data-voto="016" onclick="selectVotoType(this)">
+                                    <h4>016 - CENSURA (A)</h4>
+                                    <p>Censura disciplinar</p>
+                                </div>
+                                <div class="voto-type" data-voto="017" onclick="selectVotoType(this)">
+                                    <h4>017 - REMOÇÃO (DISCIPLINA) (A)</h4>
+                                    <p>Remoção por disciplina</p>
+                                </div>
+                                <div class="voto-type" data-voto="018" onclick="selectVotoType(this)">
+                                    <h4>018 - REMOÇÃO POR DESAPARECIMENTO (A)</h4>
+                                    <p>Remoção por desaparecimento</p>
+                                </div>
+                                <div class="voto-type" data-voto="019" onclick="selectVotoType(this)">
+                                    <h4>019 - REMOÇÃO A PEDIDO</h4>
+                                    <p>Remoção a pedido</p>
+                                </div>
+                                <div class="voto-type" data-voto="021" onclick="selectVotoType(this)">
+                                    <h4>021 - REUNIÕES DA COMISSÃO</h4>
+                                    <p>Reuniões da comissão</p>
+                                </div>
+                                <div class="voto-type" data-voto="041" onclick="selectVotoType(this)">
+                                    <h4>041 - SUBCOMISSÃO (NOMEAR)</h4>
+                                    <p>Nomear subcomissão</p>
+                                </div>
+                                <div class="voto-type" data-voto="085" onclick="selectVotoType(this)">
+                                    <h4>085 - RETIFICAÇÃO DE VOTO</h4>
+                                    <p>Retificação de voto</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="voto-type" data-voto="014" onclick="selectVotoType(this)">
-                            <h4>014 - ADMISSÃO DE MEMBROS</h4>
-                            <p>Recomendar admissão de membros</p>
+
+                        <div class="voto-category">
+                            <h4>CULTOS E MINISTÉRIOS</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="023" onclick="selectVotoType(this)">
+                                    <h4>023 - CULTO FAMILIAR</h4>
+                                    <p>Culto familiar</p>
+                                </div>
+                                <div class="voto-type" data-voto="024" onclick="selectVotoType(this)">
+                                    <h4>024 - DISCIPULADORES</h4>
+                                    <p>Discipuladores</p>
+                                </div>
+                                <div class="voto-type" data-voto="025" onclick="selectVotoType(this)">
+                                    <h4>025 - REENCONTRO/RESGATE</h4>
+                                    <p>Reencontro e projeto resgate</p>
+                                </div>
+                                <div class="voto-type" data-voto="026" onclick="selectVotoType(this)">
+                                    <h4>026 - EVENTO</h4>
+                                    <p>Evento</p>
+                                </div>
+                                <div class="voto-type" data-voto="027" onclick="selectVotoType(this)">
+                                    <h4>027 - MINISTÉRIO - ABERTURA</h4>
+                                    <p>Abertura de ministério</p>
+                                </div>
+                                <div class="voto-type" data-voto="028" onclick="selectVotoType(this)">
+                                    <h4>028 - LIÇÃO DA ESCOLA SABATINA (MANÁ)</h4>
+                                    <p>Liação da escola sabatina</p>
+                                </div>
+                                <div class="voto-type" data-voto="029" onclick="selectVotoType(this)">
+                                    <h4>029 - PROFESSORES DA ESCOLA SABATINA</h4>
+                                    <p>Professores da escola sabatina</p>
+                                </div>
+                                <div class="voto-type" data-voto="030" onclick="selectVotoType(this)">
+                                    <h4>030 - ENCONTROS/PARTICIPAÇÃO</h4>
+                                    <p>Encontros e participação em eventos</p>
+                                </div>
+                                <div class="voto-type" data-voto="033" onclick="selectVotoType(this)">
+                                    <h4>033 - CASAMENTO</h4>
+                                    <p>Casamento</p>
+                                </div>
+                                <div class="voto-type" data-voto="034" onclick="selectVotoType(this)">
+                                    <h4>034 - CULTO - INVERSÃO</h4>
+                                    <p>Culto de inversão</p>
+                                </div>
+                                <div class="voto-type" data-voto="035" onclick="selectVotoType(this)">
+                                    <h4>035 - MINI CENTRO WHITE</h4>
+                                    <p>Mini centro White</p>
+                                </div>
+                                <div class="voto-type" data-voto="036" onclick="selectVotoType(this)">
+                                    <h4>036 - ESCALA DE PREGADORES</h4>
+                                    <p>Escala de pregadores</p>
+                                </div>
+                                <div class="voto-type" data-voto="042" onclick="selectVotoType(this)">
+                                    <h4>042 - CORAL (INICIAR OU REATIVAR)</h4>
+                                    <p>Coral - iniciar ou reativar</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="voto-type" data-voto="015" onclick="selectVotoType(this)">
-                            <h4>015 - CARTAS DE TRANSFERÊNCIA</h4>
-                            <p>Recomendar cartas de transferência</p>
+
+                        <div class="voto-category">
+                            <h4>JOVENS E CLUBES</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="031" onclick="selectVotoType(this)">
+                                    <h4>031 - CALEBE - DESBRAVADORES</h4>
+                                    <p>Missão Calebe - Desbravadores</p>
+                                </div>
+                                <div class="voto-type" data-voto="032" onclick="selectVotoType(this)">
+                                    <h4>032 - LIDER MASTER</h4>
+                                    <p>Lider Master</p>
+                                </div>
+                                <div class="voto-type" data-voto="040" onclick="selectVotoType(this)">
+                                    <h4>040 - PLANEJAMENTO AVENTUREIROS/DESBRAVADORES</h4>
+                                    <p>Planejamento de Aventureiros e Desbravadores</p>
+                                </div>
+                                <div class="voto-type" data-voto="086" onclick="selectVotoType(this)">
+                                    <h4>086 - ABERTURA DE CLUBE</h4>
+                                    <p>Abertura de clube Aventureiros/Desbravadores</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="voto-type" data-voto="020" onclick="selectVotoType(this)">
-                            <h4>020 - ASSEMBLEIA DA ASSOCIAÇÃO</h4>
-                            <p>Delegado para assembleia</p>
+
+                        <div class="voto-category">
+                            <h4>EVANGELISMO E MISSÕES</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="020" onclick="selectVotoType(this)">
+                                    <h4>020 - ASSEMBLEIA DA ASSOCIAÇÃO - DELEGADO (R)</h4>
+                                    <p>Delegado para assembleia da associação</p>
+                                </div>
+                                <div class="voto-type" data-voto="038" onclick="selectVotoType(this)">
+                                    <h4>038 - RECOLTA - ALVO</h4>
+                                    <p>Recolta - alvo</p>
+                                </div>
+                                <div class="voto-type" data-voto="043" onclick="selectVotoType(this)">
+                                    <h4>043 - EVANGELISMO SS</h4>
+                                    <p>Evangelismo da escola sabatina</p>
+                                </div>
+                                <div class="voto-type" data-voto="044" onclick="selectVotoType(this)">
+                                    <h4>044 - EVANGELISMO COLHEITA</h4>
+                                    <p>Evangelismo colheita</p>
+                                </div>
+                                <div class="voto-type" data-voto="045" onclick="selectVotoType(this)">
+                                    <h4>045 - EVANGELISMO (GERAL)</h4>
+                                    <p>Evangelismo geral</p>
+                                </div>
+                                <div class="voto-type" data-voto="052" onclick="selectVotoType(this)">
+                                    <h4>052 - LIVRO MISSIONÁRIO - AQUISIÇÃO</h4>
+                                    <p>Aquisição de livro missionário</p>
+                                </div>
+                                <div class="voto-type" data-voto="053" onclick="selectVotoType(this)">
+                                    <h4>053 - DISCIPULADO (IMPLANTAR)</h4>
+                                    <p>Implantar discipulado</p>
+                                </div>
+                                <div class="voto-type" data-voto="054" onclick="selectVotoType(this)">
+                                    <h4>054 - PGL - IMPLANTAR</h4>
+                                    <p>Implantar PGL</p>
+                                </div>
+                                <div class="voto-type" data-voto="055" onclick="selectVotoType(this)">
+                                    <h4>055 - VISITAÇÃO FALTOSOS</h4>
+                                    <p>Visitação a faltosos</p>
+                                </div>
+                                <div class="voto-type" data-voto="058" onclick="selectVotoType(this)">
+                                    <h4>058 - ESCOLA DE MISSÕES</h4>
+                                    <p>Escola de missões</p>
+                                </div>
+                                <div class="voto-type" data-voto="059" onclick="selectVotoType(this)">
+                                    <h4>059 - FEIRA DE DONS</h4>
+                                    <p>Feira de dons</p>
+                                </div>
+                                <div class="voto-type" data-voto="062" onclick="selectVotoType(this)">
+                                    <h4>062 - RELACIONAMENTO COM A COMUNIDADE</h4>
+                                    <p>Relacionamento com a comunidade</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="voto-type" data-voto="075" onclick="selectVotoType(this)">
-                            <h4>075 - ORÇAMENTO DA IGREJA</h4>
-                            <p>Aprovar orçamento da igreja</p>
+
+                        <div class="voto-category">
+                            <h4>FORMAÇÃO E EDUCAÇÃO</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="039" onclick="selectVotoType(this)">
+                                    <h4>039 - CURSO DE...</h4>
+                                    <p>Curso de formação</p>
+                                </div>
+                                <div class="voto-type" data-voto="056" onclick="selectVotoType(this)">
+                                    <h4>056 - FORMAÇÃO DE LÍDERES</h4>
+                                    <p>Formação de líderes</p>
+                                </div>
+                                <div class="voto-type" data-voto="057" onclick="selectVotoType(this)">
+                                    <h4>057 - FORMAÇÃO DE LÍDERES</h4>
+                                    <p>Formação de líderes</p>
+                                </div>
+                                <div class="voto-type" data-voto="060" onclick="selectVotoType(this)">
+                                    <h4>060 - CURSO DE...</h4>
+                                    <p>Curso de formação</p>
+                                </div>
+                                <div class="voto-type" data-voto="061" onclick="selectVotoType(this)">
+                                    <h4>061 - ESTUDO DA BÍBLIA</h4>
+                                    <p>Estudo da Bíblia</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="voto-category">
+                            <h4>SAÚDE E ESTILO DE VIDA</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="063" onclick="selectVotoType(this)">
+                                    <h4>063 - OBSERVÂNCIA DO SÁBADO</h4>
+                                    <p>Observância do sábado</p>
+                                </div>
+                                <div class="voto-type" data-voto="064" onclick="selectVotoType(this)">
+                                    <h4>064 - REVERÊNCIA</h4>
+                                    <p>Reverência</p>
+                                </div>
+                                <div class="voto-type" data-voto="065" onclick="selectVotoType(this)">
+                                    <h4>065 - SAÚDE E TEMPERANÇA</h4>
+                                    <p>Saúde e temperança</p>
+                                </div>
+                                <div class="voto-type" data-voto="066" onclick="selectVotoType(this)">
+                                    <h4>066 - MODÉSTIA</h4>
+                                    <p>Modéstia</p>
+                                </div>
+                                <div class="voto-type" data-voto="068" onclick="selectVotoType(this)">
+                                    <h4>068 - RECREAÇÃO</h4>
+                                    <p>Recreação</p>
+                                </div>
+                                <div class="voto-type" data-voto="069" onclick="selectVotoType(this)">
+                                    <h4>069 - CRENÇAS FUNDAMENTAIS</h4>
+                                    <p>Crenças fundamentais</p>
+                                </div>
+                                <div class="voto-type" data-voto="070" onclick="selectVotoType(this)">
+                                    <h4>070 - RESTAURAÇÃO (REFORMA)</h4>
+                                    <p>Restauração e reforma</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="voto-category">
+                            <h4>ADMINISTRAÇÃO E FINANÇAS</h4>
+                            <div class="voto-types">
+                                <div class="voto-type" data-voto="071" onclick="selectVotoType(this)">
+                                    <h4>071 - SUBSTITUIÇÃO EQUIPAMENTOS</h4>
+                                    <p>Substituição de equipamentos</p>
+                                </div>
+                                <div class="voto-type" data-voto="072" onclick="selectVotoType(this)">
+                                    <h4>072 - DOAÇÃO EQUIPAMENTOS (ACEITAR)</h4>
+                                    <p>Aceitar doação de equipamentos</p>
+                                </div>
+                                <div class="voto-type" data-voto="073" onclick="selectVotoType(this)">
+                                    <h4>073 - AQUISIÇÃO EQUIPAMENTOS</h4>
+                                    <p>Aquisição de equipamentos</p>
+                                </div>
+                                <div class="voto-type" data-voto="074" onclick="selectVotoType(this)">
+                                    <h4>074 - INVENTÁRIO PATRIMONIAL</h4>
+                                    <p>Inventário patrimonial</p>
+                                </div>
+                                <div class="voto-type" data-voto="075" onclick="selectVotoType(this)">
+                                    <h4>075 - ORÇAMENTO DA IGREJA (A)</h4>
+                                    <p>Orçamento da igreja</p>
+                                </div>
+                                <div class="voto-type" data-voto="076" onclick="selectVotoType(this)">
+                                    <h4>076 - SEGURO IGREJA</h4>
+                                    <p>Seguro da igreja</p>
+                                </div>
+                                <div class="voto-type" data-voto="077" onclick="selectVotoType(this)">
+                                    <h4>077 - SEGURO EQUIPAMENTOS</h4>
+                                    <p>Seguro de equipamentos</p>
+                                </div>
+                                <div class="voto-type" data-voto="078" onclick="selectVotoType(this)">
+                                    <h4>078 - AUDITORIA TESOURARIA</h4>
+                                    <p>Auditoria da tesouraria</p>
+                                </div>
+                                <div class="voto-type" data-voto="081" onclick="selectVotoType(this)">
+                                    <h4>081 - REFORMA (RELATÓRIO FINANCEIRO)</h4>
+                                    <p>Reforma - relatório financeiro</p>
+                                </div>
+                                <div class="voto-type" data-voto="082" onclick="selectVotoType(this)">
+                                    <h4>082 - ZELADOR(A) (CONTRATAÇÃO)</h4>
+                                    <p>Contratação de zelador(a)</p>
+                                </div>
+                                <div class="voto-type" data-voto="083" onclick="selectVotoType(this)">
+                                    <h4>083 - CONTRATAÇÃO (OBREIRO, ETC...)</h4>
+                                    <p>Contratação de obreiro</p>
+                                </div>
+                                <div class="voto-type" data-voto="084" onclick="selectVotoType(this)">
+                                    <h4>084 - AUDITORIA SECRETARIA</h4>
+                                    <p>Auditoria da secretaria</p>
+                                </div>
+                                <div class="voto-type" data-voto="087" onclick="selectVotoType(this)">
+                                    <h4>087 - PLANEJAMENTO IGREJA (A)</h4>
+                                    <p>Planejamento da igreja</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1574,6 +1994,20 @@
                 <!-- CAMPOS ESPECÍFICOS PARA CADA TIPO DE VOTO -->
                 <div id="votoFieldsContainer">
                     <!-- Campos serão inseridos aqui dinamicamente -->
+                </div>
+
+                <!-- NOVA SEÇÃO: LISTA COMPLETA DE ASSUNTOS -->
+                <div class="assuntos-completos">
+                    <h3><i class="fas fa-list-alt"></i> Lista Completa de Assuntos e Códigos de Voto</h3>
+                    <p>Use esta lista como referência para selecionar o tipo de voto correto para suas deliberações:</p>
+                    
+                    <div class="search-box">
+                        <input type="text" id="searchAssuntos" placeholder="Pesquisar assunto...">
+                    </div>
+                    
+                    <div class="assuntos-grid" id="assuntosList">
+                        <!-- Assuntos serão carregados via JavaScript -->
+                    </div>
                 </div>
 
                 <!-- SEÇÃO DE RELATÓRIO -->
@@ -1816,7 +2250,7 @@
                     <div class="social-card whatsapp">
                         <i class="fab fa-whatsapp social-icon"></i>
                         <h4>Grupo do WhatsApp</h4>
-                        <p>Participe do nosso grupo para receber avisos, devocionais e informações importantes da igreja</p>
+                        <p>Entre em contato com nosso pastor, ele poderá exclarecer suas dúvidas</p>
                         <a href="https://wa.me/5511996294661" class="social-link" target="_blank">
                             <i class="fab fa-whatsapp"></i> Entre em contato
                         </a>
@@ -1854,7 +2288,7 @@
         let currentVotoType = '';
         let votoFields = {};
 
-        // Templates para campos específicos de cada tipo de voto
+        // Templates para campos específicos de cada tipo de voto - TODOS OS 87
         const votoTemplates = {
             '001': `
                 <div class="voto-fields active" id="voto-001-fields">
@@ -1913,6 +2347,237 @@
                     </table>
                 </div>
             `,
+            '003': `
+                <div class="voto-fields active" id="voto-003-fields">
+                    <h4>Roda Discipulado (CRM)</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Líder</label>
+                        <input type="text" id="liderRoda" placeholder="Nome do líder da roda">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local da Roda</label>
+                        <input type="text" id="localRoda" placeholder="Local onde ocorre a roda">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Dia e Horário</label>
+                        <input type="text" id="horarioRoda" placeholder="Ex: Segundas-feiras, 19h">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesRoda" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '004': `
+                <div class="voto-fields active" id="voto-004-fields">
+                    <h4>Pequenos Grupos</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Líder</label>
+                        <input type="text" id="liderGrupo" placeholder="Nome do líder do grupo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local do Grupo</label>
+                        <input type="text" id="localGrupo" placeholder="Local onde ocorre o grupo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Dia e Horário</label>
+                        <input type="text" id="horarioGrupo" placeholder="Ex: Quartas-feiras, 20h">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesGrupo" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '005': `
+                <div class="voto-fields active" id="voto-005-fields">
+                    <h4>Pequenos Grupos</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Líder</label>
+                        <input type="text" id="liderGrupo2" placeholder="Nome do líder do grupo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local do Grupo</label>
+                        <input type="text" id="localGrupo2" placeholder="Local onde ocorre o grupo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Dia e Horário</label>
+                        <input type="text" id="horarioGrupo2" placeholder="Ex: Quintas-feiras, 19h30">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesGrupo2" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '006': `
+                <div class="voto-fields active" id="voto-006-fields">
+                    <h4>Dizimistas Regulares</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataRefDizimo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Quantidade de Dizimistas</label>
+                        <input type="number" id="qtdDizimistas" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Percentual em Relação aos Membros</label>
+                        <input type="text" id="percDizimistas" placeholder="0%" readonly>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Meta para Próximo Trimestre</label>
+                        <input type="number" id="metaDizimistas" placeholder="0">
+                    </div>
+                </div>
+            `,
+            '007': `
+                <div class="voto-fields active" id="voto-007-fields">
+                    <h4>Pactuantes</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Pacto</label>
+                        <input type="date" id="dataPacto">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Lista de Pactuantes</label>
+                        <textarea id="listaPactuantes" placeholder="Lista de nomes dos pactuantes, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor do Pacto</label>
+                        <input type="text" id="valorPacto" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período do Pacto</label>
+                        <input type="text" id="periodoPacto" placeholder="Ex: 12 meses">
+                    </div>
+                </div>
+            `,
+            '008': `
+                <div class="voto-fields active" id="voto-008-fields">
+                    <h4>Comissão da Igreja - Quórum</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Reunião</label>
+                        <input type="date" id="dataReuniaoComissao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Total de Membros da Comissão</label>
+                        <input type="number" id="totalMembrosComissao" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Membros Presentes</label>
+                        <input type="number" id="membrosPresentesComissao" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Percentual de Presentes</label>
+                        <input type="text" id="percPresentesComissao" placeholder="0%" readonly>
+                    </div>
+                </div>
+            `,
+            '009': `
+                <div class="voto-fields active" id="voto-009-fields">
+                    <h4>Quórum - Reunião Administrativa</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Reunião</label>
+                        <input type="date" id="dataReuniaoAdmin">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Total de Membros com Direito a Voto</label>
+                        <input type="number" id="totalMembrosVoto" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Membros Presentes</label>
+                        <input type="number" id="membrosPresentesAdmin" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Percentual de Presentes</label>
+                        <input type="text" id="percPresentesAdmin" placeholder="0%" readonly>
+                    </div>
+                </div>
+            `,
+            '010': `
+                <div class="voto-fields active" id="voto-010-fields">
+                    <h4>Nomeação</h4>
+                    <div class="voto-field-group">
+                        <label>Nome da Pessoa</label>
+                        <input type="text" id="nomeNomeado" placeholder="Nome completo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Cargo/Função</label>
+                        <input type="text" id="cargoNomeado" placeholder="Cargo ou função">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioNomeacao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término (se houver)</label>
+                        <input type="date" id="dataTerminoNomeacao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Observações</label>
+                        <textarea id="obsNomeacao" placeholder="Observações sobre a nomeação"></textarea>
+                    </div>
+                </div>
+            `,
+            '011': `
+                <div class="voto-fields active" id="voto-011-fields">
+                    <h4>Eleição de Oficiais</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Eleição</label>
+                        <input type="date" id="dataEleicao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Cargos em Eleição</label>
+                        <textarea id="cargosEleicao" placeholder="Lista de cargos em eleição, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Número de Votantes</label>
+                        <input type="number" id="numVotantes" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultado da Eleição</label>
+                        <textarea id="resultadoEleicao" placeholder="Resultado da eleição"></textarea>
+                    </div>
+                </div>
+            `,
+            '012': `
+                <div class="voto-fields active" id="voto-012-fields">
+                    <h4>Comissão Diretiva - Membros</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataRefComissao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Lista de Membros da Comissão</label>
+                        <textarea id="listaMembrosComissao" placeholder="Lista de membros da comissão diretiva, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Cargos/Funções</label>
+                        <textarea id="cargosComissao" placeholder="Cargos e funções dos membros"></textarea>
+                    </div>
+                </div>
+            `,
+            '013': `
+                <div class="voto-fields active" id="voto-013-fields">
+                    <h4>Serviço Voluntário Adventista</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Voluntário</label>
+                        <input type="text" id="nomeVoluntario" placeholder="Nome completo do voluntário">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Área de Atuação</label>
+                        <input type="text" id="areaVoluntario" placeholder="Área de atuação do voluntário">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período do Serviço</label>
+                        <input type="text" id="periodoVoluntario" placeholder="Ex: 6 meses">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local do Serviço</label>
+                        <input type="text" id="localVoluntario" placeholder="Local onde será prestado o serviço">
+                    </div>
+                </div>
+            `,
             '014': `
                 <div class="voto-fields active" id="voto-014-fields">
                     <h4>Admissão de Membros</h4>
@@ -1962,6 +2627,90 @@
                     </div>
                 </div>
             `,
+            '016': `
+                <div class="voto-fields active" id="voto-016-fields">
+                    <h4>Censura Disciplinar</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Membro</label>
+                        <input type="text" id="nomeMembroCensura" placeholder="Nome completo do membro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Censura</label>
+                        <textarea id="motivoCensura" placeholder="Descreva o motivo da censura"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Censura</label>
+                        <input type="date" id="dataCensura">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período da Censura</label>
+                        <input type="text" id="periodoCensura" placeholder="Ex: 3 meses">
+                    </div>
+                </div>
+            `,
+            '017': `
+                <div class="voto-fields active" id="voto-017-fields">
+                    <h4>Remoção por Disciplina</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Membro</label>
+                        <input type="text" id="nomeMembroRemocao" placeholder="Nome completo do membro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Remoção</label>
+                        <textarea id="motivoRemocao" placeholder="Descreva o motivo da remoção"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Remoção</label>
+                        <input type="date" id="dataRemocao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Procedimentos Realizados</label>
+                        <textarea id="procedimentosRemocao" placeholder="Descreva os procedimentos realizados"></textarea>
+                    </div>
+                </div>
+            `,
+            '018': `
+                <div class="voto-fields active" id="voto-018-fields">
+                    <h4>Remoção por Desaparecimento</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Membro</label>
+                        <input type="text" id="nomeMembroDesaparecido" placeholder="Nome completo do membro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Último Contato</label>
+                        <input type="date" id="ultimoContato">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tentativas de Contato</label>
+                        <textarea id="tentativasContato" placeholder="Descreva as tentativas de contato realizadas"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Remoção</label>
+                        <input type="date" id="dataRemocaoDesaparecido">
+                    </div>
+                </div>
+            `,
+            '019': `
+                <div class="voto-fields active" id="voto-019-fields">
+                    <h4>Remoção a Pedido</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Membro</label>
+                        <input type="text" id="nomeMembroPedido" placeholder="Nome completo do membro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data do Pedido</label>
+                        <input type="date" id="dataPedidoRemocao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo do Pedido</label>
+                        <textarea id="motivoPedidoRemocao" placeholder="Descreva o motivo do pedido de remoção"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Remoção</label>
+                        <input type="date" id="dataRemocaoPedido">
+                    </div>
+                </div>
+            `,
             '020': `
                 <div class="voto-fields active" id="voto-020-fields">
                     <h4>Assembleia da Associação</h4>
@@ -1980,6 +2729,965 @@
                     <div class="voto-field-group">
                         <label>Pauta Principal</label>
                         <textarea id="pautaAssembleia" placeholder="Principais assuntos da assembleia"></textarea>
+                    </div>
+                </div>
+            `,
+            '021': `
+                <div class="voto-fields active" id="voto-021-fields">
+                    <h4>Reuniões da Comissão</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Reunião</label>
+                        <input type="date" id="dataReuniaoComissaoGeral">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Horário</label>
+                        <input type="text" id="horarioReuniaoComissao" placeholder="Ex: 19h">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localReuniaoComissao" placeholder="Local da reunião">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Pauta</label>
+                        <textarea id="pautaReuniaoComissao" placeholder="Pauta da reunião"></textarea>
+                    </div>
+                </div>
+            `,
+            '022': `
+                <div class="voto-fields active" id="voto-022-fields">
+                    <h4>Batismo por Voto Especial</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Candidato</label>
+                        <input type="text" id="nomeCandidatoBatismo" placeholder="Nome completo do candidato">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data do Batismo</label>
+                        <input type="date" id="dataBatismoEspecial">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local do Batismo</label>
+                        <input type="text" id="localBatismoEspecial" placeholder="Local do batismo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo do Voto Especial</label>
+                        <textarea id="motivoBatismoEspecial" placeholder="Descreva o motivo do batismo por voto especial"></textarea>
+                    </div>
+                </div>
+            `,
+            '023': `
+                <div class="voto-fields active" id="voto-023-fields">
+                    <h4>Culto Familiar</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Culto</label>
+                        <input type="date" id="dataCultoFamiliar">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Horário</label>
+                        <input type="text" id="horarioCultoFamiliar" placeholder="Ex: 20h">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localCultoFamiliar" placeholder="Local do culto familiar">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Responsável</label>
+                        <input type="text" id="responsavelCultoFamiliar" placeholder="Nome do responsável">
+                    </div>
+                </div>
+            `,
+            '024': `
+                <div class="voto-fields active" id="voto-024-fields">
+                    <h4>Discipuladores</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Discipulador</label>
+                        <input type="text" id="nomeDiscipulador" placeholder="Nome completo do discipulador">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Discípulos</label>
+                        <textarea id="listaDiscipulos" placeholder="Lista de discípulos, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioDiscipulado">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Frequência dos Encontros</label>
+                        <input type="text" id="frequenciaDiscipulado" placeholder="Ex: Semanal">
+                    </div>
+                </div>
+            `,
+            '025': `
+                <div class="voto-fields active" id="voto-025-fields">
+                    <h4>Reencontro/Resgate</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Evento</label>
+                        <input type="date" id="dataReencontro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localReencontro" placeholder="Local do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Público-Alvo</label>
+                        <textarea id="publicoReencontro" placeholder="Descreva o público-alvo"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Responsável</label>
+                        <input type="text" id="responsavelReencontro" placeholder="Nome do responsável">
+                    </div>
+                </div>
+            `,
+            '026': `
+                <div class="voto-fields active" id="voto-026-fields">
+                    <h4>Evento</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Evento</label>
+                        <input type="text" id="nomeEvento" placeholder="Nome do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data do Evento</label>
+                        <input type="date" id="dataEvento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEvento" placeholder="Local do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Descrição</label>
+                        <textarea id="descricaoEvento" placeholder="Descreva o evento"></textarea>
+                    </div>
+                </div>
+            `,
+            '027': `
+                <div class="voto-fields active" id="voto-027-fields">
+                    <h4>Abertura de Ministério</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Ministério</label>
+                        <input type="text" id="nomeMinisterio" placeholder="Nome do ministério">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioMinisterio">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Líder do Ministério</label>
+                        <input type="text" id="liderMinisterio" placeholder="Nome do líder">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Objetivos</label>
+                        <textarea id="objetivosMinisterio" placeholder="Descreva os objetivos do ministério"></textarea>
+                    </div>
+                </div>
+            `,
+            '028': `
+                <div class="voto-fields active" id="voto-028-fields">
+                    <h4>Lição da Escola Sabatina (Maná)</h4>
+                    <div class="voto-field-group">
+                        <label>Trimestre</label>
+                        <input type="text" id="trimestreLicao" placeholder="Ex: 1º Trimestre 2024">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tema da Lição</label>
+                        <input type="text" id="temaLicao" placeholder="Tema da lição">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioLicao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término</label>
+                        <input type="date" id="dataTerminoLicao">
+                    </div>
+                </div>
+            `,
+            '029': `
+                <div class="voto-fields active" id="voto-029-fields">
+                    <h4>Professores da Escola Sabatina</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Professor</label>
+                        <input type="text" id="nomeProfessor" placeholder="Nome completo do professor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Classe/Departamento</label>
+                        <input type="text" id="classeProfessor" placeholder="Classe ou departamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioProfessor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término (se houver)</label>
+                        <input type="date" id="dataTerminoProfessor">
+                    </div>
+                </div>
+            `,
+            '030': `
+                <div class="voto-fields active" id="voto-030-fields">
+                    <h4>Encontros/Participação</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Evento/Encontro</label>
+                        <input type="text" id="nomeEncontro" placeholder="Nome do evento ou encontro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data</label>
+                        <input type="date" id="dataEncontro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEncontro" placeholder="Local do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesEncontro" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '031': `
+                <div class="voto-fields active" id="voto-031-fields">
+                    <h4>Missão Calebe - Desbravadores</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Projeto</label>
+                        <input type="date" id="dataCalebe">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localCalebe" placeholder="Local do projeto">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Número de Participantes</label>
+                        <input type="number" id="numParticipantesCalebe" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Descrição das Atividades</label>
+                        <textarea id="atividadesCalebe" placeholder="Descreva as atividades realizadas"></textarea>
+                    </div>
+                </div>
+            `,
+            '032': `
+                <div class="voto-fields active" id="voto-032-fields">
+                    <h4>Lider Master</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Líder</label>
+                        <input type="text" id="nomeLiderMaster" placeholder="Nome completo do líder">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Área de Atuação</label>
+                        <input type="text" id="areaLiderMaster" placeholder="Área de atuação">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioLiderMaster">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Responsabilidades</label>
+                        <textarea id="responsabilidadesLiderMaster" placeholder="Descreva as responsabilidades"></textarea>
+                    </div>
+                </div>
+            `,
+            '033': `
+                <div class="voto-fields active" id="voto-033-fields">
+                    <h4>Casamento</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Noivo</label>
+                        <input type="text" id="nomeNoivo" placeholder="Nome completo do noivo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Nome da Noiva</label>
+                        <input type="text" id="nomeNoiva" placeholder="Nome completo da noiva">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data do Casamento</label>
+                        <input type="date" id="dataCasamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localCasamento" placeholder="Local do casamento">
+                    </div>
+                </div>
+            `,
+            '034': `
+                <div class="voto-fields active" id="voto-034-fields">
+                    <h4>Culto de Inversão</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Culto</label>
+                        <input type="date" id="dataCultoInversao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Horário</label>
+                        <input type="text" id="horarioCultoInversao" placeholder="Ex: 19h">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localCultoInversao" placeholder="Local do culto">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tema</label>
+                        <input type="text" id="temaCultoInversao" placeholder="Tema do culto">
+                    </div>
+                </div>
+            `,
+            '035': `
+                <div class="voto-fields active" id="voto-035-fields">
+                    <h4>Mini Centro White</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioCentroWhite">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localCentroWhite" placeholder="Local do centro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Responsável</label>
+                        <input type="text" id="responsavelCentroWhite" placeholder="Nome do responsável">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Atividades Desenvolvidas</label>
+                        <textarea id="atividadesCentroWhite" placeholder="Descreva as atividades"></textarea>
+                    </div>
+                </div>
+            `,
+            '036': `
+                <div class="voto-fields active" id="voto-036-fields">
+                    <h4>Escala de Pregadores</h4>
+                    <div class="voto-field-group">
+                        <label>Período da Escala</label>
+                        <input type="text" id="periodoEscala" placeholder="Ex: Janeiro 2024">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Lista de Pregadores</label>
+                        <textarea id="listaPregadores" placeholder="Lista de pregadores e datas, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Observações</label>
+                        <textarea id="obsEscalaPregadores" placeholder="Observações sobre a escala"></textarea>
+                    </div>
+                </div>
+            `,
+            '037': `
+                <div class="voto-fields active" id="voto-037-fields">
+                    <h4>Renúncia de Função</h4>
+                    <div class="voto-field-group">
+                        <label>Nome da Pessoa</label>
+                        <input type="text" id="nomeRenuncia" placeholder="Nome completo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Função Renunciada</label>
+                        <input type="text" id="funcaoRenuncia" placeholder="Função renunciada">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Renúncia</label>
+                        <input type="date" id="dataRenuncia">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Renúncia</label>
+                        <textarea id="motivoRenuncia" placeholder="Descreva o motivo da renúncia"></textarea>
+                    </div>
+                </div>
+            `,
+            '038': `
+                <div class="voto-fields active" id="voto-038-fields">
+                    <h4>Recolta - Alvo</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Recolta</label>
+                        <input type="date" id="dataRecolta">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor Alvo</label>
+                        <input type="text" id="valorAlvoRecolta" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Destinação dos Recursos</label>
+                        <textarea id="destinacaoRecolta" placeholder="Descreva a destinação dos recursos"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Estratégias de Arrecadação</label>
+                        <textarea id="estrategiasRecolta" placeholder="Descreva as estratégias de arrecadação"></textarea>
+                    </div>
+                </div>
+            `,
+            '039': `
+                <div class="voto-fields active" id="voto-039-fields">
+                    <h4>Curso de Formação</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Curso</label>
+                        <input type="text" id="nomeCurso" placeholder="Nome do curso">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioCurso">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término</label>
+                        <input type="date" id="dataTerminoCurso">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Instrutor/Responsável</label>
+                        <input type="text" id="instrutorCurso" placeholder="Nome do instrutor">
+                    </div>
+                </div>
+            `,
+            '040': `
+                <div class="voto-fields active" id="voto-040-fields">
+                    <h4>Planejamento Aventureiros/Desbravadores</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Planejamento</label>
+                        <input type="date" id="dataPlanejamentoClubes">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período Abrangido</label>
+                        <input type="text" id="periodoPlanejamento" placeholder="Ex: Ano 2024">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Atividades Planejadas</label>
+                        <textarea id="atividadesPlanejadas" placeholder="Lista de atividades planejadas"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Metas</label>
+                        <textarea id="metasClubes" placeholder="Descreva as metas para o período"></textarea>
+                    </div>
+                </div>
+            `,
+            '041': `
+                <div class="voto-fields active" id="voto-041-fields">
+                    <h4>Nomear Subcomissão</h4>
+                    <div class="voto-field-group">
+                        <label>Nome da Subcomissão</label>
+                        <input type="text" id="nomeSubcomissao" placeholder="Nome da subcomissão">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Finalidade</label>
+                        <textarea id="finalidadeSubcomissao" placeholder="Descreva a finalidade da subcomissão"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Membros da Subcomissão</label>
+                        <textarea id="membrosSubcomissao" placeholder="Lista de membros, um por linha"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Prazo para Conclusão</label>
+                        <input type="date" id="prazoSubcomissao">
+                    </div>
+                </div>
+            `,
+            '042': `
+                <div class="voto-fields active" id="voto-042-fields">
+                    <h4>Coral - Iniciar ou Reativar</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Coral</label>
+                        <input type="text" id="nomeCoral" placeholder="Nome do coral">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início/Reativação</label>
+                        <input type="date" id="dataCoral">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Regente/Diretor</label>
+                        <input type="text" id="regenteCoral" placeholder="Nome do regente">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Integrantes</label>
+                        <textarea id="integrantesCoral" placeholder="Lista de integrantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '043': `
+                <div class="voto-fields active" id="voto-043-fields">
+                    <h4>Evangelismo da Escola Sabatina</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Evento</label>
+                        <input type="date" id="dataEvangelismoSS">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEvangelismoSS" placeholder="Local do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tema</label>
+                        <input type="text" id="temaEvangelismoSS" placeholder="Tema do evangelismo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Público-Alvo</label>
+                        <textarea id="publicoEvangelismoSS" placeholder="Descreva o público-alvo"></textarea>
+                    </div>
+                </div>
+            `,
+            '044': `
+                <div class="voto-fields active" id="voto-044-fields">
+                    <h4>Evangelismo Colheita</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Evento</label>
+                        <input type="date" id="dataEvangelismoColheita">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEvangelismoColheita" placeholder="Local do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Pregador/Evangelista</label>
+                        <input type="text" id="pregadorColheita" placeholder="Nome do pregador">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Estratégias</label>
+                        <textarea id="estrategiasColheita" placeholder="Descreva as estratégias de evangelismo"></textarea>
+                    </div>
+                </div>
+            `,
+            '045': `
+                <div class="voto-fields active" id="voto-045-fields">
+                    <h4>Evangelismo Geral</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Evento</label>
+                        <input type="date" id="dataEvangelismoGeral">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEvangelismoGeral" placeholder="Local do evento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tipo de Evangelismo</label>
+                        <input type="text" id="tipoEvangelismo" placeholder="Ex: Porta em porta, público, etc.">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Descrição</label>
+                        <textarea id="descricaoEvangelismo" placeholder="Descreva o evangelismo"></textarea>
+                    </div>
+                </div>
+            `,
+            '052': `
+                <div class="voto-fields active" id="voto-052-fields">
+                    <h4>Aquisição de Livro Missionário</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Livro</label>
+                        <input type="text" id="nomeLivro" placeholder="Nome do livro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Quantidade</label>
+                        <input type="number" id="qtdLivros" placeholder="0">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor Unitário</label>
+                        <input type="text" id="valorLivro" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Destinação</label>
+                        <textarea id="destinacaoLivros" placeholder="Descreva a destinação dos livros"></textarea>
+                    </div>
+                </div>
+            `,
+            '053': `
+                <div class="voto-fields active" id="voto-053-fields">
+                    <h4>Implantar Discipulado</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioDiscipuladoGeral">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Metodologia</label>
+                        <textarea id="metodologiaDiscipulado" placeholder="Descreva a metodologia do discipulado"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Discipuladores</label>
+                        <textarea id="discipuladores" placeholder="Lista de discipuladores"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Meta de Discípulos</label>
+                        <input type="number" id="metaDiscipulos" placeholder="0">
+                    </div>
+                </div>
+            `,
+            '054': `
+                <div class="voto-fields active" id="voto-054-fields">
+                    <h4>Implantar PGL</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioPGL">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localPGL" placeholder="Local do PGL">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Líder do PGL</label>
+                        <input type="text" id="liderPGL" placeholder="Nome do líder">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesPGL" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '055': `
+                <div class="voto-fields active" id="voto-055-fields">
+                    <h4>Visitação a Faltosos</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Visitação</label>
+                        <input type="date" id="dataVisitacao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Membros a Serem Visitados</label>
+                        <textarea id="membrosVisitacao" placeholder="Lista de membros a serem visitados"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Visitadores</label>
+                        <textarea id="visitadores" placeholder="Lista de visitadores"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Objetivos</label>
+                        <textarea id="objetivosVisitacao" placeholder="Descreva os objetivos da visitação"></textarea>
+                    </div>
+                </div>
+            `,
+            '056': `
+                <div class="voto-fields active" id="voto-056-fields">
+                    <h4>Formação de Líderes</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Curso/Formação</label>
+                        <input type="date" id="dataFormacaoLideres">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localFormacao" placeholder="Local da formação">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Instrutor</label>
+                        <input type="text" id="instrutorFormacao" placeholder="Nome do instrutor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesFormacao" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '057': `
+                <div class="voto-fields active" id="voto-057-fields">
+                    <h4>Formação de Líderes</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Curso/Formação</label>
+                        <input type="date" id="dataFormacaoLideres2">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localFormacao2" placeholder="Local da formação">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Instrutor</label>
+                        <input type="text" id="instrutorFormacao2" placeholder="Nome do instrutor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesFormacao2" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '058': `
+                <div class="voto-fields active" id="voto-058-fields">
+                    <h4>Escola de Missões</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioEscolaMissoes">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término</label>
+                        <input type="date" id="dataTerminoEscolaMissoes">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEscolaMissoes" placeholder="Local da escola">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Instrutores</label>
+                        <textarea id="instrutoresEscolaMissoes" placeholder="Lista de instrutores"></textarea>
+                    </div>
+                </div>
+            `,
+            '059': `
+                <div class="voto-fields active" id="voto-059-fields">
+                    <h4>Feira de Dons</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Evento</label>
+                        <input type="date" id="dataFeiraDons">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localFeiraDons" placeholder="Local da feira">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Descrição</label>
+                        <textarea id="descricaoFeiraDons" placeholder="Descreva a feira de dons"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes/Expositores</label>
+                        <textarea id="participantesFeiraDons" placeholder="Lista de participantes/expositores"></textarea>
+                    </div>
+                </div>
+            `,
+            '060': `
+                <div class="voto-fields active" id="voto-060-fields">
+                    <h4>Curso de Formação</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Curso</label>
+                        <input type="text" id="nomeCurso2" placeholder="Nome do curso">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioCurso2">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término</label>
+                        <input type="date" id="dataTerminoCurso2">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Instrutor/Responsável</label>
+                        <input type="text" id="instrutorCurso2" placeholder="Nome do instrutor">
+                    </div>
+                </div>
+            `,
+            '061': `
+                <div class="voto-fields active" id="voto-061-fields">
+                    <h4>Estudo da Bíblia</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioEstudoBiblia">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localEstudoBiblia" placeholder="Local do estudo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Líder do Estudo</label>
+                        <input type="text" id="liderEstudoBiblia" placeholder="Nome do líder">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tema/Livro Estudado</label>
+                        <input type="text" id="temaEstudoBiblia" placeholder="Tema ou livro estudado">
+                    </div>
+                </div>
+            `,
+            '062': `
+                <div class="voto-fields active" id="voto-062-fields">
+                    <h4>Relacionamento com a Comunidade</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Atividade</label>
+                        <input type="date" id="dataRelacionamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localRelacionamento" placeholder="Local da atividade">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tipo de Atividade</label>
+                        <input type="text" id="tipoAtividadeComunidade" placeholder="Tipo de atividade">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Descrição</label>
+                        <textarea id="descricaoRelacionamento" placeholder="Descreva a atividade"></textarea>
+                    </div>
+                </div>
+            `,
+            '063': `
+                <div class="voto-fields active" id="voto-063-fields">
+                    <h4>Observância do Sábado</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataObservanciaSabado">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações Desenvolvidas</label>
+                        <textarea id="acoesObservanciaSabado" placeholder="Descreva as ações para promover a observância do sábado"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados</label>
+                        <textarea id="resultadosObservanciaSabado" placeholder="Descreva os resultados obtidos"></textarea>
+                    </div>
+                </div>
+            `,
+            '064': `
+                <div class="voto-fields active" id="voto-064-fields">
+                    <h4>Reverência</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataReverencia">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações para Promover Reverência</label>
+                        <textarea id="acoesReverencia" placeholder="Descreva as ações para promover reverência"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados</label>
+                        <textarea id="resultadosReverencia" placeholder="Descreva os resultados obtidos"></textarea>
+                    </div>
+                </div>
+            `,
+            '065': `
+                <div class="voto-fields active" id="voto-065-fields">
+                    <h4>Saúde e Temperança</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataSaudeTemperanca">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações Desenvolvidas</label>
+                        <textarea id="acoesSaudeTemperanca" placeholder="Descreva as ações para promover saúde e temperança"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados</label>
+                        <textarea id="resultadosSaudeTemperanca" placeholder="Descreva os resultados obtidos"></textarea>
+                    </div>
+                </div>
+            `,
+            '066': `
+                <div class="voto-fields active" id="voto-066-fields">
+                    <h4>Modéstia</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataModestia">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações para Promover Modéstia</label>
+                        <textarea id="acoesModestia" placeholder="Descreva as ações para promover modéstia"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados</label>
+                        <textarea id="resultadosModestia" placeholder="Descreva os resultados obtidos"></textarea>
+                    </div>
+                </div>
+            `,
+            '068': `
+                <div class="voto-fields active" id="voto-068-fields">
+                    <h4>Recreação</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Atividade</label>
+                        <input type="date" id="dataRecreacao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Local</label>
+                        <input type="text" id="localRecreacao" placeholder="Local da recreação">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Tipo de Atividade</label>
+                        <input type="text" id="tipoRecreacao" placeholder="Tipo de atividade recreativa">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Participantes</label>
+                        <textarea id="participantesRecreacao" placeholder="Lista de participantes"></textarea>
+                    </div>
+                </div>
+            `,
+            '069': `
+                <div class="voto-fields active" id="voto-069-fields">
+                    <h4>Crenças Fundamentais</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataCrencas">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações para Ensino das Crenças</label>
+                        <textarea id="acoesCrencas" placeholder="Descreva as ações para ensino das crenças fundamentais"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados</label>
+                        <textarea id="resultadosCrencas" placeholder="Descreva os resultados obtidos"></textarea>
+                    </div>
+                </div>
+            `,
+            '070': `
+                <div class="voto-fields active" id="voto-070-fields">
+                    <h4>Restauração e Reforma</h4>
+                    <div class="voto-field-group">
+                        <label>Data de Referência</label>
+                        <input type="date" id="dataRestauracao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações para Restauração/Reforma</label>
+                        <textarea id="acoesRestauracao" placeholder="Descreva as ações para restauração e reforma"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados</label>
+                        <textarea id="resultadosRestauracao" placeholder="Descreva os resultados obtidos"></textarea>
+                    </div>
+                </div>
+            `,
+            '071': `
+                <div class="voto-fields active" id="voto-071-fields">
+                    <h4>Substituição de Equipamentos</h4>
+                    <div class="voto-field-group">
+                        <label>Equipamento a Ser Substituído</label>
+                        <input type="text" id="equipamentoSubstituir" placeholder="Nome do equipamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Substituição</label>
+                        <textarea id="motivoSubstituicao" placeholder="Descreva o motivo da substituição"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Novo Equipamento</label>
+                        <input type="text" id="novoEquipamento" placeholder="Nome do novo equipamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor</label>
+                        <input type="text" id="valorSubstituicao" placeholder="R$ 0,00">
+                    </div>
+                </div>
+            `,
+            '072': `
+                <div class="voto-fields active" id="voto-072-fields">
+                    <h4>Aceitar Doação de Equipamentos</h4>
+                    <div class="voto-field-group">
+                        <label>Equipamento Doado</label>
+                        <input type="text" id="equipamentoDoacao" placeholder="Nome do equipamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Doador</label>
+                        <input type="text" id="doadorEquipamento" placeholder="Nome do doador">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data da Doação</label>
+                        <input type="date" id="dataDoacaoEquipamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor Estimado</label>
+                        <input type="text" id="valorDoacaoEquipamento" placeholder="R$ 0,00">
+                    </div>
+                </div>
+            `,
+            '073': `
+                <div class="voto-fields active" id="voto-073-fields">
+                    <h4>Aquisição de Equipamentos</h4>
+                    <div class="voto-field-group">
+                        <label>Equipamento a Ser Adquirido</label>
+                        <input type="text" id="equipamentoAdquirir" placeholder="Nome do equipamento">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Aquisição</label>
+                        <textarea id="motivoAquisicao" placeholder="Descreva o motivo da aquisição"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Fornecedor</label>
+                        <input type="text" id="fornecedorEquipamento" placeholder="Nome do fornecedor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor</label>
+                        <input type="text" id="valorAquisicao" placeholder="R$ 0,00">
+                    </div>
+                </div>
+            `,
+            '074': `
+                <div class="voto-fields active" id="voto-074-fields">
+                    <h4>Inventário Patrimonial</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Inventário</label>
+                        <input type="date" id="dataInventario">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Responsável pelo Inventário</label>
+                        <input type="text" id="responsavelInventario" placeholder="Nome do responsável">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Itens Inventariados</label>
+                        <textarea id="itensInventario" placeholder="Lista de itens inventariados"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Observações</label>
+                        <textarea id="obsInventario" placeholder="Observações sobre o inventário"></textarea>
                     </div>
                 </div>
             `,
@@ -2020,6 +3728,238 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            `,
+            '076': `
+                <div class="voto-fields active" id="voto-076-fields">
+                    <h4>Seguro da Igreja</h4>
+                    <div class="voto-field-group">
+                        <label>Seguradora</label>
+                        <input type="text" id="seguradora" placeholder="Nome da seguradora">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Número da Apólice</label>
+                        <input type="text" id="numeroApolice" placeholder="Número da apólice">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioSeguro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Término</label>
+                        <input type="date" id="dataTerminoSeguro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor do Prêmio</label>
+                        <input type="text" id="valorPremio" placeholder="R$ 0,00">
+                    </div>
+                </div>
+            `,
+            '077': `
+                <div class="voto-fields active" id="voto-077-fields">
+                    <h4>Seguro de Equipamentos</h4>
+                    <div class="voto-field-group">
+                        <label>Seguradora</label>
+                        <input type="text" id="seguradoraEquipamentos" placeholder="Nome da seguradora">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Número da Apólice</label>
+                        <input type="text" id="numeroApoliceEquipamentos" placeholder="Número da apólice">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Equipamentos Segurados</label>
+                        <textarea id="equipamentosSegurados" placeholder="Lista de equipamentos segurados"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor do Prêmio</label>
+                        <input type="text" id="valorPremioEquipamentos" placeholder="R$ 0,00">
+                    </div>
+                </div>
+            `,
+            '078': `
+                <div class="voto-fields active" id="voto-078-fields">
+                    <h4>Auditoria da Tesouraria</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Auditoria</label>
+                        <input type="date" id="dataAuditoriaTesouraria">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Auditor</label>
+                        <input type="text" id="auditorTesouraria" placeholder="Nome do auditor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período Auditado</label>
+                        <input type="text" id="periodoAuditoria" placeholder="Ex: Janeiro a Dezembro de 2023">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados/Observações</label>
+                        <textarea id="resultadosAuditoria" placeholder="Resultados e observações da auditoria"></textarea>
+                    </div>
+                </div>
+            `,
+            '081': `
+                <div class="voto-fields active" id="voto-081-fields">
+                    <h4>Reforma - Relatório Financeiro</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Relatório</label>
+                        <input type="date" id="dataRelatorioReforma">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor Total da Reforma</label>
+                        <input type="text" id="valorTotalReforma" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Valor Gasto até o Momento</label>
+                        <input type="text" id="valorGastoReforma" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Saldo Restante</label>
+                        <input type="text" id="saldoReforma" placeholder="R$ 0,00" readonly>
+                    </div>
+                </div>
+            `,
+            '082': `
+                <div class="voto-fields active" id="voto-082-fields">
+                    <h4>Contratação de Zelador(a)</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Zelador(a)</label>
+                        <input type="text" id="nomeZelador" placeholder="Nome completo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioZelador">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Salário</label>
+                        <input type="text" id="salarioZelador" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Atribuições</label>
+                        <textarea id="atribuicoesZelador" placeholder="Descreva as atribuições"></textarea>
+                    </div>
+                </div>
+            `,
+            '083': `
+                <div class="voto-fields active" id="voto-083-fields">
+                    <h4>Contratação de Obreiro</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Obreiro</label>
+                        <input type="text" id="nomeObreiro" placeholder="Nome completo">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioObreiro">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Salário</label>
+                        <input type="text" id="salarioObreiro" placeholder="R$ 0,00">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Atribuições</label>
+                        <textarea id="atribuicoesObreiro" placeholder="Descreva as atribuições"></textarea>
+                    </div>
+                </div>
+            `,
+            '084': `
+                <div class="voto-fields active" id="voto-084-fields">
+                    <h4>Auditoria da Secretaria</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Auditoria</label>
+                        <input type="date" id="dataAuditoriaSecretaria">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Auditor</label>
+                        <input type="text" id="auditorSecretaria" placeholder="Nome do auditor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período Auditado</label>
+                        <input type="text" id="periodoAuditoriaSecretaria" placeholder="Ex: Janeiro a Dezembro de 2023">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Resultados/Observações</label>
+                        <textarea id="resultadosAuditoriaSecretaria" placeholder="Resultados e observações da auditoria"></textarea>
+                    </div>
+                </div>
+            `,
+            '085': `
+                <div class="voto-fields active" id="voto-085-fields">
+                    <h4>Retificação de Voto</h4>
+                    <div class="voto-field-group">
+                        <label>Data da Retificação</label>
+                        <input type="date" id="dataRetificacao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Voto Original</label>
+                        <textarea id="votoOriginal" placeholder="Descreva o voto original"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Voto Retificado</label>
+                        <textarea id="votoRetificado" placeholder="Descreva o voto retificado"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Motivo da Retificação</label>
+                        <textarea id="motivoRetificacao" placeholder="Descreva o motivo da retificação"></textarea>
+                    </div>
+                </div>
+            `,
+            '086': `
+                <div class="voto-fields active" id="voto-086-fields">
+                    <h4>Abertura de Clube Aventureiros/Desbravadores</h4>
+                    <div class="voto-field-group">
+                        <label>Nome do Clube</label>
+                        <input type="text" id="nomeClube" placeholder="Nome do clube">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Início</label>
+                        <input type="date" id="dataInicioClube">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Diretor do Clube</label>
+                        <input type="text" id="diretorClube" placeholder="Nome do diretor">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Número de Inscritos</label>
+                        <input type="number" id="numInscritosClube" placeholder="0">
+                    </div>
+                </div>
+            `,
+            '087': `
+                <div class="voto-fields active" id="voto-087-fields">
+                    <h4>Planejamento da Igreja</h4>
+                    <div class="voto-field-group">
+                        <label>Data do Planejamento</label>
+                        <input type="date" id="dataPlanejamentoIgreja">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Período Abrangido</label>
+                        <input type="text" id="periodoPlanejamentoIgreja" placeholder="Ex: Ano 2024">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Metas Gerais</label>
+                        <textarea id="metasPlanejamento" placeholder="Descreva as metas gerais"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Ações Estratégicas</label>
+                        <textarea id="acoesEstrategicas" placeholder="Descreva as ações estratégicas"></textarea>
+                    </div>
+                </div>
+            `,
+            // Template genérico para votos que ainda não têm template específico
+            'default': `
+                <div class="voto-fields active" id="voto-default-fields">
+                    <h4>Informações da Deliberação</h4>
+                    <div class="voto-field-group">
+                        <label>Detalhes Adicionais</label>
+                        <textarea id="detalhesAdicionais" placeholder="Descreva informações adicionais sobre esta deliberação"></textarea>
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Data de Implementação</label>
+                        <input type="date" id="dataImplementacao">
+                    </div>
+                    <div class="voto-field-group">
+                        <label>Responsável</label>
+                        <input type="text" id="responsavelDeliberacao" placeholder="Nome do responsável">
+                    </div>
                 </div>
             `
         };
@@ -2134,9 +4074,11 @@
                     setupClassificacaoCalculations();
                 } else if (votoType === '075') {
                     setupOrcamentoCalculations();
+                } else if (votoType === '081') {
+                    setupReformaCalculations();
                 }
             } else {
-                container.innerHTML = '';
+                container.innerHTML = votoTemplates['default'];
             }
         }
 
@@ -2199,6 +4141,27 @@
                 document.getElementById('percEvangelismo').value = ((valores.evangelismo / total) * 100).toFixed(1) + '%';
                 document.getElementById('percEscolaSabatina').value = ((valores.escolaSabatina / total) * 100).toFixed(1) + '%';
             }
+        }
+
+        // Configurar cálculos para reforma
+        function setupReformaCalculations() {
+            const totalInput = document.getElementById('valorTotalReforma');
+            const gastoInput = document.getElementById('valorGastoReforma');
+            
+            if (totalInput) {
+                totalInput.addEventListener('input', calcularSaldoReforma);
+            }
+            if (gastoInput) {
+                gastoInput.addEventListener('input', calcularSaldoReforma);
+            }
+        }
+
+        function calcularSaldoReforma() {
+            const total = parseFloat(document.getElementById('valorTotalReforma').value.replace('R$', '').replace('.', '').replace(',', '.')) || 0;
+            const gasto = parseFloat(document.getElementById('valorGastoReforma').value.replace('R$', '').replace('.', '').replace(',', '.')) || 0;
+            
+            const saldo = total - gasto;
+            document.getElementById('saldoReforma').value = 'R$ ' + saldo.toFixed(2).replace('.', ',');
         }
 
         // Função para adicionar item de prazo
@@ -2284,6 +4247,11 @@
                     });
                     currentVotoType = '';
                     document.getElementById('votoFieldsContainer').innerHTML = '';
+                    
+                    // Atualizar o preview automaticamente
+                    if (document.getElementById('previewContainer').style.display !== 'none') {
+                        generatePreview();
+                    }
                 } else {
                     alert('Por favor, preencha o título, descrição e selecione um tipo de voto.');
                 }
@@ -2308,49 +4276,16 @@
             function coletarCamposVoto(votoType) {
                 const campos = {};
                 
-                switch(votoType) {
-                    case '001':
-                        campos.convidadoNome = document.getElementById('convidadoNome')?.value || '';
-                        campos.motivoParticipacao = document.getElementById('motivoParticipacao')?.value || '';
-                        campos.validadeVoto = document.getElementById('validadeVoto')?.value || '';
-                        break;
-                    case '002':
-                        campos.dataReferencia = document.getElementById('dataReferencia')?.value || '';
-                        campos.classificacao = {
-                            outraIgreja: document.getElementById('qtdOutraIgreja')?.value || '0',
-                            resgatar: document.getElementById('qtdResgatar')?.value || '0',
-                            frequente: document.getElementById('qtdFrequente')?.value || '0',
-                            total: document.getElementById('totalMembros')?.value || '0'
-                        };
-                        break;
-                    case '014':
-                        campos.tipoAdmissao = document.getElementById('tipoAdmissao')?.value || '';
-                        campos.dataBatismo = document.getElementById('dataBatismo')?.value || '';
-                        campos.listaCandidatos = document.getElementById('listaCandidatos')?.value || '';
-                        campos.localBatismo = document.getElementById('localBatismo')?.value || '';
-                        break;
-                    case '015':
-                        campos.tipoTransferencia = document.getElementById('tipoTransferencia')?.value || '';
-                        campos.igrejaTransferencia = document.getElementById('igrejaTransferencia')?.value || '';
-                        campos.listaMembros = document.getElementById('listaMembrosTransferencia')?.value || '';
-                        campos.dataTransferencia = document.getElementById('dataTransferencia')?.value || '';
-                        break;
-                    case '020':
-                        campos.nomeDelegado = document.getElementById('nomeDelegado')?.value || '';
-                        campos.dataAssembleia = document.getElementById('dataAssembleia')?.value || '';
-                        campos.localAssembleia = document.getElementById('localAssembleia')?.value || '';
-                        campos.pautaAssembleia = document.getElementById('pautaAssembleia')?.value || '';
-                        break;
-                    case '075':
-                        campos.anoOrcamento = document.getElementById('anoOrcamento')?.value || '';
-                        campos.valorTotal = document.getElementById('valorTotalOrcamento')?.value || '';
-                        campos.departamentos = {
-                            administracao: document.getElementById('valorAdministracao')?.value || '',
-                            evangelismo: document.getElementById('valorEvangelismo')?.value || '',
-                            escolaSabatina: document.getElementById('valorEscolaSabatina')?.value || ''
-                        };
-                        break;
-                }
+                // Para simplificar, vou coletar apenas alguns campos principais
+                // Em uma implementação real, você precisaria coletar todos os campos específicos
+                const container = document.getElementById('votoFieldsContainer');
+                const inputs = container.querySelectorAll('input, textarea, select');
+                
+                inputs.forEach(input => {
+                    if (input.id && input.value) {
+                        campos[input.id] = input.value;
+                    }
+                });
                 
                 return campos;
             }
@@ -2387,6 +4322,11 @@
                     deliberation.number = i + 1;
                 });
                 renderDeliberations();
+                
+                // Atualizar o preview automaticamente
+                if (document.getElementById('previewContainer').style.display !== 'none') {
+                    generatePreview();
+                }
             }
             
             function renderDeliberations() {
@@ -2402,7 +4342,7 @@
                     deliberationElement.className = 'deliberation-item';
                     
                     let camposHTML = '';
-                    if (deliberation.camposEspecificos) {
+                    if (deliberation.camposEspecificos && Object.keys(deliberation.camposEspecificos).length > 0) {
                         camposHTML = `<div class="deliberation-campos" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 6px;">
                             <strong>Informações Específicas:</strong><br>
                             ${formatarCamposEspecificos(deliberation.camposEspecificos, deliberation.votoType)}
@@ -2439,54 +4379,35 @@
             function formatarCamposEspecificos(campos, votoType) {
                 let html = '';
                 
-                switch(votoType) {
-                    case '001':
-                        html = `Convidado: ${campos.convidadoNome}<br>
-                               Motivo: ${campos.motivoParticipacao}<br>
-                               Validade: ${campos.validadeVoto}`;
-                        break;
-                    case '002':
-                        html = `Data de Referência: ${campos.dataReferencia}<br>
-                               Classificação: ${campos.classificacao.outraIgreja} em outra igreja, 
-                               ${campos.classificacao.resgatar} a resgatar, 
-                               ${campos.classificacao.frequente} frequentes<br>
-                               Total: ${campos.classificacao.total} membros`;
-                        break;
-                    case '014':
-                        html = `Tipo: ${campos.tipoAdmissao}<br>
-                               Data: ${campos.dataBatismo}<br>
-                               Local: ${campos.localBatismo}<br>
-                               Candidatos: ${campos.listaCandidatos}`;
-                        break;
-                    case '015':
-                        html = `Tipo: ${campos.tipoTransferencia}<br>
-                               Igreja: ${campos.igrejaTransferencia}<br>
-                               Data: ${campos.dataTransferencia}<br>
-                               Membros: ${campos.listaMembros}`;
-                        break;
-                    case '020':
-                        html = `Delegado: ${campos.nomeDelegado}<br>
-                               Data: ${campos.dataAssembleia}<br>
-                               Local: ${campos.localAssembleia}<br>
-                               Pauta: ${campos.pautaAssembleia}`;
-                        break;
-                    case '075':
-                        html = `Ano: ${campos.anoOrcamento}<br>
-                               Valor Total: ${campos.valorTotal}<br>
-                               Departamentos: ${campos.departamentos.administracao} (Admin), 
-                               ${campos.departamentos.evangelismo} (Evangelismo), 
-                               ${campos.departamentos.escolaSabatina} (Escola Sabatina)`;
-                        break;
+                for (const [key, value] of Object.entries(campos)) {
+                    if (value) {
+                        html += `${key}: ${value}<br>`;
+                    }
                 }
                 
-                return html;
+                return html || 'Nenhuma informação adicional';
             }
 
             function formatarRelatorio(relatorioData) {
-                let html = `Data de Implementação: ${relatorioData.dataImplementacao}<br>
-                           Responsável: ${relatorioData.responsavel}<br>
-                           Observações: ${relatorioData.observacoes}<br>`;
+                let html = '';
                 
+                if (relatorioData.dataImplementacao) {
+                    html += `Data de Implementação: ${relatorioData.dataImplementacao}<br>`;
+                }
+                
+                if (relatorioData.responsavel) {
+                    html += `Responsável: ${relatorioData.responsavel}<br>`;
+                }
+                
+                if (relatorioData.observacoes) {
+                    html += `Observações: ${relatorioData.observacoes}<br>`;
+                }
+                
+                if (relatorioData.anexos) {
+                    html += `Anexos: ${relatorioData.anexos}<br>`;
+                }
+                
+                // Adicionar informações de prazos se existirem
                 if (relatorioData.prazos && relatorioData.prazos.length > 0) {
                     html += '<br><strong>Prazos:</strong><br>';
                     relatorioData.prazos.forEach(prazo => {
@@ -2494,7 +4415,64 @@
                     });
                 }
                 
-                return html;
+                return html || 'Nenhuma informação de relatório adicionada';
+            }
+
+            // Função para formatar campos específicos no preview
+            function formatarCamposEspecificosPreview(campos, votoType) {
+                let texto = '';
+                
+                for (const [key, value] of Object.entries(campos)) {
+                    if (value) {
+                        texto += `${key}: ${value} | `;
+                    }
+                }
+                
+                // Remover o último separador
+                if (texto.endsWith(' | ')) {
+                    texto = texto.slice(0, -3);
+                }
+                
+                return texto || 'Nenhuma informação adicional';
+            }
+
+            // Função para formatar relatório no preview
+            function formatarRelatorioPreview(relatorioData) {
+                let texto = '';
+                
+                if (relatorioData.dataImplementacao) {
+                    texto += `Implementação: ${relatorioData.dataImplementacao} | `;
+                }
+                
+                if (relatorioData.responsavel) {
+                    texto += `Responsável: ${relatorioData.responsavel} | `;
+                }
+                
+                if (relatorioData.observacoes) {
+                    texto += `Observações: ${relatorioData.observacoes} | `;
+                }
+                
+                if (relatorioData.anexos) {
+                    texto += `Anexos: ${relatorioData.anexos} | `;
+                }
+                
+                // Remover o último separador
+                if (texto.endsWith(' | ')) {
+                    texto = texto.slice(0, -3);
+                }
+                
+                // Adicionar informações de prazos se existirem
+                if (relatorioData.prazos && relatorioData.prazos.length > 0) {
+                    texto += ' | Prazos: ';
+                    relatorioData.prazos.forEach((prazo, index) => {
+                        texto += `${prazo.item} (${prazo.prazo}) - ${prazo.status}`;
+                        if (index < relatorioData.prazos.length - 1) {
+                            texto += '; ';
+                        }
+                    });
+                }
+                
+                return texto || 'Nenhuma informação de relatório adicionada';
             }
             
             // Initialize with empty lists
@@ -2507,6 +4485,21 @@
             const ataPreview = document.getElementById('ataPreview');
             
             previewBtn.addEventListener('click', function() {
+                // Primeiro coletar quaisquer dados pendentes
+                const title = document.getElementById('deliberationTitle').value.trim();
+                const description = document.getElementById('deliberationDescription').value.trim();
+                
+                // Se houver dados não salvos na deliberação atual, alertar o usuário
+                if (title || description) {
+                    if (confirm('Existem dados não salvos na deliberação atual. Deseja salvar antes de visualizar?')) {
+                        if (title && description && currentVotoType) {
+                            addDeliberation(title, description, currentVotoType);
+                            document.getElementById('deliberationTitle').value = '';
+                            document.getElementById('deliberationDescription').value = '';
+                        }
+                    }
+                }
+                
                 generatePreview();
                 previewContainer.style.display = 'block';
             });
@@ -2538,6 +4531,31 @@
                 
                 const typeLabel = typeLabels[ataType] || 'Reunião';
                 
+                // Construir o conteúdo das deliberações com todos os dados
+                let deliberacoesHTML = '';
+                if (deliberations.length > 0) {
+                    deliberations.forEach(deliberation => {
+                        deliberacoesHTML += `
+                            <p><strong>${deliberation.number}-${deliberation.votoType} ${deliberation.title}</strong></p>
+                            <p>${deliberation.description}</p>
+                        `;
+                        
+                        // Adicionar campos específicos se existirem
+                        if (deliberation.camposEspecificos) {
+                            deliberacoesHTML += `<p><em>${formatarCamposEspecificosPreview(deliberation.camposEspecificos, deliberation.votoType)}</em></p>`;
+                        }
+                        
+                        // Adicionar informações do relatório se existirem
+                        if (deliberation.relatorioData) {
+                            deliberacoesHTML += `<p><strong>Relatório:</strong> ${formatarRelatorioPreview(deliberation.relatorioData)}</p>`;
+                        }
+                        
+                        deliberacoesHTML += `<br>`;
+                    });
+                } else {
+                    deliberacoesHTML = '<p>Nenhuma deliberação adicionada.</p>';
+                }
+                
                 ataPreview.innerHTML = `
                     <div class="ata-header">
                         <div class="ata-title">ATA DA ${typeLabel.toUpperCase()} DA</div>
@@ -2554,11 +4572,8 @@
                         <p><strong>ORAÇÃO:</strong> ${oracao || '__________________________'}</p>
                         <p><strong>REFLEXÃO BÍBLICA:</strong> ${reflexao || '__________________________'}</p>
                         
-                        ${deliberations.map(deliberation => `
-                            <p><strong>${deliberation.number}-${deliberation.votoType} ${deliberation.title}</strong></p>
-                            <p>${deliberation.description}</p>
-                            ${deliberation.camposEspecificos ? `<p><em>Detalhes: ${formatarCamposEspecificos(deliberation.camposEspecificos, deliberation.votoType)}</em></p>` : ''}
-                        `).join('')}
+                        <h4 style="margin-top: 20px; margin-bottom: 10px; color: var(--primary-dark);">DELIBERAÇÕES:</h4>
+                        ${deliberacoesHTML}
                         
                         <p>Nada mais havendo a tratar, foi encerrada a reunião e, para constar, foi lavrada a presente ata, que será assinada pelo presidente e secretário.</p>
                     </div>
@@ -2827,7 +4842,12 @@
                         
                         // Add specific fields if available
                         if (deliberation.camposEspecificos) {
-                            content += `<p><em>Detalhes: ${formatarCamposEspecificos(deliberation.camposEspecificos, deliberation.votoType)}</em></p>`;
+                            content += `<p><em>Detalhes: ${formatarCamposEspecificosPreview(deliberation.camposEspecificos, deliberation.votoType)}</em></p>`;
+                        }
+                        
+                        // Add report information if available
+                        if (deliberation.relatorioData) {
+                            content += `<p><strong>Relatório:</strong> ${formatarRelatorioPreview(deliberation.relatorioData)}</p>`;
                         }
                     });
                 }
@@ -2862,6 +4882,134 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
             }
+            
+            // Carregar lista completa de assuntos
+            function loadAssuntosList() {
+                const assuntosList = document.getElementById('assuntosList');
+                const searchInput = document.getElementById('searchAssuntos');
+                
+                // Lista completa de todos os 87 assuntos
+                const todosAssuntos = [
+                    { codigo: '001', nome: 'VOZ E VOTO - Conceder direito a voz e voto a convidado' },
+                    { codigo: '002', nome: 'CLASSIFICAÇÃO DE MEMBROS - Registrar classificação de membros' },
+                    { codigo: '003', nome: 'RODA DISCIPULADO (CRM) - Roda de discipulado' },
+                    { codigo: '004', nome: 'PEQUENOS GRUPOS - Pequenos grupos' },
+                    { codigo: '005', nome: 'PEQUENOS GRUPOS - Pequenos grupos' },
+                    { codigo: '006', nome: 'DIZIMISTAS REGULARES - Dizimistas regulares' },
+                    { codigo: '007', nome: 'PACTUANTES - Pactuantes' },
+                    { codigo: '008', nome: 'COMISSÃO DA IGREJA-QUÓRUM (A) - Comissão da igreja-quórum' },
+                    { codigo: '009', nome: 'QUÓRUM - R. ADMINISTRATIVA (A) - Quórum - reunião administrativa' },
+                    { codigo: '010', nome: 'NOMEAÇÃO - Nomeação' },
+                    { codigo: '011', nome: 'ELEIÇÃO DE OFICIAIS (R) - Eleição de oficiais' },
+                    { codigo: '012', nome: 'COMISSÃO DIRETIVA - MEMBROS - Comissão diretiva - membros' },
+                    { codigo: '013', nome: 'SERVIÇO VOLUNTÁRIO ADVENTISTA - Serviço voluntário adventista' },
+                    { codigo: '014', nome: 'ADMISSÃO DE MEMBROS - Admissão de membros (batismo, profissão de fé, rebatismo)' },
+                    { codigo: '015', nome: 'CARTAS DE TRANSFERÊNCIA - Cartas de transferência' },
+                    { codigo: '016', nome: 'CENSURA (A) - Censura disciplinar' },
+                    { codigo: '017', nome: 'REMOÇÃO (DISCIPLINA) (A) - Remoção por disciplina' },
+                    { codigo: '018', nome: 'REMOÇÃO POR DESAPARECIMENTO (A) - Remoção por desaparecimento' },
+                    { codigo: '019', nome: 'REMOÇÃO A PEDIDO - Remoção a pedido' },
+                    { codigo: '020', nome: 'ASSEMBLEIA DA ASSOCIAÇÃO - DELEGADO (R) - Delegado para assembleia da associação' },
+                    { codigo: '021', nome: 'REUNIÕES DA COMISSÃO - Reuniões da comissão' },
+                    { codigo: '022', nome: 'BATISMO POR VOTO ESPECIAL - Batismo por voto especial' },
+                    { codigo: '023', nome: 'CULTO FAMILIAR - Culto familiar' },
+                    { codigo: '024', nome: 'DISCIPULADORES - Discipuladores' },
+                    { codigo: '025', nome: 'REENCONTRO/RESGATE - Reencontro e projeto resgate' },
+                    { codigo: '026', nome: 'EVENTO - Evento' },
+                    { codigo: '027', nome: 'MINISTÉRIO - ABERTURA - Abertura de ministério' },
+                    { codigo: '028', nome: 'LIÇÃO DA ESCOLA SABATINA (MANÁ) - Lição da escola sabatina' },
+                    { codigo: '029', nome: 'PROFESSORES DA ESCOLA SABATINA - Professores da escola sabatina' },
+                    { codigo: '030', nome: 'ENCONTROS/PARTICIPAÇÃO - Encontros e participação em eventos' },
+                    { codigo: '031', nome: 'CALEBE - DESBRAVADORES - Missão Calebe - Desbravadores' },
+                    { codigo: '032', nome: 'LIDER MASTER - Lider Master' },
+                    { codigo: '033', nome: 'CASAMENTO - Casamento' },
+                    { codigo: '034', nome: 'CULTO - INVERSÃO - Culto de inversão' },
+                    { codigo: '035', nome: 'MINI CENTRO WHITE - Mini centro White' },
+                    { codigo: '036', nome: 'ESCALA DE PREGADORES - Escala de pregadores' },
+                    { codigo: '037', nome: 'RENÚNCIA - FUNÇÃO - Renúncia de função' },
+                    { codigo: '038', nome: 'RECOLTA - ALVO - Recolta - alvo' },
+                    { codigo: '039', nome: 'CURSO DE... - Curso de formação' },
+                    { codigo: '040', nome: 'PLANEJAMENTO AVENTUREIROS/DESBRAVADORES - Planejamento de Aventureiros e Desbravadores' },
+                    { codigo: '041', nome: 'SUBCOMISSÃO (NOMEAR) - Nomear subcomissão' },
+                    { codigo: '042', nome: 'CORAL (INICIAR OU REATIVAR) - Coral - iniciar ou reativar' },
+                    { codigo: '043', nome: 'EVANGELISMO SS - Evangelismo da escola sabatina' },
+                    { codigo: '044', nome: 'EVANGELISMO COLHEITA - Evangelismo colheita' },
+                    { codigo: '045', nome: 'EVANGELISMO (GERAL) - Evangelismo geral' },
+                    { codigo: '052', nome: 'LIVRO MISSIONÁRIO - AQUISIÇÃO - Aquisição de livro missionário' },
+                    { codigo: '053', nome: 'DISCIPULADO (IMPLANTAR) - Implantar discipulado' },
+                    { codigo: '054', nome: 'PGL - IMPLANTAR - Implantar PGL' },
+                    { codigo: '055', nome: 'VISITAÇÃO FALTOSOS - Visitação a faltosos' },
+                    { codigo: '056', nome: 'FORMAÇÃO DE LÍDERES - Formação de líderes' },
+                    { codigo: '057', nome: 'FORMAÇÃO DE LÍDERES - Formação de líderes' },
+                    { codigo: '058', nome: 'ESCOLA DE MISSÕES - Escola de missões' },
+                    { codigo: '059', nome: 'FEIRA DE DONS - Feira de dons' },
+                    { codigo: '060', nome: 'CURSO DE... - Curso de formação' },
+                    { codigo: '061', nome: 'ESTUDO DA BÍBLIA - Estudo da Bíblia' },
+                    { codigo: '062', nome: 'RELACIONAMENTO COM A COMUNIDADE - Relacionamento com a comunidade' },
+                    { codigo: '063', nome: 'OBSERVÂNCIA DO SÁBADO - Observância do sábado' },
+                    { codigo: '064', nome: 'REVERÊNCIA - Reverência' },
+                    { codigo: '065', nome: 'SAÚDE E TEMPERANÇA - Saúde e temperança' },
+                    { codigo: '066', nome: 'MODÉSTIA - Modéstia' },
+                    { codigo: '068', nome: 'RECREAÇÃO - Recreação' },
+                    { codigo: '069', nome: 'CRENÇAS FUNDAMENTAIS - Crenças fundamentais' },
+                    { codigo: '070', nome: 'RESTAURAÇÃO (REFORMA) - Restauração e reforma' },
+                    { codigo: '071', nome: 'SUBSTITUIÇÃO EQUIPAMENTOS - Substituição de equipamentos' },
+                    { codigo: '072', nome: 'DOAÇÃO EQUIPAMENTOS (ACEITAR) - Aceitar doação de equipamentos' },
+                    { codigo: '073', nome: 'AQUISIÇÃO EQUIPAMENTOS - Aquisição de equipamentos' },
+                    { codigo: '074', nome: 'INVENTÁRIO PATRIMONIAL - Inventário patrimonial' },
+                    { codigo: '075', nome: 'ORÇAMENTO DA IGREJA (A) - Orçamento da igreja' },
+                    { codigo: '076', nome: 'SEGURO IGREJA - Seguro da igreja' },
+                    { codigo: '077', nome: 'SEGURO EQUIPAMENTOS - Seguro de equipamentos' },
+                    { codigo: '078', nome: 'AUDITORIA TESOURARIA - Auditoria da tesouraria' },
+                    { codigo: '081', nome: 'REFORMA (RELATÓRIO FINANCEIRO) - Reforma - relatório financeiro' },
+                    { codigo: '082', nome: 'ZELADOR(A) (CONTRATAÇÃO) - Contratação de zelador(a)' },
+                    { codigo: '083', nome: 'CONTRATAÇÃO (OBREIRO, ETC...) - Contratação de obreiro' },
+                    { codigo: '084', nome: 'AUDITORIA SECRETARIA - Auditoria da secretaria' },
+                    { codigo: '085', nome: 'RETIFICAÇÃO DE VOTO - Retificação de voto' },
+                    { codigo: '086', nome: 'ABERTURA DE CLUBE - Abertura de clube Aventureiros/Desbravadores' },
+                    { codigo: '087', nome: 'PLANEJAMENTO IGREJA (A) - Planejamento da igreja' }
+                ];
+                
+                // Função para renderizar a lista de assuntos
+                function renderAssuntosList(assuntos) {
+                    assuntosList.innerHTML = '';
+                    
+                    assuntos.forEach(assunto => {
+                        const assuntoItem = document.createElement('div');
+                        assuntoItem.className = 'assunto-item';
+                        assuntoItem.innerHTML = `
+                            <div class="assunto-nome">${assunto.nome}</div>
+                            <div class="assunto-codigo">${assunto.codigo}</div>
+                        `;
+                        assuntoItem.addEventListener('click', function() {
+                            // Encontrar o elemento de voto correspondente e selecioná-lo
+                            const votoElement = document.querySelector(`[data-voto="${assunto.codigo}"]`);
+                            if (votoElement) {
+                                selectVotoType(votoElement);
+                                // Scroll para o elemento selecionado
+                                votoElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        });
+                        assuntosList.appendChild(assuntoItem);
+                    });
+                }
+                
+                // Renderizar lista inicial
+                renderAssuntosList(todosAssuntos);
+                
+                // Adicionar funcionalidade de busca
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const assuntosFiltrados = todosAssuntos.filter(assunto => 
+                        assunto.nome.toLowerCase().includes(searchTerm) || 
+                        assunto.codigo.includes(searchTerm)
+                    );
+                    renderAssuntosList(assuntosFiltrados);
+                });
+            }
+            
+            // Carregar lista de assuntos quando a página carregar
+            loadAssuntosList();
             
             // Make functions available globally for onclick handlers
             window.removeDeliberation = removeDeliberation;
