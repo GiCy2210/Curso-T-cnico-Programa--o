@@ -1124,6 +1124,9 @@
           <i class="fas fa-star" style="color: #8b5cf6;"></i>
           <span>Animes</span>
         </div>
+        <div id="user-playlists-container">
+          <!-- Playlists do usuário serão adicionadas aqui via JavaScript -->
+        </div>
         <div class="playlist-item" data-page="create-playlist">
           <i class="fas fa-plus"></i>
           <span>Criar Playlist</span>
@@ -1745,6 +1748,7 @@
     const playlistSelectList = document.getElementById('playlist-select-list');
     const playlistSelectTitle = document.getElementById('playlist-select-title');
     const createNewPlaylistBtn = document.getElementById('create-new-playlist-btn');
+    const userPlaylistsContainer = document.getElementById('user-playlists-container');
     
     // Elementos das novas páginas
     const albumDetailPage = document.getElementById('album-detail-page');
@@ -1815,6 +1819,9 @@
       
       // Atualizar contador de músicas curtidas
       updateLikedSongsCount();
+      
+      // Renderizar playlists do usuário
+      renderUserPlaylists();
     });
 
     // Configurar event listeners
@@ -2196,6 +2203,11 @@
       localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
       
       alert(`Música adicionada a "${playlist.name}"!`);
+      
+      // Se estamos na página de detalhes da playlist, atualizar
+      if (currentPage === 'playlist-detail' && currentPlaylistDetail && currentPlaylistDetail.id === playlistId) {
+        showPlaylistDetail(playlistId);
+      }
     }
 
     // Criar nova playlist a partir do modal
@@ -2222,6 +2234,9 @@
       
       alert(`Playlist "${name}" criada e música adicionada!`);
       hidePlaylistSelectModal();
+      
+      // Atualizar sidebar
+      renderUserPlaylists();
       
       // Se estamos na página de playlists, atualizar
       if (currentPage === 'playlists') {
@@ -2347,6 +2362,9 @@
           case 'animes':
             renderAnimesPlaylist();
             break;
+          case 'create-playlist':
+            // Não precisa renderizar nada especial
+            break;
         }
       }
       
@@ -2354,6 +2372,32 @@
       if (window.innerWidth <= 768) {
         sidebar.classList.remove('open');
       }
+    }
+
+    // Renderizar playlists do usuário na sidebar
+    function renderUserPlaylists() {
+      userPlaylistsContainer.innerHTML = '';
+      
+      // Adicionar playlists do usuário (excluindo as playlists padrão)
+      userPlaylists.forEach(playlist => {
+        if (!['playlist1', 'playlist2', 'playlist3', 'playlist4'].includes(playlist.id)) {
+          const playlistItem = document.createElement('div');
+          playlistItem.className = 'playlist-item';
+          playlistItem.setAttribute('data-page', `playlist-${playlist.id}`);
+          
+          // Usar ícone padrão para playlists criadas pelo usuário
+          playlistItem.innerHTML = `
+            <i class="fas fa-music" style="color: #6d28d9;"></i>
+            <span>${playlist.name}</span>
+          `;
+          
+          playlistItem.addEventListener('click', () => {
+            showPlaylistDetail(playlist.id);
+          });
+          
+          userPlaylistsContainer.appendChild(playlistItem);
+        }
+      });
     }
 
     // Renderizar conteúdo destacado
@@ -3033,7 +3077,7 @@
         songs: []
       };
       
-      // Adicionar à lista de playlists
+      // Adicionar à lista de playlists do usuário
       userPlaylists.push(newPlaylist);
       
       // Salvar no localStorage
@@ -3046,8 +3090,11 @@
       // Mostrar mensagem de sucesso
       alert(`Playlist "${name}" criada com sucesso!`);
       
-      // Redirecionar para a página de playlists
-      changePage('playlists');
+      // Atualizar sidebar com a nova playlist
+      renderUserPlaylists();
+      
+      // Redirecionar para a página de detalhes da nova playlist
+      showPlaylistDetail(newPlaylist.id);
     }
 
     // Editar playlist
@@ -3082,7 +3129,17 @@
         playlist.description = document.getElementById('edit-playlist-description').value.trim();
         localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
         document.body.removeChild(modal);
-        if (currentPage === 'playlists') renderPlaylistsPage();
+        
+        // Atualizar sidebar
+        renderUserPlaylists();
+        
+        // Atualizar página atual se necessário
+        if (currentPage === 'playlists') {
+          renderPlaylistsPage();
+        } else if (currentPage === 'playlist-detail' && currentPlaylistDetail.id === playlistId) {
+          showPlaylistDetail(playlistId);
+        }
+        
         alert('Playlist atualizada com sucesso!');
       });
       
