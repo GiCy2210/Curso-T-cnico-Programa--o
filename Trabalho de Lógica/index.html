@@ -21,6 +21,7 @@
       --gray-400: #64748b; /* Cinza mais escuro para melhor contraste */
       --gray-600: #1e293b; /* Cinza mais escuro no tema claro */
       --success: #10b981; /* Verde */
+      --danger: #ef4444; /* Vermelho */
       --sidebar-width: 280px;
       --player-height: 90px;
     }
@@ -515,6 +516,41 @@
     
     .btn-outline:active {
       transform: scale(0.95);
+    }
+    
+    /* Botões de perigo */
+    .btn-danger {
+      background-color: var(--danger);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-danger:hover {
+      background-color: #dc2626;
+      transform: translateY(-2px);
+    }
+    
+    .btn-danger:active {
+      transform: scale(0.95);
+    }
+    
+    .btn-outline-danger {
+      background-color: transparent;
+      border: 2px solid var(--danger);
+      color: var(--danger);
+    }
+    
+    .btn-outline-danger:hover {
+      background-color: var(--danger);
+      color: white;
     }
     
     /* Modal de letras */
@@ -1457,6 +1493,10 @@
                 <i class="fas fa-sort"></i>
                 Ordenar
               </button>
+              <button class="btn-outline-danger" id="delete-playlist-btn">
+                <i class="fas fa-trash"></i>
+                Excluir
+              </button>
             </div>
           </div>
         </div>
@@ -1770,6 +1810,7 @@
     const playlistDetailSongsList = document.getElementById('playlist-detail-songs-list');
     const playPlaylistDetailBtn = document.getElementById('play-playlist-detail');
     const sortPlaylistDetailBtn = document.getElementById('sort-playlist-detail');
+    const deletePlaylistBtn = document.getElementById('delete-playlist-btn');
 
     // Estado da aplicação
     let currentPlaylist = [];
@@ -1923,6 +1964,9 @@
       // Formulário de criar playlist
       createPlaylistForm.addEventListener('submit', handleCreatePlaylist);
 
+      // Botão de excluir playlist
+      deletePlaylistBtn.addEventListener('click', deleteCurrentPlaylist);
+
       // Atalhos de teclado
       document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -1943,6 +1987,41 @@
             break;
         }
       });
+    }
+
+    // Função para excluir a playlist atual
+    function deleteCurrentPlaylist() {
+      if (!currentPlaylistDetail) return;
+      
+      // Não permitir excluir playlists padrão
+      const defaultPlaylists = ['playlist1', 'playlist2', 'playlist3', 'playlist4'];
+      if (defaultPlaylists.includes(currentPlaylistDetail.id)) {
+        alert('Não é possível excluir playlists padrão do sistema.');
+        return;
+      }
+      
+      const confirmDelete = confirm(`Tem certeza que deseja excluir a playlist "${currentPlaylistDetail.name}"? Esta ação não pode ser desfeita.`);
+      
+      if (!confirmDelete) return;
+      
+      // Encontrar o índice da playlist no array
+      const playlistIndex = userPlaylists.findIndex(p => p.id === currentPlaylistDetail.id);
+      
+      if (playlistIndex === -1) return;
+      
+      // Remover a playlist do array
+      userPlaylists.splice(playlistIndex, 1);
+      
+      // Salvar no localStorage
+      localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
+      
+      // Atualizar a sidebar
+      renderUserPlaylists();
+      
+      // Redirecionar para a página de playlists
+      changePage('playlists');
+      
+      alert(`Playlist "${currentPlaylistDetail.name}" excluída com sucesso!`);
     }
 
     // Função para o botão "Ver tudo"
@@ -3102,6 +3181,10 @@
       const playlist = userPlaylists.find(p => p.id === playlistId);
       if (!playlist) return;
       
+      // Não permitir editar/excluir playlists padrão através deste modal
+      const defaultPlaylists = ['playlist1', 'playlist2', 'playlist3', 'playlist4'];
+      const isDefaultPlaylist = defaultPlaylists.includes(playlistId);
+      
       const modal = document.createElement('div');
       modal.className = 'modal show';
       modal.innerHTML = `
@@ -3111,37 +3194,67 @@
           <form id="edit-playlist-form">
             <div style="margin-bottom: 1.5rem;">
               <label for="edit-playlist-name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nome da Playlist</label>
-              <input type="text" id="edit-playlist-name" class="search-input" value="${playlist.name}" style="width: 100%;">
+              <input type="text" id="edit-playlist-name" class="search-input" value="${playlist.name}" style="width: 100%;" ${isDefaultPlaylist ? 'disabled' : ''}>
             </div>
             <div style="margin-bottom: 1.5rem;">
               <label for="edit-playlist-description" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Descrição</label>
-              <textarea id="edit-playlist-description" class="search-input" rows="3" style="width: 100%; resize: vertical;">${playlist.description}</textarea>
+              <textarea id="edit-playlist-description" class="search-input" rows="3" style="width: 100%; resize: vertical;" ${isDefaultPlaylist ? 'disabled' : ''}>${playlist.description}</textarea>
             </div>
-            <button type="submit" class="btn" style="width: 100%;">Salvar Alterações</button>
+            <div style="display: flex; gap: 1rem;">
+              <button type="submit" class="btn" style="flex: 1;" ${isDefaultPlaylist ? 'disabled' : ''}>
+                <i class="fas fa-save"></i>
+                Salvar Alterações
+              </button>
+              ${!isDefaultPlaylist ? `
+                <button type="button" class="btn-danger" id="delete-playlist-modal-btn" style="flex: 1;">
+                  <i class="fas fa-trash"></i>
+                  Excluir Playlist
+                </button>
+              ` : ''}
+            </div>
+            ${isDefaultPlaylist ? `
+              <div style="margin-top: 1rem; padding: 1rem; background-color: rgba(239, 68, 68, 0.1); border-radius: 0.5rem; color: #ef4444; text-align: center;">
+                <i class="fas fa-info-circle"></i>
+                Playlists padrão do sistema não podem ser editadas ou excluídas.
+              </div>
+            ` : ''}
           </form>
         </div>
       `;
       document.body.appendChild(modal);
       
-      modal.querySelector('#edit-playlist-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        playlist.name = document.getElementById('edit-playlist-name').value.trim();
-        playlist.description = document.getElementById('edit-playlist-description').value.trim();
-        localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
-        document.body.removeChild(modal);
+      if (!isDefaultPlaylist) {
+        modal.querySelector('#edit-playlist-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          playlist.name = document.getElementById('edit-playlist-name').value.trim();
+          playlist.description = document.getElementById('edit-playlist-description').value.trim();
+          localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
+          document.body.removeChild(modal);
+          
+          // Atualizar sidebar
+          renderUserPlaylists();
+          
+          // Atualizar página atual se necessário
+          if (currentPage === 'playlists') {
+            renderPlaylistsPage();
+          } else if (currentPage === 'playlist-detail' && currentPlaylistDetail.id === playlistId) {
+            showPlaylistDetail(playlistId);
+          }
+          
+          alert('Playlist atualizada com sucesso!');
+        });
         
-        // Atualizar sidebar
-        renderUserPlaylists();
-        
-        // Atualizar página atual se necessário
-        if (currentPage === 'playlists') {
-          renderPlaylistsPage();
-        } else if (currentPage === 'playlist-detail' && currentPlaylistDetail.id === playlistId) {
-          showPlaylistDetail(playlistId);
-        }
-        
-        alert('Playlist atualizada com sucesso!');
-      });
+        // Botão de excluir no modal
+        modal.querySelector('#delete-playlist-modal-btn').addEventListener('click', () => {
+          document.body.removeChild(modal);
+          deletePlaylist(playlistId);
+        });
+      } else {
+        modal.querySelector('#edit-playlist-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          // Não faz nada para playlists padrão
+        });
+      }
       
       modal.querySelector('#edit-playlist-close').addEventListener('click', () => {
         document.body.removeChild(modal);
@@ -3149,6 +3262,49 @@
       modal.addEventListener('click', (e) => {
         if (e.target === modal) document.body.removeChild(modal);
       });
+    }
+
+    // Função para excluir qualquer playlist
+    function deletePlaylist(playlistId) {
+      const playlist = userPlaylists.find(p => p.id === playlistId);
+      if (!playlist) return;
+      
+      // Não permitir excluir playlists padrão
+      const defaultPlaylists = ['playlist1', 'playlist2', 'playlist3', 'playlist4'];
+      if (defaultPlaylists.includes(playlistId)) {
+        alert('Não é possível excluir playlists padrão do sistema.');
+        return;
+      }
+      
+      const confirmDelete = confirm(`Tem certeza que deseja excluir a playlist "${playlist.name}"? Esta ação não pode ser desfeita.`);
+      
+      if (!confirmDelete) return;
+      
+      // Encontrar o índice da playlist no array
+      const playlistIndex = userPlaylists.findIndex(p => p.id === playlistId);
+      
+      if (playlistIndex === -1) return;
+      
+      // Remover a playlist do array
+      userPlaylists.splice(playlistIndex, 1);
+      
+      // Salvar no localStorage
+      localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
+      
+      // Atualizar a sidebar
+      renderUserPlaylists();
+      
+      // Se estávamos na página de detalhes da playlist excluída, redirecionar
+      if (currentPage === 'playlist-detail' && currentPlaylistDetail && currentPlaylistDetail.id === playlistId) {
+        changePage('playlists');
+      }
+      
+      // Se estávamos na página de playlists, atualizar
+      if (currentPage === 'playlists') {
+        renderPlaylistsPage();
+      }
+      
+      alert(`Playlist "${playlist.name}" excluída com sucesso!`);
     }
   </script>
 </body>
