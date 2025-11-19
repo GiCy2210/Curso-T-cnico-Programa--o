@@ -1818,10 +1818,41 @@
         </div>
     </footer>
 
-    <script>
-        // URL do Google Apps Script (substitua pela sua)
-        const API_BASE = 'https://script.google.com/macros/s/AKfycbxkr1pSPvDIZQXMq8-HfQveKTGREXnJaDQe1_nayQjYssOHl-8wJY4ZOzT5bGsRpaaL/exec';
-    
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { 
+            getFirestore, 
+            collection, 
+            addDoc, 
+            getDocs, 
+            updateDoc, 
+            deleteDoc, 
+            doc, 
+            query, 
+            where,
+            orderBy,
+            limit
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBWBaVi8fQuOe2rywnCtiZyv3AM1x1sul0",
+            authDomain: "bratzytech.firebaseapp.com",
+            projectId: "bratzytech",
+            storageBucket: "bratzytech.firebasestorage.app",
+            messagingSenderId: "233837286634",
+            appId: "1:233837286634:web:763f1a91ec09de7d697393",
+            measurementId: "G-ZLRP321SHT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
         // Dados locais
         let products = [];
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -1830,10 +1861,11 @@
         let purchases = JSON.parse(localStorage.getItem('purchases')) || [];
         let currentPayment = null;
         let editingProductId = null;
-    
+
         // Elementos DOM
         const productsContainer = document.getElementById('products-container');
         const featuredProductsContainer = document.getElementById('featured-products-container');
+        const newProductsContainer = document.getElementById('new-products-container');
         const searchInput = document.getElementById('search-input');
         const searchBtn = document.querySelector('.search-btn');
         const searchBar = document.querySelector('.search-bar');
@@ -1877,7 +1909,7 @@
         const cartTotal = document.getElementById('cart-total');
         const checkoutBtn = document.getElementById('checkout-btn');
         const cartCount = document.querySelector('.cart-count');
-    
+
         // Elementos do modal de produto
         const productModalImg = document.getElementById('product-modal-img');
         const productModalTitle = document.getElementById('product-modal-title');
@@ -1885,143 +1917,87 @@
         const productModalSeller = document.getElementById('product-modal-seller');
         const productModalDescription = document.getElementById('product-modal-description');
         const productModalActions = document.getElementById('product-modal-actions');
-    
-        // ========== FUNÇÕES DA API GOOGLE SHEETS ==========
-    
-        // Função para buscar produtos da API
+
+        // ========== FUNÇÕES FIREBASE FIRESTORE ==========
+
+        // Função para buscar produtos do Firestore
         async function fetchProducts() {
             try {
-                const response = await fetch(`${API_BASE}?action=getProducts`);
-                if (!response.ok) {
-                    throw new Error('Erro ao carregar produtos');
-                }
-                const data = await response.json();
-                
-                // Mapear os campos do Google Sheets para nosso formato
-                return data.map(item => ({
-                    id: item.ID,
-                    name: item.Name,
-                    price: parseFloat(item.Price),
-                    image: item.Image,
-                    description: item.Description,
-                    category: item.Category,
-                    seller: item.Seller,
-                    sellerEmail: item.SellerEmail,
-                    createdAt: item.CreatedAt
-                }));
-            } catch (error) {
-                console.error('Erro ao buscar produtos:', error);
-                // Fallback para dados locais
-                return JSON.parse(localStorage.getItem('products')) || [];
-            }
-        }
-    
-        // Função para adicionar produto via API
-        async function addProductAPI(product) {
-            try {
-                // Mapear para o formato do Google Sheets
-                const productData = {
-                    ID: product.id,
-                    Name: product.name,
-                    Price: product.price,
-                    Image: product.image,
-                    Description: product.description,
-                    Category: product.category,
-                    Seller: product.seller,
-                    SellerEmail: product.sellerEmail,
-                    CreatedAt: new Date().toISOString()
-                };
-    
-                const response = await fetch(API_BASE, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(productData)
+                const querySnapshot = await getDocs(collection(db, "products"));
+                const productsList = [];
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    productsList.push({
+                        id: doc.id,
+                        name: data.name,
+                        price: data.price,
+                        image: data.image,
+                        description: data.description,
+                        category: data.category,
+                        seller: data.seller,
+                        sellerEmail: data.sellerEmail,
+                        createdAt: data.createdAt
+                    });
                 });
-                
-                if (!response.ok) {
-                    throw new Error('Erro ao adicionar produto');
-                }
-                
-                const result = await response.json();
-                return result.success ? product : null;
+                return productsList;
             } catch (error) {
-                console.error('Erro ao adicionar produto:', error);
-                // Fallback para localStorage
-                const products = JSON.parse(localStorage.getItem('products')) || [];
-                products.push(product);
-                localStorage.setItem('products', JSON.stringify(products));
-                return product;
+                console.error("Erro ao buscar produtos: ", error);
+                return [];
             }
         }
-    
-        // Função para atualizar produto via API
-        async function updateProductAPI(productId, product) {
+
+        // Função para adicionar produto no Firestore
+        async function addProductToFirestore(product) {
             try {
-                // Mapear para o formato do Google Sheets
-                const productData = {
-                    ID: productId,
-                    Name: product.name,
-                    Price: product.price,
-                    Image: product.image,
-                    Description: product.description,
-                    Category: product.category,
-                    Seller: product.seller,
-                    SellerEmail: product.sellerEmail
-                };
-    
-                const response = await fetch(API_BASE, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(productData)
+                const docRef = await addDoc(collection(db, "products"), {
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    description: product.description,
+                    category: product.category,
+                    seller: product.seller,
+                    sellerEmail: product.sellerEmail,
+                    createdAt: new Date().toISOString()
                 });
-                
-                if (!response.ok) {
-                    throw new Error('Erro ao atualizar produto');
-                }
-                
-                const result = await response.json();
-                return result.success ? product : null;
+                return docRef.id;
             } catch (error) {
-                console.error('Erro ao atualizar produto:', error);
-                // Fallback para localStorage
-                const products = JSON.parse(localStorage.getItem('products')) || [];
-                const index = products.findIndex(p => p.id === productId);
-                if (index !== -1) {
-                    products[index] = product;
-                    localStorage.setItem('products', JSON.stringify(products));
-                }
-                return product;
+                console.error("Erro ao adicionar produto: ", error);
+                throw error;
             }
         }
-    
-        // Função para deletar produto via API
-        async function deleteProductAPI(productId) {
+
+        // Função para atualizar produto no Firestore
+        async function updateProductInFirestore(productId, product) {
             try {
-                const response = await fetch(`${API_BASE}?action=deleteProduct&id=${productId}`);
-                
-                if (!response.ok) {
-                    throw new Error('Erro ao deletar produto');
-                }
-                
-                const result = await response.json();
-                return result.success;
-            } catch (error) {
-                console.error('Erro ao deletar produto:', error);
-                // Fallback para localStorage
-                const products = JSON.parse(localStorage.getItem('products')) || [];
-                const filteredProducts = products.filter(p => p.id !== productId);
-                localStorage.setItem('products', JSON.stringify(filteredProducts));
+                const productRef = doc(db, "products", productId);
+                await updateDoc(productRef, {
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    description: product.description,
+                    category: product.category
+                });
                 return true;
+            } catch (error) {
+                console.error("Erro ao atualizar produto: ", error);
+                throw error;
             }
         }
-    
+
+        // Função para deletar produto do Firestore
+        async function deleteProductFromFirestore(productId) {
+            try {
+                await deleteDoc(doc(db, "products", productId));
+                return true;
+            } catch (error) {
+                console.error("Erro ao deletar produto: ", error);
+                throw error;
+            }
+        }
+
         // ========== FUNÇÕES PRINCIPAIS MODIFICADAS ==========
-    
-        // Função para salvar produto (agora usando Google Sheets)
+
+        // Função para salvar produto (agora usando Firebase Firestore)
         async function saveProduct() {
             const name = document.getElementById('product-form-name').value;
             const price = parseFloat(document.getElementById('product-form-price').value);
@@ -2040,26 +2016,20 @@
                 image,
                 description,
                 category,
-                seller: userData.sellerName,
+                seller: userData.sellerName || userData.name,
                 sellerEmail: userData.email
             };
             
-            let success = false;
-            
-            if (editingProductId) {
-                // Atualizar produto existente
-                productData.id = editingProductId;
-                const updatedProduct = await updateProductAPI(editingProductId, productData);
-                success = !!updatedProduct;
-            } else {
-                // Adicionar novo produto
-                productData.id = Date.now();
-                const newProduct = await addProductAPI(productData);
-                success = !!newProduct;
-            }
-            
-            if (success) {
-                // Recarregar produtos da API
+            try {
+                if (editingProductId) {
+                    // Atualizar produto existente
+                    await updateProductInFirestore(editingProductId, productData);
+                } else {
+                    // Adicionar novo produto
+                    await addProductToFirestore(productData);
+                }
+                
+                // Recarregar produtos do Firestore
                 products = await fetchProducts();
                 renderProducts();
                 renderFeaturedProducts();
@@ -2068,31 +2038,33 @@
                 resetProductForm();
                 
                 alert(editingProductId ? 'Produto atualizado com sucesso!' : 'Produto adicionado com sucesso!');
-            } else {
+            } catch (error) {
                 alert('Erro ao salvar o produto. Tente novamente.');
+                console.error(error);
             }
         }
-    
-        // Função para deletar produto do site (agora usando Google Sheets)
+
+        // Função para deletar produto do site (agora usando Firebase Firestore)
         async function deleteProductFromSite(productId) {
-            const success = await deleteProductAPI(productId);
-            
-            if (success) {
-                // Recarregar produtos da API
+            try {
+                await deleteProductFromFirestore(productId);
+                
+                // Recarregar produtos do Firestore
                 products = await fetchProducts();
                 renderProducts();
                 renderFeaturedProducts();
                 updateCart();
                 alert('Produto removido do site com sucesso!');
-            } else {
+            } catch (error) {
                 alert('Erro ao remover o produto. Tente novamente.');
+                console.error(error);
             }
         }
-    
+
         // ========== INICIALIZAÇÃO ==========
-    
+
         document.addEventListener('DOMContentLoaded', async function() {
-            // Carregar produtos da API
+            // Carregar produtos do Firestore
             products = await fetchProducts();
             renderProducts();
             renderFeaturedProducts();
@@ -2304,9 +2276,9 @@
                 }
             });
         });
-    
+
         // ========== FUNÇÕES EXISTENTES (mantidas) ==========
-    
+
         // Funções de produtos
         function renderProducts() {
             productsContainer.innerHTML = '';
@@ -2321,7 +2293,7 @@
                         <p>${product.description.substring(0, 100)}...</p>
                         <div class="price">R$ ${product.price.toFixed(2)}</div>
                         <div class="product-actions">
-                            <button class="btn btn-primary" onclick="addToCart(${product.id})">Comprar</button>
+                            <button class="btn btn-primary" onclick="addToCart('${product.id}')">Comprar</button>
                         </div>
                     </div>
                 `;
@@ -2337,7 +2309,7 @@
                 productsContainer.appendChild(productCard);
             });
         }
-    
+
         function renderFeaturedProducts() {
             featuredProductsContainer.innerHTML = '';
             
@@ -2354,7 +2326,7 @@
                         <p>${product.description.substring(0, 100)}...</p>
                         <div class="price">R$ ${product.price.toFixed(2)}</div>
                         <div class="product-actions">
-                            <button class="btn btn-primary" onclick="addToCart(${product.id})">Comprar</button>
+                            <button class="btn btn-primary" onclick="addToCart('${product.id}')">Comprar</button>
                         </div>
                     </div>
                 `;
@@ -2370,7 +2342,7 @@
                 featuredProductsContainer.appendChild(productCard);
             });
         }
-    
+
         function filterProducts(searchTerm) {
             if (!searchTerm.trim()) {
                 renderProducts();
@@ -2400,7 +2372,7 @@
                         <p>${product.description.substring(0, 100)}...</p>
                         <div class="price">R$ ${product.price.toFixed(2)}</div>
                         <div class="product-actions">
-                            <button class="btn btn-primary" onclick="addToCart(${product.id})">Comprar</button>
+                            <button class="btn btn-primary" onclick="addToCart('${product.id}')">Comprar</button>
                         </div>
                     </div>
                 `;
@@ -2416,7 +2388,7 @@
                 productsContainer.appendChild(productCard);
             });
         }
-    
+
         // Funções de usuário
         function saveUserData(type) {
             if (type === 'buyer') {
@@ -2469,7 +2441,7 @@
             
             alert('Conta criada com sucesso!');
         }
-    
+
         function updateUIForUserType() {
             if (userType === 'seller') {
                 addProductBtn.classList.add('visible');
@@ -2477,14 +2449,14 @@
                 addProductBtn.classList.remove('visible');
             }
         }
-    
+
         function showAccountSelection() {
             document.getElementById('user-selection').style.display = 'block';
             buyerForm.classList.remove('active');
             sellerForm.classList.remove('active');
             accountScreen.classList.remove('active');
         }
-    
+
         function showAccountScreen() {
             document.getElementById('user-selection').style.display = 'none';
             buyerForm.classList.remove('active');
@@ -2512,7 +2484,7 @@
                 renderMyProducts();
             }
         }
-    
+
         function renderPurchases() {
             purchasesList.innerHTML = '';
             
@@ -2554,7 +2526,7 @@
                 purchasesList.appendChild(purchaseItem);
             });
         }
-    
+
         // Função para renderizar produtos do vendedor
         function renderMyProducts() {
             myProductsList.innerHTML = '';
@@ -2591,7 +2563,7 @@
             // Adicionar eventos aos botões
             document.querySelectorAll('.edit-product-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const productId = parseInt(this.getAttribute('data-id'));
+                    const productId = this.getAttribute('data-id');
                     const product = products.find(p => p.id === productId);
                     if (product) {
                         openProductForm(product);
@@ -2602,7 +2574,7 @@
             
             document.querySelectorAll('.remove-product-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const productId = parseInt(this.getAttribute('data-id'));
+                    const productId = this.getAttribute('data-id');
                     if (confirm('Tem certeza que deseja remover este produto do site? Esta ação não pode ser desfeita.')) {
                         deleteProductFromSite(productId);
                         renderMyProducts();
@@ -2610,7 +2582,7 @@
                 });
             });
         }
-    
+
         function saveAccountSettings() {
             const name = document.getElementById('edit-name').value;
             const email = document.getElementById('edit-email').value;
@@ -2641,7 +2613,7 @@
             
             alert('Configurações salvas com sucesso!');
         }
-    
+
         function logout() {
             userType = null;
             userData = {};
@@ -2654,7 +2626,7 @@
             
             alert('Você saiu da sua conta.');
         }
-    
+
         // Funções do carrinho
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
@@ -2688,7 +2660,7 @@
                 btn.disabled = false;
             }, 1500);
         }
-    
+
         function updateCart() {
             cartItems.innerHTML = '';
             
@@ -2728,7 +2700,7 @@
             cartTotal.textContent = `R$ ${total.toFixed(2)}`;
             cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
         }
-    
+
         function updateQuantity(index, change) {
             cart[index].quantity += change;
             
@@ -2739,13 +2711,13 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCart();
         }
-    
+
         function removeFromCart(index) {
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCart();
         }
-    
+
         function checkout() {
             if (cart.length === 0) {
                 alert('Seu carrinho está vazio!');
@@ -2763,7 +2735,7 @@
             // Mostrar modal de pagamento
             showPaymentModal(total);
         }
-    
+
         // Funções de pagamento
         function showPaymentModal(total) {
             paymentAmount.textContent = `R$ ${total.toFixed(2)}`;
@@ -2787,7 +2759,7 @@
                 status: 'pending'
             };
         }
-    
+
         function simulatePayment() {
             // Simular processamento do pagamento
             paymentStatus.style.display = 'block';
@@ -2824,7 +2796,7 @@
                 }, 3000);
             }, 3000);
         }
-    
+
         function generateRandomPix(total) {
             // Formatar o valor para o PIX (2 casas decimais)
             const formattedTotal = total.toFixed(2).replace('.', '');
@@ -2861,7 +2833,7 @@
             
             return payload;
         }
-    
+
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(function() {
                 const originalText = button.textContent;
@@ -2874,7 +2846,7 @@
                 }, 2000);
             });
         }
-    
+
         // Funções de produto
         function openProductDetails(product) {
             productModalImg.src = product.image;
@@ -2926,7 +2898,7 @@
             
             productModal.classList.add('active');
         }
-    
+
         function openProductForm(product = null) {
             if (product) {
                 // Modo edição
@@ -2949,16 +2921,16 @@
             
             productFormModal.classList.add('active');
         }
-    
+
         function resetProductForm() {
             document.getElementById('product-form').reset();
             editingProductId = null;
         }
-    
-        // Função para excluir produto (mantida para compatibilidade)
-        function deleteProduct(productId) {
-            deleteProductFromSite(productId);
-        }
+
+        // Torna as funções disponíveis globalmente para os event handlers inline
+        window.addToCart = addToCart;
+        window.updateQuantity = updateQuantity;
+        window.removeFromCart = removeFromCart;
     </script>
 </body>
 </html>
